@@ -1,1 +1,27 @@
-<p>register works!</p>
+<div class="register-wizard">
+
+  <app-register-user-info 
+    *ngIf="currentStep === 1"
+    (nextStep)="onNextStep()"
+    (previousStep)="onPreviousStep()">
+  </app-register-user-info>
+
+  <app-user-location 
+    *ngIf="currentStep === 2"
+    (nextStep)="onNextStep()"
+    (previousStep)="onPreviousStep()">
+  </app-user-location>
+
+  <app-account-setup 
+    *ngIf="currentStep === 3"
+    (nextStep)="onNextStep()"
+    (previousStep)="onPreviousStep()">
+  </app-account-setup>
+
+  <app-review-submit 
+    *ngIf="currentStep === 4"
+    (nextStep)="onNextStep()"
+    (previousStep)="onPreviousStep()">
+  </app-review-submit>
+
+</div>
