@@ -5,66 +5,90 @@
 <!-- Page Wrapper -->
 <div class="bg-gray-50 dark:bg-slate-900 pt-[60px] min-h-screen flex justify-center items-center">
     <div
-        class="w-full md:w-2/6 py-10  mr-4 ml-4 border border-purple-400 border-t-[20px] border-b-4 border-b-purple-400 rounded-md shadow-md bg-white dark:bg-slate-900">
+        class="w-full md:w-2/6 py-10 mr-4 ml-4 border border-purple-400 border-t-[20px] border-b-4 border-b-purple-400 rounded-md shadow-md bg-white dark:bg-slate-900">
         <!-- Title -->
         <div class="text-center text-2xl md:text-3xl py-5 dark:text-gray-50">Location</div>
 
         <!-- Subtitle -->
-        <div class="text-center text-sm py-2 dark:text-gray-400 mb-4">Please provide your location.</div>
+        <div class="text-center text-sm py-2 dark:text-gray-400 mb-4">
+            Please provide your location.
+        </div>
 
         <!-- Form -->
-        <form id="contact_us_form" onsubmit="">
+        <form id="contact_us_form" [formGroup]="form">
             <div class="space-y-5 ml-4 mr-4 px-3 md:px-0">
                 <!-- City -->
                 <div class="relative">
-                    <input type="text" name="city" id="city" autocomplete="off"
+                    <input type="text" name="city" id="city" autocomplete="off" formControlName="city"
                         class="px-4 py-2 peer w-full border border-purple-400 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-800 dark:text-gray-50"
                         placeholder="Enter your City" />
+                        <!-- Label -->
                     <label for="city"
                         class="bg-gray-50 px-2 absolute left-2 -top-3.5 text-gray-600 text-sm transition-all peer-focus:-top-3 peer-focus:bg-gray-50 peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 dark:peer-focus:bg-slate-800 dark:bg-slate-800 dark:text-gray-50">
                         City
                     </label>
+                     <!-- Error message -->
+                    <div class="text-pink-600 text-sm" *ngIf="form.get('city')?.touched && form.get('city')?.invalid">
+                        {{ getErrorMessage('city') }}
+                    </div>
                 </div>
 
                 <!-- Address -->
                 <div class="relative">
-                    <input type="text" name="address" id="address" autocomplete="off"
+                    <input type="text" name="address" id="address" autocomplete="off" formControlName="address"
                         class="px-4 py-2 peer w-full border border-purple-400 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-800 dark:text-gray-50"
                         placeholder="Enter your Address" />
+                        <!-- Label -->
                     <label for=""
                         class="bg-gray-50 px-2 absolute left-2 -top-3.5 text-gray-600 text-sm transition-all peer-focus:-top-3 peer-focus:bg-gray-50 peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 dark:peer-focus:bg-slate-800 dark:bg-slate-800 dark:text-gray-50">
                         Address
                     </label>
+                     <!-- Error message -->
+                    <div class="text-pink-600 text-sm"
+                        *ngIf="form.get('address')?.touched && form.get('address')?.invalid">
+                        {{ getErrorMessage('address') }}
+                    </div>
                 </div>
 
-                <!-- Contacts -->
+                <!-- Postal Code -->
                 <div class="relative">
-                    <input type="text" name="postalCode" id="postalCode" autocomplete="off"
+                    <input type="text" name="postalCode" id="postalCode" autocomplete="off" formControlName="postalCode"
                         class="px-4 py-2 peer w-full border border-purple-400 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-800 dark:text-gray-50"
                         placeholder="Enter Postal Code" />
+                        <!-- Label -->
                     <label for="postalCode"
                         class="bg-gray-50 px-2 absolute left-2 -top-3.5 text-gray-600 text-sm transition-all peer-focus:-top-3 peer-focus:bg-gray-50 peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 dark:peer-focus:bg-slate-800 dark:bg-slate-800 dark:text-gray-50">
                         Postal Code
                     </label>
+                     <!-- Error message -->
+                    <div class="text-pink-600 text-sm"
+                        *ngIf="form.get('postalCode')?.touched && form.get('postalCode')?.invalid">
+                        {{ getErrorMessage('postalCode') }}
+                    </div>
                 </div>
 
                 <!-- Province -->
                 <div class="relative">
-                    <select [(ngModel)]="selectedProvince" name="province" required
+                    <select formControlName="province"
                         class="px-4 py-2 peer w-full border border-purple-400 bg-gray-50 shadow-sm text-purple-600 rounded-md focus:outline-none focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-800 dark:text-gray-50">
-                        <!-- Default option (shows by default now) -->
-                        <option disabled>Select a Province</option>
+                        <!-- Default option -->
+                        <option value="" disabled selected>Select a Province</option>
 
                         <!-- Provinces -->
                         <option *ngFor="let province of provinces" [value]="province">
                             {{ province.replace('_', ' ') }}
                         </option>
                     </select>
-                    <!-- Floating label trick -->
+
+                    <!-- Floating label -->
                     <label class="absolute left-3 top-2 text-gray-400 pointer-events-none"
-                        [class.hidden]="selectedProvince">
+                        [class.hidden]="form.get('province')?.value">
                         Select a Province
                     </label>
+                     <!-- Error message -->
+                    <div class="text-pink-600 text-sm" *ngIf="form.get('province')?.touched && form.get('province')?.invalid">
+                        {{ getErrorMessage('province') }}
+                    </div>
                 </div>
 
                 <!-- Going to the back screen / forward one -->

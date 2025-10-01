@@ -20,26 +20,26 @@
             <!-- Register Info -->
             <div class="border-b pb-4 border-gray-400">
                 <div class="text-gray-500 dark:text-gray-400 mb-2 font-semibold">Register Info</div>
-                <p class="text-purple-600">Name: </p>
-                <p class="text-purple-600">Contact: </p>
-                <p class="text-purple-600">Email: </p>
+                <p class="text-purple-600">Name: {{ form.get('firstName')?.value }} {{ form.get('surname')?.value }}</p>
+            <p class="text-purple-600">Contact: {{ form.get('contact')?.value }}</p>
+            <p class="text-purple-600">Email: {{ form.get('email')?.value }}</p>
             </div>
 
             <!-- Address Info -->
             <div class="border-b pb-4 border-gray-400">
                 <div class="text-gray-500 dark:text-gray-400 mb-2 font-semibold">Address</div>
-                <p class="text-purple-600">City: </p>
-                <p class="text-purple-600">Address: </p>
-                <p class="text-purple-600">Postal Code:</p>
-                <p class="text-purple-600">Province: </p>
+               <p class="text-purple-600">City: {{ form.get('city')?.value }}</p>
+            <p class="text-purple-600">Address: {{ form.get('address')?.value }}</p>
+            <p class="text-purple-600">Postal Code: {{ form.get('postalCode')?.value }}</p>
+            <p class="text-purple-600">Province: {{ form.get('province')?.value }}</p>
             </div>
 
             <!-- Account Info -->
             <div class="border-b pb-4 border-gray-400">
                 <div class="text-gray-500 dark:text-gray-400 mb-2 font-semibold">Account</div>
-                <p class="text-purple-600">Username: </p>
-                <p class="text-purple-600">Email:</p>
-                <p class="text-purple-600">Role:</p>
+                 <p class="text-purple-600">Username: {{ form.get('firstName')?.value }}</p>
+            <p class="text-purple-600">Email: {{ form.get('email')?.value }}</p>
+            <p class="text-purple-600">Role: {{ form.get('role')?.value }}</p>
             </div>
 
             <!-- Buttons -->

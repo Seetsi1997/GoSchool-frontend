@@ -1,3 +1,4 @@
+import { LocationEntity } from "./location";
 import { Users } from "./Users";
 
 export interface Driver {
@@ -6,7 +7,7 @@ export interface Driver {
     driverSurname: string;
     email: string;
     driverContact: string;
-    driverLocation: Location;
+    driverLocation: LocationEntity;
     totalNumberOfStudents?: number;
     assignedStudents: number[];
     userAccount: Users;

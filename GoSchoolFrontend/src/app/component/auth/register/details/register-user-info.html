@@ -17,53 +17,73 @@
     </div>
 
     <!-- Form -->
-    <form id="contact_us_form" onsubmit="">
+    <form id="contact_us_form"[formGroup]="form">
       <div class="space-y-5 ml-4 mr-4 px-3 md:px-0 ">
         
         <!-- First Name -->
         <div class="relative">
-          <input type="text" name="fname" id="fname" autocomplete="off"
+          <input type="text" name="fname" id="fname" autocomplete="off"  formControlName="firstName"
             class="px-4 py-2 peer w-full border border-purple-400 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-800 dark:text-gray-50"
             placeholder="First Name" />
+            <!-- Label -->
           <label for="fname"
             class="bg-gray-50 px-2 absolute left-2 -top-3.5 text-gray-600 text-sm transition-all peer-focus:-top-3 peer-focus:bg-gray-50 peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 dark:peer-focus:bg-slate-800 dark:bg-slate-800 dark:text-gray-50">
             First Name
           </label>
+           <!-- Error message -->
+          <div class="text-pink-600 text-sm" *ngIf="form.get('firstName')?.touched && form.get('firstName')?.invalid">
+            {{ getErrorMessage('firstName') }}
+          </div>
         </div>
 
         <!-- Last Name -->
         <div class="relative">
-          <input type="text" name="surname" id="surname" autocomplete="off"
+          <input type="text" name="surname" id="surname" autocomplete="off" formControlName="surname"
             class="px-4 py-2 peer w-full border border-purple-400 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-800 dark:text-gray-50"
             placeholder="Surname" />
+            <!-- Label -->
           <label for="surname"
             class="bg-gray-50 px-2 absolute left-2 -top-3.5 text-gray-600 text-sm transition-all peer-focus:-top-3 peer-focus:bg-gray-50 peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 dark:peer-focus:bg-slate-800 dark:bg-slate-800 dark:text-gray-50">
             Surname
           </label>
+           <!-- Error message -->
+          <div class="text-pink-600 text-sm" *ngIf="form.get('surname')?.touched && form.get('surname')?.invalid">
+            {{ getErrorMessage('surname') }}
+          </div>
         </div>
         
          <!-- Contacts -->
          <div class="relative">
-          <input type="text" name="contact" id="contact" autocomplete="off"
+          <input type="text" name="contact" id="contact" autocomplete="off" formControlName="contact"
             class="px-4 py-2 peer w-full border border-purple-400 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-800 dark:text-gray-50"
             placeholder="Contact" />
+            <!-- Label -->
           <label for="contact"
             class="bg-gray-50 px-2 absolute left-2 -top-3.5 text-gray-600 text-sm transition-all peer-focus:-top-3 peer-focus:bg-gray-50 peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 dark:peer-focus:bg-slate-800 dark:bg-slate-800 dark:text-gray-50">
             Contact
           </label>
+           <!-- Error message -->
+          <div class="text-pink-600 text-sm" *ngIf="form.get('contact')?.touched && form.get('contact')?.invalid">
+            {{ getErrorMessage('contact') }}
+          </div>
         </div>
 
         <!-- Email -->
         <div class="relative">
-          <input type="email" name="email" id="email" autocomplete="off"
+          <input type="email" name="email" id="email" autocomplete="off" formControlName="email"
             class="px-4 py-2 peer w-full border border-purple-400 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-800 dark:text-gray-50"
             placeholder="Email Address" />
+            <!-- Label -->
           <label for="email"
             class="bg-gray-50 px-2 absolute left-2 -top-3.5 text-gray-600 text-sm transition-all peer-focus:-top-3 peer-focus:bg-gray-50 peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 dark:peer-focus:bg-slate-800 dark:bg-slate-800 dark:text-gray-50">
             Email Address
           </label>
-          <div class="peer-invalid:mt-2 hidden peer-invalid:block text-pink-600 text-sm">
+         <!--<div class="peer-invalid:mt-2 hidden peer-invalid:block text-pink-600 text-sm">
             Please provide a valid email address.
+          </div>-->
+           <!-- Error message -->
+          <div class="text-pink-600 text-sm" *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+            {{ getErrorMessage('email') }}
           </div>
         </div>
 

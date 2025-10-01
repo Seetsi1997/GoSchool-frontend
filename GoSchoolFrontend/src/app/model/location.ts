@@ -1,6 +1,6 @@
 import { Province } from "../component/constant/province";
 
-export interface Location {
+export interface LocationEntity {
    locationUUID?: string;
    city: string;
    address: string;

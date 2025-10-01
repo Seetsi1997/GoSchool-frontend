@@ -1,27 +1,32 @@
-<div class="register-wizard">
+<div class="register-wizard" [ngSwitch]="currentStep">
 
   <app-register-user-info 
-    *ngIf="currentStep === 1"
+     *ngSwitchCase="1"
+    [form]="form"
     (nextStep)="onNextStep()"
     (previousStep)="onPreviousStep()">
   </app-register-user-info>
 
   <app-user-location 
-    *ngIf="currentStep === 2"
+    *ngSwitchCase="2"
+    [form]="form"
     (nextStep)="onNextStep()"
     (previousStep)="onPreviousStep()">
   </app-user-location>
 
   <app-account-setup 
-    *ngIf="currentStep === 3"
+    *ngSwitchCase="3"
+    [form]="form"
     (nextStep)="onNextStep()"
     (previousStep)="onPreviousStep()">
   </app-account-setup>
 
-  <app-review-submit 
-    *ngIf="currentStep === 4"
-    (nextStep)="onNextStep()"
-    (previousStep)="onPreviousStep()">
-  </app-review-submit>
+ <app-review-submit
+   *ngSwitchCase="4"
+  [form]="form"
+  (previousStep)="onPreviousStep()"
+  (submitForm)="onSubmitForm()">
+</app-review-submit>
+
 
 </div>

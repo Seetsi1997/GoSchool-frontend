@@ -1,10 +1,10 @@
 import { PaymentMethod } from "../component/constant/paymentMethod";
 import { PaymentStatus } from "../component/constant/paymentStatus";
-import { StudentEntity } from "./student";
-import { Users } from "./Users";
+import { StudentEntity } from "../model/student";
+import { Users } from "../model/Users";
 
 
-export interface PaymentRecordEntity{
+export interface PaymentRecordDTO{
     paymentRecordId: string;
     student: StudentEntity;
     amount: number;

@@ -2,7 +2,7 @@ import { Role } from "../component/constant/role";
 
 export interface Users{
     uuid?: string;
-    username: string;
+    firstname: string;
     email: string;
     profileImageUrl?: string;
     password: string;

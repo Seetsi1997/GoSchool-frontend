@@ -10,73 +10,105 @@
         <div class="text-center text-2xl md:text-3xl py-5 dark:text-gray-50">Account Setup</div>
 
         <!-- Subtitle -->
-        <div class="text-center text-sm py-2 dark:text-gray-400 mb-4"> Choose your role and create a password to finish.</div>
+        <div class="text-center text-sm py-2 dark:text-gray-400 mb-4"> Choose your role and create a password to finish.
+        </div>
 
         <!-- Form -->
-        <form id="contact_us_form" onsubmit="">
+        <form id="contact_us_form" [formGroup]="form">
             <div class="space-y-5 ml-4 mr-4 px-3 md:px-0">
-                <!-- City -->
+                <!-- Username -->
                 <div class="relative">
-                    <input type="text" name="username" id="username" autocomplete="off"
+                    <input type="text" name="firstName" id="firstName" autocomplete="off" [value]="form.get('firstName')?.value" readonly
                         class="px-4 py-2 peer w-full border border-purple-400 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-800 dark:text-gray-50"
                         placeholder="Enter Username" />
-                    <label for="username"
+                    <!-- label -->
+                    <label for="firstName"
                         class="bg-gray-50 px-2 absolute left-2 -top-3.5 text-gray-600 text-sm transition-all peer-focus:-top-3 peer-focus:bg-gray-50 peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 dark:peer-focus:bg-slate-800 dark:bg-slate-800 dark:text-gray-50">
                         Username
                     </label>
+                    <!-- Error message -->
+                    <div class="text-pink-600 text-sm"
+                        *ngIf="form.get('firstName')?.touched && form.get('firstName')?.invalid">
+                        {{ getErrorMessage('firstName') }}
+                    </div>
                 </div>
 
-                <!-- Address -->
+                <!-- Email -->
                 <div class="relative">
                     <input type="text" name="email" id="email" autocomplete="off"
+                        [value]="form.get('email')?.value" readonly
                         class="px-4 py-2 peer w-full border border-purple-400 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-800 dark:text-gray-50"
                         placeholder="Enter Email" />
+                    <!-- label -->
                     <label for="email"
                         class="bg-gray-50 px-2 absolute left-2 -top-3.5 text-gray-600 text-sm transition-all peer-focus:-top-3 peer-focus:bg-gray-50 peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 dark:peer-focus:bg-slate-800 dark:bg-slate-800 dark:text-gray-50">
                         Email
                     </label>
+                    <!-- Error message -->
+                    <div class="text-pink-600 text-sm"
+                        *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+                        {{ getErrorMessage('email') }}
+                    </div>
                 </div>
 
-                <!-- Contacts -->
+                <!-- Password -->
                 <div class="relative">
-                    <input type="text" name="password" id="password" autocomplete="off"
+                    <input type="text" name="password" id="password" autocomplete="off" formControlName="password"
                         class="px-4 py-2 peer w-full border border-purple-400 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-800 dark:text-gray-50"
                         placeholder="Enter Password" />
+                    <!-- label -->
                     <label for="password"
                         class="bg-gray-50 px-2 absolute left-2 -top-3.5 text-gray-600 text-sm transition-all peer-focus:-top-3 peer-focus:bg-gray-50 peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 dark:peer-focus:bg-slate-800 dark:bg-slate-800 dark:text-gray-50">
                         Password
                     </label>
+                    <!-- Error message -->
+                    <div class="text-pink-600 text-sm"
+                        *ngIf="form.get('password')?.touched && form.get('password')?.invalid">
+                        {{ getErrorMessage('password') }}
+                    </div>
                 </div>
 
 
-                <!-- Contacts -->
+                <!-- Confirm Password -->
                 <div class="relative">
                     <input type="text" name="confirmPassword" id="confirmPassword" autocomplete="off"
+                        formControlName="confirmPassword"
                         class="px-4 py-2 peer w-full border border-purple-400 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-800 dark:text-gray-50"
                         placeholder="Confirm Password" />
+                    <!-- label -->
                     <label for="confirmPassword"
                         class="bg-gray-50 px-2 absolute left-2 -top-3.5 text-gray-600 text-sm transition-all peer-focus:-top-3 peer-focus:bg-gray-50 peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 dark:peer-focus:bg-slate-800 dark:bg-slate-800 dark:text-gray-50">
                         Confirm Password
                     </label>
+                    <!-- Error message -->
+                    <div class="text-pink-600 text-sm"
+                        *ngIf="form.get('confirmPassword')?.touched && form.get('confirmPassword')?.invalid">
+                        {{ getErrorMessage('confirmPassword') }}
+                    </div>
                 </div>
 
-                <!-- Province -->
+                <!-- Role -->
                 <div class="relative">
-                    <select [(ngModel)]="selectedRole" name="role" required
+                    <select formControlName="role"
                         class="px-4 py-2 peer w-full border border-purple-400 bg-gray-50 shadow-sm text-purple-600 rounded-md focus:outline-none focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-800 dark:text-gray-50">
-                        <!-- Default option (shows by default now) -->
-                        <option disabled>Select a Province</option>
+                        <!-- Default option -->
+                        <option value="" disabled selected>Select Role</option>
 
                         <!-- Provinces -->
-                        <option *ngFor="let roles of role" [value]="roles">
-                            {{ roles.replace('_', ' ') }}
+                        <option *ngFor="let r of role" [value]="r">
+                            {{ r.replace('_', ' ') }}
                         </option>
                     </select>
-                    <!-- Floating label trick -->
+
+                    <!-- Floating label -->
                     <label class="absolute left-3 top-2 text-gray-400 pointer-events-none"
-                        [class.hidden]="selectedRole">
+                        [class.hidden]="form.get('role')?.value">
                         Select a Role
                     </label>
+                    <!-- Error message -->
+                    <div class="text-pink-600 text-sm" *ngIf="form.get('role')?.touched && form.get('role')?.invalid">
+                        {{ getErrorMessage('role') }}
+                    </div>
                 </div>
 
                 <!-- Going to the back screen / forward one -->

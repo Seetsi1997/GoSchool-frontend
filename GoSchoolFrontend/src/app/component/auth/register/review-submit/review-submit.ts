@@ -1,5 +1,6 @@
 import { CommonModule } from "@angular/common";
-import { Component, EventEmitter, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { FormGroup } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 
 @Component({
@@ -10,10 +11,13 @@ import { RouterModule } from "@angular/router";
 })
 
 export class ReviewSubmit {
- 
+  @Input() form!: FormGroup; 
   @Output() previousStep = new EventEmitter<void>();
+  @Output() submitForm = new EventEmitter<void>(); 
 
   goPrevious() {
-   this.previousStep.emit();
+    this.previousStep.emit();
   }
+
+ onSubmit() { if (this.form.valid) this.submitForm.emit();}
 }
