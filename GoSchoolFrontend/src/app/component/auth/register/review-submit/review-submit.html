@@ -1,58 +1,203 @@
 <!-- Header -->
 <div class="flex items-center justify-center fixed top-0 left-0 w-full h-[60px] z-50 dark:bg-slate-900">
-    <p class="text-xl font-bold text-white dark:text-white">GoSchool</p>
+  <p class="text-xl font-bold text-white dark:text-white">GoSchool</p>
 </div>
 
 <div class="bg-gray-50 dark:bg-slate-900 pt-[60px] min-h-screen flex justify-center items-center">
-    <div
-        class="w-full md:w-2/6 py-10  mr-4 ml-4  mt-4 mb-4 border border-purple-400 border-t-[20px] border-b-4 border-b-purple-400 rounded-md shadow-md bg-white dark:bg-slate-900">
+  <div
+    class="w-full md:w-2/6 py-10 mr-4 ml-4 mt-4 mb-4 border border-purple-400 border-t-[20px] border-b-4 border-b-purple-400 rounded-md shadow-md bg-white dark:bg-slate-900">
+    <!-- Title -->
+    <div class="text-center text-2xl md:text-3xl py-5 dark:text-gray-50">Review</div>
 
-        <!-- Title -->
-        <div class="text-center text-2xl md:text-3xl py-5 dark:text-gray-50">Review</div>
+    <!-- Subtitle -->
+    <div class="text-center text-sm py-2 dark:text-gray-400 mb-4">Review your details below.</div>
 
+    <!-- Form Wrapper -->
+    <div class="space-y-5 ml-4 mr-4 px-3 md:px-0">
+      <!-- Register Info -->
 
-        <!-- Subtitle -->
-        <div class="text-center text-sm py-2 dark:text-gray-400 mb-4"> Review your details below.</div>
+      <div class="border-b pb-4 border-gray-400">
+        <div class="text-gray-500 dark:text-gray-400 mb-2 font-semibold">Register Info</div>
+        <table class="w-full text-left table-auto min-w-max">
+          <thead>
+            <tr class="flex items-center justify-between border-b border-b pb-4 border-slate-500">
+              <th>
+                <p class="block text-sm font-normal leading-none text-slate-500">Name</p>
+              </th>
+              <th>
+                <p class="block text-sm font-normal leading-none text-slate-500">Surname</p>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="flex items-center justify-between">
+              <td class="p-4">
+                <p class="block text-sm text-purple-600">
+                  {{ form.get('firstName')?.value }}
+                </p>
+              </td>
+              <td class="p-4">
+                <p class="block text-sm text-purple-600">
+                  {{ form.get('surname')?.value }}
+                </p>
+              </td>
+            </tr>
+          </tbody>
+          <thead>
+            <tr class="flex items-center justify-between border-b border-b pb-4 border-slate-500">
+              <th>
+                <p class="block text-sm font-normal leading-none text-slate-500">Email</p>
+              </th>
+              <th>
+                <p class="block text-sm font-normal leading-none text-slate-500">Contact</p>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="flex items-center justify-between">
+              <td class="p-4">
+                <p class="block text-sm text-purple-600">
+                  {{ form.get('email')?.value }}
+                </p>
+              </td>
+              <td class="p-4">
+                <p class="block text-sm text-purple-600">
+                  {{ form.get('contact')?.value }}
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-        <!-- Form Wrapper -->
-        <div class="space-y-5 ml-4 mr-4 px-3 md:px-0">
+      <!-- Address Info -->
+      <div class="border-b pb-4 border-gray-400">
+        <div class="text-gray-500 dark:text-gray-400 mb-2 font-semibold">Address</div>
+        <table class="w-full text-left table-auto min-w-max">
+          <thead>
+            <tr class="flex items-center justify-between border-b border-b pb-4 border-slate-500">
+              <th>
+                <p class="block text-sm font-normal leading-none text-slate-500">City</p>
+              </th>
+              <th>
+                <p class="block text-sm font-normal leading-none text-slate-500">Address</p>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="flex items-center justify-between">
+              <td class="p-4">
+                <p class="block text-sm text-purple-600">
+                  {{ form.get('city')?.value }}
+                </p>
+              </td>
+              <td class="p-4">
+                <p class="block text-sm text-purple-600">
+                  {{ form.get('address')?.value }}
+                </p>
+              </td>
+            </tr>
+          </tbody>
+          <thead>
+            <tr class="flex items-center justify-between border-b border-b pb-4 border-slate-500">
+              <th>
+                <p class="block text-sm font-normal leading-none text-slate-500">Province</p>
+              </th>
+              <th>
+                <p class="block text-sm font-normal leading-none text-slate-500">Postal Code</p>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="flex items-center justify-between">
+              <td class="p-4">
+                <p class="block text-sm text-purple-600">
+                  {{ form.get('province')?.value }}
+                </p>
+              </td>
+              <td class="p-4">
+                <p class="block text-sm text-purple-600">
+                  {{ form.get('postalCode')?.value }}
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-            <!-- Register Info -->
-            <div class="border-b pb-4 border-gray-400">
-                <div class="text-gray-500 dark:text-gray-400 mb-2 font-semibold">Register Info</div>
-                <p class="text-purple-600">Name: {{ form.get('firstName')?.value }} {{ form.get('surname')?.value }}</p>
-            <p class="text-purple-600">Contact: {{ form.get('contact')?.value }}</p>
-            <p class="text-purple-600">Email: {{ form.get('email')?.value }}</p>
-            </div>
+      <!-- Account Info -->
+      <div class="border-b pb-4 border-gray-400">
+        <div class="text-gray-500 dark:text-gray-400 mb-2 font-semibold">Account</div>
+        <table class="w-full text-left table-auto min-w-max">
+          <thead>
+            <tr class="flex items-center justify-between border-b border-b pb-4 border-slate-500">
+              <th>
+                <p class="block text-sm font-normal leading-none text-slate-500">Username</p>
+              </th>
+              <th>
+                <p class="block text-sm font-normal leading-none text-slate-500">Email</p>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="flex items-center justify-between">
+              <td class="p-4">
+                <p class="block text-sm text-purple-600">
+                  {{ form.get('firstName')?.value }}
+                </p>
+              </td>
+              <td class="p-4">
+                <p class="block text-sm text-purple-600">
+                  {{ form.get('email')?.value }}
+                </p>
+              </td>
+            </tr>
+          </tbody>
+          <thead>
+            <tr class="flex items-center justify-between border-b border-b pb-4 border-slate-500">
+              <th>
+                <p class="block text-sm font-normal leading-none text-slate-500">Role</p>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="flex items-center justify-between">
+              <td class="p-4">
+                <p class="block text-sm text-purple-600">
+                  {{ form.get('role')?.value }}
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-            <!-- Address Info -->
-            <div class="border-b pb-4 border-gray-400">
-                <div class="text-gray-500 dark:text-gray-400 mb-2 font-semibold">Address</div>
-               <p class="text-purple-600">City: {{ form.get('city')?.value }}</p>
-            <p class="text-purple-600">Address: {{ form.get('address')?.value }}</p>
-            <p class="text-purple-600">Postal Code: {{ form.get('postalCode')?.value }}</p>
-            <p class="text-purple-600">Province: {{ form.get('province')?.value }}</p>
-            </div>
+      <!-- Buttons -->
+      <div class="flex space-x-4 mt-4">
+        <button type="button" (click)="goPrevious()"
+          class="w-full rounded-md bg-purple-600 hover:bg-purple-700 hover:shadow-md py-3 text-white">
+          Back
+        </button>
+        <button type="button" (click)="onSubmit()"
+          class="relative w-full flex items-center justify-center space-x-2 rounded-md bg-purple-600 hover:bg-purple-700 hover:shadow-md py-3 text-white disabled:opacity-60"
+          [disabled]="loading">
 
-            <!-- Account Info -->
-            <div class="border-b pb-4 border-gray-400">
-                <div class="text-gray-500 dark:text-gray-400 mb-2 font-semibold">Account</div>
-                 <p class="text-purple-600">Username: {{ form.get('firstName')?.value }}</p>
-            <p class="text-purple-600">Email: {{ form.get('email')?.value }}</p>
-            <p class="text-purple-600">Role: {{ form.get('role')?.value }}</p>
-            </div>
+          <!-- Spinner -->
+          <svg *ngIf="loading" aria-hidden="true" class="w-5 h-5 mr-2 text-white animate-spin" viewBox="0 0 100 101"
+            fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+              fill="currentColor" />
+            <path
+              d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+              fill="currentFill" />
+          </svg>
 
-            <!-- Buttons -->
-            <div class="flex space-x-4 mt-4">
-                <button type="button" (click)="goPrevious()"
-                    class="w-full rounded-md bg-purple-600 hover:bg-purple-700 hover:shadow-md py-3 text-white">
-                    Back
-                </button>
-                <button type="button"
-                    class="w-full rounded-md bg-purple-600 hover:bg-purple-700 hover:shadow-md py-3 text-white">
-                    Submit
-                </button>
-            </div>
-        </div>
+          <!-- Button Text -->
+          <span>{{ loading ? 'Submitting...' : 'Submit' }}</span>
+        </button>
+
+      </div>
     </div>
+  </div>
 </div>

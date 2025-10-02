@@ -1,18 +1,19 @@
 import { Routes } from '@angular/router';
 import { Register } from './component/auth/register/register';
-import { RegisterUserInfo } from './component/auth/register/details/register-user-info';
-import { UserLocation } from './component/auth/register/address/user-location';
-import { AccontSetup } from './component/auth/register/account-setup/account-setup';
 import { Login } from './component/auth/login/login';
 import { ForgotPassword } from './component/auth/forgot-password/forgot-password';
 import { ResetPassword } from './component/auth/reset-password/reset-password';
-import { ReviewSubmit } from './component/auth/register/review-submit/review-submit';
+import { ParentDashboard } from './component/parent/parent-dashboard/parent-dashboard';
+import { DriverDashboard } from './component/driver/driver-dashboard/driver-dashboard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: Login },
-  { path: 'register', component: Register }, // parent wizard
+  { path: 'register', component: Register }, 
   { path: 'forgot-password', component: ForgotPassword },
+  {path: 'reset-password', component: ResetPassword},
+  {path: 'parent-dashboard', component: ParentDashboard},
+  {path: 'driver-dashboard', component: DriverDashboard},
   { path: '**', redirectTo: 'login' }
 ];
 
