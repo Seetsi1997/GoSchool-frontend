@@ -53,6 +53,10 @@ export class AccontSetup {
     role: {
       required: 'Role is required',
     },
+    contact: {
+      required: 'Contact is required',
+      pattern: 'Contact must be 10 or 11 digits, numbers only',
+    },
   };
 
   constructor(private router: Router) {}
@@ -85,7 +89,7 @@ export class AccontSetup {
   }
 
   goNext() {
-    const stepControls = ['firstName', 'email', 'password', 'confirmPassword', 'role'];
+    const stepControls = ['firstName', 'email', 'contact', 'password', 'confirmPassword', 'role'];
     stepControls.forEach((control) => this.form.get(control)?.markAsTouched());
 
     // Check both controls AND form group (so mismatch stops navigation)

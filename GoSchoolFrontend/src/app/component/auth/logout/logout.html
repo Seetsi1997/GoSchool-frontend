@@ -1,0 +1,40 @@
+<dialog #logoutDialog class="backdrop:bg-gray-900/50 rounded-lg p-0 m-[auto]">
+    <div class="relative transform overflow-hidden rounded-lg bg-slate-500 shadow-xl w-full max-w-lg">
+        <!-- Content -->
+        <div
+            class="bg-gray-100 bg-clip-text bg-gradient-to-r from-slate-50 to-purple-500 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div class="sm:flex sm:items-start">
+                <!-- Icon -->
+                <div
+                    class="mx-auto flex h-12 w-12 sm:h-[45px] sm:w-[45px] items-center justify-center rounded-full bg-slate-100">
+                    <svg class="h-[42px] w-[42px] text-slate-500 sm:h-[39px] sm:w-[39px]" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M0 10C0 4.478 4.478 0 10 0c5.523 0 10 4.478 10 10 0 5.523-4.477 10-10 10-5.522 0-10-4.477-10-10zm11.125 2.002H8.989v-.141c.01-1.966.492-2.254 1.374-2.782.093-.056.19-.114.293-.178.73-.459 1.292-1.038 1.292-1.883 0-.948-.743-1.564-1.666-1.564-.851 0-1.657.398-1.712 1.533H6.304C6.364 4.693 8.18 3.5 10.294 3.5c2.306 0 3.894 1.447 3.894 3.488 0 1.382-.695 2.288-1.805 2.952l-.238.144c-.79.475-1.009.607-1.02 1.777V12zm.17 3.012a1.344 1.344 0 01-1.327 1.328 1.32 1.32 0 01-1.328-1.328 1.318 1.318 0 011.328-1.316c.712 0 1.322.592 1.328 1.316z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </div>
+
+                <!-- Text -->
+                <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                    <h3 class="text-base font-semibold text-white">Logout</h3>
+                    <div class="mt-2">
+                        <p class="text-sm text-gray-300">Are you sure you want to logout?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="bg-gray-700/25 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+            <button (click)="confirmLogout()"
+                class="inline-flex w-full justify-center rounded-md bg-red-500 px-3 py-2 text-sm font-semibold text-white hover:bg-red-400 sm:ml-3 sm:w-auto">
+                Logout
+            </button>
+            <button (click)="closeDialog()"
+                class="mt-3 inline-flex w-full justify-center rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-white inset-ring inset-ring-white/5 hover:bg-white/20 sm:mt-0 sm:w-auto">
+                Cancel
+            </button>
+        </div>
+    </div>
+</dialog>

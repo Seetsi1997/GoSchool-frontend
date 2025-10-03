@@ -70,4 +70,29 @@ export class Auth {
         })
       );
   }
+
+  forgotPassword(email: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/auth/api/users/forgot-password`, { email });
+  }
+
+  /**
+   * 
+   * forgotPassword(payload: { phoneNumber: string }): Observable<any> {
+  return this.http.post(`${this.apiUrl}/auth/api/users/forgot-password`, payload);
+}
+   * 
+   */
+
+  resetPassword(
+    token: string,
+    newPassword: string,
+    confirmPassword: string
+  ): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/auth/api/users/reset-password`, {
+      token,
+      newPassword,
+      confirmPassword,
+    });
+  }
+
 }

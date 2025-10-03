@@ -26,6 +26,10 @@
                         class="bg-gray-50 px-2 absolute left-2 -top-3.5 text-gray-600 text-sm transition-all peer-focus:-top-3 peer-focus:bg-gray-50 peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 dark:peer-focus:bg-slate-800 dark:bg-slate-800 dark:text-gray-50">
                         Email
                     </label>
+                    <div class="text-pink-600 text-sm"
+                        *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid">
+                        {{ getErrorMessage('email') }}
+                    </div>
                 </div>
 
 

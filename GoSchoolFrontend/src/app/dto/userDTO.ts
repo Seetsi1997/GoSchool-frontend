@@ -6,5 +6,6 @@ export interface UserDTO{
   firstname: string;
   profileImageUrl: string;
   role: Role;
+  phoneNumber: string;
 }
 

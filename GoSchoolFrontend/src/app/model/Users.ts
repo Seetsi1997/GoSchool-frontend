@@ -7,5 +7,6 @@ export interface Users{
     profileImageUrl?: string;
     password: string;
     role: Role;
+    phoneNumber: string;
     verified?: boolean;
 }

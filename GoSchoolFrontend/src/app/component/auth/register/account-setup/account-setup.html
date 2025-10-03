@@ -52,6 +52,23 @@
                     </div>
                 </div>
 
+                 <!-- Email -->
+                <div class="relative">
+                    <input type="text" name="contact" id="contact" autocomplete="off" [value]="form.get('contact')?.value"
+                        readonly
+                        class="px-4 py-2 peer w-full border border-purple-400 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-800 dark:text-gray-50"
+                        placeholder="Enter contact" />
+                    <!-- label -->
+                    <label for="contact"
+                        class="bg-gray-50 px-2 absolute left-2 -top-3.5 text-gray-600 text-sm transition-all peer-focus:-top-3 peer-focus:bg-gray-50 peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 dark:peer-focus:bg-slate-800 dark:bg-slate-800 dark:text-gray-50">
+                        Contact
+                    </label>
+                    <!-- Error message -->
+                    <div class="text-pink-600 text-sm" *ngIf="form.get('contact')?.touched && form.get('contact')?.invalid">
+                        {{ getErrorMessage('contact') }}
+                    </div>
+                </div>
+
                 <!-- Password -->
                 <div class="relative">
                     <input [type]="showPassword ? 'text' : 'password'" name="password" id="password" autocomplete="off"

@@ -62,7 +62,7 @@ export class Login implements OnInit {
   }
 
   getErrorMessage(controlName: string) {
-    const control = this.loginForm.get(controlName); // ✅ use loginForm
+    const control = this.loginForm.get(controlName);
     if (!control || !control.errors || !control.touched) return null;
 
     const errors = control.errors;
