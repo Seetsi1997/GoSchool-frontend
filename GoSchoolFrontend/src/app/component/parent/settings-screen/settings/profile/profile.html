@@ -1,0 +1,68 @@
+<!-- Overlay -->
+<div class="fixed inset-0  bg-slate-200 z-50 flex items-center justify-center p-4">
+  <!-- Modal Container -->
+  <div class="bg-slate-500 rounded-2xl shadow-xl w-full max-w-md max-h-[90vh] overflow-hidden">
+    
+    <!-- Header -->
+    <div class="flex items-center justify-between p-4 border-b border-gray-200">
+      <h2 class="text-xl font-semibold text-slate-100">Profile Settings</h2>
+      <button type="button" (click)="goBack()" class="text-gray-400 hover:text-gray-600 transition-colors">
+        <svg class="w-6 h-6 text-slate-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Content -->
+    <div class="p-6 overflow-y-auto max-h-[calc(90vh-80px)]">
+      <div class="space-y-4">
+        <!-- Profile Picture -->
+        <div class="flex justify-center mb-4">
+          <div class="relative">
+            <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center">
+              <span class="text-2xl font-semibold text-purple-600">U</span>
+            </div>
+            <button class="absolute bottom-0 right-0 bg-purple-500 text-white p-1 rounded-full">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Form Fields -->
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-slate-100 mb-1">Full Name</label>
+            <input type="text" [(ngModel)]="parent.firstName"
+                   class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
+             </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-slate-100 mb-1">Email Address</label>
+            <input type="email"  [(ngModel)]="parent.surname"
+                    class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
+                  </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-slate-100 mb-1">Phone Number</label>
+            <input type="tel" [(ngModel)]="parent.contact"
+                    class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
+                  </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex gap-3 pt-4">
+          <button (click)="goBack()" 
+                  class="flex-1 px-4 py-2 text-slate-100 border border-slate-300 rounded-lg transition-colors">
+            Cancel
+          </button>
+          <button class="flex-1 px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors">
+            Save Changes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

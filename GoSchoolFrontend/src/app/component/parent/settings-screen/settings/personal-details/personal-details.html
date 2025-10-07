@@ -1,0 +1,124 @@
+<!-- Overlay -->
+<div class="fixed inset-0 bg-slate-200 z-50 flex items-center justify-center p-4">
+    <!-- Modal Container -->
+    <div class="bg-slate-500 rounded-2xl shadow-xl w-full max-w-md max-h-[90vh] overflow-hidden">
+        <!-- Header -->
+        <div class="flex items-center justify-between p-4 border-b border-gray-200">
+            <h2 class="text-xl font-semibold text-slate-100">Personal Details Setting</h2>
+            <button type="button" (click)="goBack()" class="text-gray-400 hover:text-gray-600 transition-colors">
+                <svg class="w-6 h-6 text-slate-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Content -->
+        <div class="p-6 overflow-y-auto max-h-[calc(90vh-80px)]">
+            <div class="space-y-6">
+                <h2 class="text-xl font-semibold text-slate-100">Parents Info</h2>
+
+                <!-- Compact Grid Layout -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Column 1 -->
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-100 mb-1">Full Name</label>
+                                <input type="text"
+                                    class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-100 mb-1">Surname</label>
+                                <input type="text"
+                                    class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-100 mb-1">Email Address</label>
+                            <input type="email"
+                                class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-100 mb-1">Phone Number</label>
+                            <input type="tel" placeholder="Primary phone"
+                                class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-100 mb-1">City</label>
+                            <input type="text"
+                                class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
+                        </div>
+                    </div>
+
+                    <!-- Column 2 -->
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-100 mb-1">Address</label>
+                            <input type="text"
+                                class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-100 mb-1">Postal Code</label>
+                                <input type="text"
+                                    class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-100 mb-1">Province</label>
+                                <input type="text"
+                                    class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Role (Full Width) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-100 mb-1">Role</label>
+                        <input type="text"
+                            class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
+                    </div>
+                </div>
+
+            </div>
+            <div class="space-y-6 pt-4">
+                <h2 class="text-xl font-semibold text-slate-100">Student Info</h2>
+
+                <!-- Compact Grid Layout -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Column 1 -->
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-100 mb-1">Full Name</label>
+                                <input type="text"
+                                    class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-100 mb-1">Surname</label>
+                                <input type="text"
+                                    class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-100 mb-1">Grade</label>
+                            <input type="text"
+                                class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex gap-3 pt-4">
+                    <button (click)="goBack()"
+                        class="flex-1 px-4 py-2 text-slate-100 border border-slate-300 rounded-lg transition-colors">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+<!-- component -->
+<div class="flex flex-col items-center justify-center p-4">
+  <!-- Title -->
+  <h1
+    class="mb-6 text-2xl text-center font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-500">
+    Upload Proof of Payment
+  </h1>
+
+  <!-- Form Container -->
+  <div class="w-full max-w-[650px] bg-white rounded-lg shadow-md">
+    <form class="py-6 px-9">
+      <!-- Upload Section -->
+      <div class="mb-6 pt-4">
+        <label class="mb-5 block text-[18px] font-semibold text-purple-400">
+          Upload File
+        </label>
+
+        <div class="mb-8">
+          <input type="file" name="file" id="file" class="sr-only" />
+          <label
+            for="file"
+            class="relative flex min-h-[200px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-12 text-center cursor-pointer hover:border-purple-400 transition"
+          >
+            <div>
+              <span class="mb-2 block font-semibold text-slate-500">
+                Drop files here
+              </span>
+              <span class="mb-2 block text-base font-medium text-[#6B7280]">
+                Or
+              </span>
+              <span
+                class="inline-flex rounded border border-slate-500 py-2 px-7 text-base font-medium text-purple-400"
+              >
+                Browse
+              </span>
+            </div>
+          </label>
+        </div>
+
+        <!-- File Preview -->
+        <div class="mb-5 rounded-md bg-[#F5F7FB] py-4 px-8 hidden" id="file-preview">
+          <div class="flex items-center justify-between">
+            <span class="truncate pr-3 text-base font-medium text-[#07074D]" id="file-name">
+              <!-- File name will appear here -->
+            </span>
+            <button type="button" class="text-[#07074D]" onclick="removeFile()">
+              ✕
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div>
+        <button
+          class="hover:shadow-form w-full rounded-md bg-slate-500 py-3 px-8 text-center text-base font-semibold text-white outline-none"
+        >
+          Send File
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

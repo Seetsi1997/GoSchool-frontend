@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../env/env';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ParentDTO } from '../../dto/parentDTO';
 
@@ -19,6 +19,14 @@ export class Parents {
       {
         headers: { 'Content-Type': 'application/json' }
       });
+  }
+
+   getCurrentParent(): Observable<ParentDTO> {
+    const headers = new HttpHeaders({
+  'Authorization': `Bearer ${localStorage.getItem('token')}`
+});
+
+    return this.http.get<ParentDTO>(`${this.apiUrl}/auth/api/parents/profile`, { headers });
   }
   
 }

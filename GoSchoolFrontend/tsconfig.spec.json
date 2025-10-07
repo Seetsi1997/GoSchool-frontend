@@ -9,5 +9,5 @@
   "include": [
     "src/**/*.spec.ts",
     "src/**/*.d.ts"
-  ]
+, "src/app/component/parent/settings-screen/payment/transactions-history/transactions-history..ts"  ]
 }

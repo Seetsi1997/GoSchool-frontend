@@ -111,13 +111,13 @@ export class Login implements OnInit {
 
             switch (this.userRole) {
               case Role.DRIVER:
-                this.router.navigate(['/driver-dashboard']);
+                this.router.navigate(['/drivers-dashboard']);
                 break;
               case Role.PARENT:
                 this.router.navigate(['/parent-dashboard']);
                 break;
               default:
-                this.router.navigate(['/driver-dashboard']);
+                this.router.navigate(['/drivers-dashboard']);
             }
           }, 2000);
         },
