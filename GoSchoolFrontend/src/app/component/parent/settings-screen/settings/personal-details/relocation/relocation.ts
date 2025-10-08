@@ -1,19 +1,19 @@
+import { Component } from '@angular/core';
+import { ParentDTO } from '../../../../../../dto/parentDTO';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
-import { ParentDTO } from '../../../../../dto/parentDTO';
-import { Parents } from '../../../../../service/serviceParent/parents';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, Router } from '@angular/router';
+import { Parents } from '../../../../../../service/serviceParent/parents';
+import { Province } from '../../../../../constant/province';
 
 @Component({
-  selector: 'app-profile',
+  selector: 'app-relocation',
   standalone: true,
   imports: [CommonModule, RouterModule, FormsModule],
-  providers: [Parents],
-  templateUrl: './profile.html',
-  styleUrls: ['./profile.css'],
+  templateUrl: './relocation.html',
+  styleUrl: './relocation.css',
 })
-export class Profile implements OnInit {
+export class ReLocation {
   parent: ParentDTO = {} as ParentDTO;
   originalParent: ParentDTO = {} as ParentDTO; // Store original data for comparison
   isLoading = true;
@@ -24,6 +24,8 @@ export class Profile implements OnInit {
   popupTitle = '';
   popupMessage = '';
   popupType: 'success' | 'error' | 'info' = 'info';
+  provinces = Object.values(Province);
+  selectedProvince: Province | null = null;
 
   constructor(private router: Router, private parentService: Parents) {}
 
@@ -51,36 +53,31 @@ export class Profile implements OnInit {
   }
 
   hasChanges(): boolean {
-    if (!this.originalParent || !this.parent) return false;
-
     return (
-      this.parent.firstName !== this.originalParent.firstName ||
-      this.parent.email !== this.originalParent.email ||
-      this.parent.surname !== this.originalParent.surname ||
-      this.parent.contact !== this.originalParent.contact ||
+      this.parent.city !== this.originalParent.city ||
       this.parent.address !== this.originalParent.address ||
       this.parent.postalCode !== this.originalParent.postalCode ||
-      this.parent.province !== this.originalParent.province ||
-      this.parent.city !== this.originalParent.city
+      this.parent.province !== this.originalParent.province
     );
   }
 
   saveChanges() {
+    // Check if there are any changes
     if (!this.hasChanges()) {
-      this.showPopupMessage('No Changes', 'No changes were made to your profile.', 'info');
+      this.showPopupMessage('No Changes', 'The location remained unchanged.', 'info');
       return;
     }
 
     this.parentService.updateCurrentParent(this.parent).subscribe({
       next: (updatedParent) => {
         this.parent = updatedParent;
-        this.originalParent = JSON.parse(JSON.stringify(updatedParent));
+        this.originalParent = { ...updatedParent };
         this.isEditing = false;
-        this.showPopupMessage('Success', 'Profile updated successfully.', 'success');
+        this.showPopupMessage('Success', 'Location updated successfully.', 'success');
       },
       error: (error) => {
         console.error('Error updating parent:', error);
-        this.showPopupMessage('Error', 'Error updating profile. Please try again.', 'error');
+        this.showPopupMessage('Error', 'Error updating location. Please try again.', 'error');
       },
     });
   }
@@ -98,9 +95,8 @@ export class Profile implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(['/parent-dashboard/settings']);
+    this.router.navigate(['/parent-dashboard/settings/settings-personal-details']);
   }
-
   capitalizeRole(role: string): string {
     if (!role) return '';
     return role.charAt(0).toUpperCase() + role.slice(1).toLowerCase();

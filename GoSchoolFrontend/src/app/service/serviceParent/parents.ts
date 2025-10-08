@@ -5,28 +5,37 @@ import { Observable } from 'rxjs';
 import { ParentDTO } from '../../dto/parentDTO';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class Parents {
+  private apiUrl = environment.apiUrl;
 
+  constructor(private http: HttpClient) {}
 
-   private apiUrl = environment.apiUrl;
-   
-  constructor(private http: HttpClient) { }
-
-    register(user: ParentDTO): Observable<any> {
-    return this.http.post(`${this.apiUrl}/auth/api/parents/register`, user, 
-      {
-        headers: { 'Content-Type': 'application/json' }
-      });
+  register(user: ParentDTO): Observable<any> {
+    return this.http.post(`${this.apiUrl}/auth/api/parents/register`, user, {
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 
-   getCurrentParent(): Observable<ParentDTO> {
+  getCurrentParent(): Observable<ParentDTO> {
+    const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
-  'Authorization': `Bearer ${localStorage.getItem('token')}`
-});
+      Authorization: `Bearer ${token}`,
+    });
 
     return this.http.get<ParentDTO>(`${this.apiUrl}/auth/api/parents/profile`, { headers });
   }
-  
+
+  updateCurrentParent(parent: ParentDTO): Observable<ParentDTO> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    });
+
+    return this.http.put<ParentDTO>(`${this.apiUrl}/auth/api/parents/profile`, parent, {
+      headers,
+    });
+  }
 }

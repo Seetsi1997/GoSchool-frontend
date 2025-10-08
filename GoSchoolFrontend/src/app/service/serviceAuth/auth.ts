@@ -5,38 +5,45 @@ import { Observable, tap } from 'rxjs';
 import { UserLoginDTO } from '../../dto/userLoginDTO';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class Auth {
-
   private apiUrl = environment.apiUrl;
   public currentUser: any = null;
   private logoutTimer: any;
-   
-  constructor(private http: HttpClient) { }
 
-    register(user: any): Observable<any> {
+  constructor(private http: HttpClient) {}
+
+  register(user: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/auth/api/users/register`, user);
   }
-  
-    login(email: string, password: string): Observable<UserLoginDTO> {
-    return this.http
-      .post<UserLoginDTO>(
-        `${environment.apiUrl}/auth/api/users/login`,
-        { email, password },
-        {
-          headers: new HttpHeaders({
-            'Content-Type': 'application/json',
-          }),
+
+  login(email: string, password: string): Observable<UserLoginDTO> {
+  return this.http
+    .post<UserLoginDTO>(
+      `${environment.apiUrl}/auth/api/users/login`,
+      { email, password },
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+      }
+    )
+    .pipe(
+      tap((res: UserLoginDTO) => {
+        if (res.token) {
+          localStorage.setItem('token', res.token);
+          console.log("✅ Token saved:", res.token);
         }
-      )
-      .pipe(
-        tap((res:  UserLoginDTO) => {
-          // assume backend returns { token, user }
-         // this.setSession(res.token, res.email);
-        })
-      );
-  }
+        // store other info if needed
+        localStorage.setItem('uuid', res.uuid);
+        localStorage.setItem('role', res.role);
+        localStorage.setItem('firstname', res.firstname);
+        localStorage.setItem('email', res.email);
+      })
+    );
+}
+
 
   logout(): Observable<any> {
     const token = sessionStorage.getItem('token');
@@ -83,16 +90,11 @@ export class Auth {
    * 
    */
 
-  resetPassword(
-    token: string,
-    newPassword: string,
-    confirmPassword: string
-  ): Observable<any> {
+  resetPassword(token: string, newPassword: string, confirmPassword: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/auth/api/users/reset-password`, {
       token,
       newPassword,
       confirmPassword,
     });
   }
-
 }

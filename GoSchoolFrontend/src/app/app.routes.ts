@@ -19,6 +19,7 @@ import { TransactionsHistory } from './component/parent/settings-screen/payment/
 import { MyChildren} from './component/parent/settings-screen/payment/my-children/my-children';
 import {ChangePassword} from './component/parent/settings-screen/support/change-password/change-password';
 import {Privacy} from './component/parent/settings-screen/support/privacy/privacy';
+import {ReLocation} from './component/parent/settings-screen/settings/personal-details/relocation/relocation'
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -40,7 +41,12 @@ export const routes: Routes = [
         component: SettingsScreen,
         children: [
           { path: 'settings-profile', component: Profile },
-          { path: 'settings-personal-details', component: PersonalDetails },
+          { path: 'settings-personal-details', component: PersonalDetails,
+            children: [
+               {path: 'settings-relocate', component: ReLocation}
+            ]
+
+           },
           { path: 'settings-transactions-history', component: TransactionsHistory },
           { path: 'settings-my-children', component: MyChildren },
           { path: 'settings-change-password', component: ChangePassword },
