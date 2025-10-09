@@ -27,17 +27,16 @@ export class ReviewSubmit {
     );
 
     if (this.form.valid) {
-      this.loading = true;  // tart loading
-      console.log('Child emit firing, form valid =', this.form.valid);
-
+      this.loading = true;  
     
+      // stop loading after action
       setTimeout(() => {
         this.submitForm.emit();
-        this.loading = false; // stop loading after action
+        this.loading = false; 
       }, 2000);
 
     } else {
-      console.log('Child form invalid. Invalid controls:');
+
       Object.keys(this.form.controls).forEach(ctrl => {
         const control = this.form.get(ctrl);
         if (control && control.invalid) {
@@ -46,5 +45,9 @@ export class ReviewSubmit {
       });
     }
   }
+    capitalizeRole(role: string): string {
+  if (!role) return '';
+  return role.charAt(0).toUpperCase() + role.slice(1).toLowerCase();
+}
 }
 

@@ -13,6 +13,7 @@ export interface ParentDTO{
     city: string;
     address: string;
     postalCode: string;
+    suburb: string;
     province: Province;
     children: StudentDTO[];
     userId: string;

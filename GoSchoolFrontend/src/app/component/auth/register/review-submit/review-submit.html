@@ -33,12 +33,12 @@
             <tr class="flex items-center justify-between">
               <td class="p-4">
                 <p class="block text-sm text-purple-600">
-                  {{ form.get('firstName')?.value }}
+                 {{ capitalizeRole(form.get('firstName')?.value) }}
                 </p>
               </td>
               <td class="p-4">
                 <p class="block text-sm text-purple-600">
-                  {{ form.get('surname')?.value }}
+                  {{ capitalizeRole(form.get('surname')?.value) }}
                 </p>
               </td>
             </tr>
@@ -77,10 +77,13 @@
           <thead>
             <tr class="flex items-center justify-between border-b border-b pb-4 border-slate-500">
               <th>
+                <p class="block text-sm font-normal leading-none text-slate-500">Suburb</p>
+              </th>
+              <th>
                 <p class="block text-sm font-normal leading-none text-slate-500">City</p>
               </th>
               <th>
-                <p class="block text-sm font-normal leading-none text-slate-500">Address</p>
+                <p class="block text-sm font-normal leading-none text-slate-500">Street Address</p>
               </th>
             </tr>
           </thead>
@@ -88,12 +91,17 @@
             <tr class="flex items-center justify-between">
               <td class="p-4">
                 <p class="block text-sm text-purple-600">
-                  {{ form.get('city')?.value }}
+                  {{ capitalizeRole(form.get('suburb')?.value) }}
                 </p>
               </td>
               <td class="p-4">
                 <p class="block text-sm text-purple-600">
-                  {{ form.get('address')?.value }}
+                 {{ capitalizeRole(form.get('city')?.value) }}
+                </p>
+              </td>
+              <td class="p-4">
+                <p class="block text-sm text-purple-600">
+                 {{ capitalizeRole(form.get('address')?.value) }}
                 </p>
               </td>
             </tr>
@@ -112,7 +120,7 @@
             <tr class="flex items-center justify-between">
               <td class="p-4">
                 <p class="block text-sm text-purple-600">
-                  {{ form.get('province')?.value }}
+                  {{ capitalizeRole(form.get('province')?.value) }}
                 </p>
               </td>
               <td class="p-4">
@@ -143,7 +151,7 @@
             <tr class="flex items-center justify-between">
               <td class="p-4">
                 <p class="block text-sm text-purple-600">
-                  {{ form.get('firstName')?.value }}
+                  {{ capitalizeRole(form.get('firstName')?.value) }}
                 </p>
               </td>
               <td class="p-4">
@@ -164,7 +172,7 @@
             <tr class="flex items-center justify-between">
               <td class="p-4">
                 <p class="block text-sm text-purple-600">
-                  {{ form.get('role')?.value }}
+                  {{ capitalizeRole(form.get('role')?.value) }}
                 </p>
               </td>
             </tr>

@@ -7,30 +7,33 @@
   </h1>
 
   <!-- Form Container -->
-  <div class="w-full max-w-[650px] bg-white rounded-lg shadow-md">
+  <div class="w-full max-w-[650px] bg-slate-500 rounded-lg shadow-md">
     <form class="py-6 px-9">
       <!-- Upload Section -->
       <div class="mb-6 pt-4">
-        <label class="mb-5 block text-[18px] font-semibold text-purple-400">
-          Upload File
-        </label>
+        <div class="flex items-center justify-between mb-5">
+          <label class="block text-[18px] font-semibold text-slate-200">
+            Upload File
+          </label>
+          <button type="button" (click)="goBack()" class="text-gray-400 hover:text-gray-600 transition-colors">
+            <svg class="w-6 h-6 text-slate-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
 
         <div class="mb-8">
           <input type="file" name="file" id="file" class="sr-only" />
-          <label
-            for="file"
-            class="relative flex min-h-[200px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-12 text-center cursor-pointer hover:border-purple-400 transition"
-          >
+          <label for="file"
+            class="relative flex min-h-[200px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-12 text-center cursor-pointer hover:border-purple-400 transition">
             <div>
-              <span class="mb-2 block font-semibold text-slate-500">
+              <span class="mb-2 block font-semibold text-slate-200">
                 Drop files here
               </span>
-              <span class="mb-2 block text-base font-medium text-[#6B7280]">
+              <span class="mb-2 block text-base font-medium text-purple-200">
                 Or
               </span>
-              <span
-                class="inline-flex rounded border border-slate-500 py-2 px-7 text-base font-medium text-purple-400"
-              >
+              <span class="inline-flex rounded border border-slate-100 py-2 px-7 text-base font-medium text-slate-200">
                 Browse
               </span>
             </div>
@@ -38,23 +41,23 @@
         </div>
 
         <!-- File Preview -->
-        <div class="mb-5 rounded-md bg-[#F5F7FB] py-4 px-8 hidden" id="file-preview">
+        <div class="mb-5 rounded-md bg-green-500 py-4 px-8 hidden" id="file-preview">
           <div class="flex items-center justify-between">
-            <span class="truncate pr-3 text-base font-medium text-[#07074D]" id="file-name">
+            <span class="truncate pr-3 text-base font-medium text-green-500" id="file-name">
               <!-- File name will appear here -->
             </span>
-            <button type="button" class="text-[#07074D]" onclick="removeFile()">
+            <button type="button" class="text-black bg-blue-600">
               ✕
             </button>
           </div>
         </div>
       </div>
 
-      <!-- Submit Button -->
-      <div>
-        <button
-          class="hover:shadow-form w-full rounded-md bg-slate-500 py-3 px-8 text-center text-base font-semibold text-white outline-none"
-        >
+      <!-- Action & Submit Button -->
+
+      <div class="flex gap-3 pt-4">
+        <button (click)="goBack()"
+          class="flex-1 px-4 py-2 text-slate-100 border border-slate-300 rounded-lg transition-colors">
           Send File
         </button>
       </div>

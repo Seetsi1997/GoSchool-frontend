@@ -50,6 +50,12 @@ export class Register {
           Validators.email,
           Validators.pattern(/^[a-zA-Z0-9._%+\-]+@gmail\.com$/),
         ]),
+        suburb: new FormControl('', [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(30),
+          Validators.pattern(/^[A-Za-z\s]+$/),
+        ]),
         city: new FormControl('', [
           Validators.required,
           Validators.minLength(5),
@@ -128,7 +134,7 @@ export class Register {
       case 1:
         return ['firstName', 'surname', 'contact', 'email'];
       case 2:
-        return ['city', 'address', 'postalCode', 'province'];
+        return ['suburb','city', 'address', 'postalCode', 'province'];
       case 3:
         return ['firstName', 'email', 'password', 'confirmPassword', 'role'];
       case 4:

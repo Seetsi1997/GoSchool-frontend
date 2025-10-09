@@ -6,4 +6,5 @@ export interface LocationDTO{
     address: string;
     province: Province; 
     postalCode: string;
+    suburb: string;
 }

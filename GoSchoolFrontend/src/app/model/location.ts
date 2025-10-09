@@ -6,4 +6,5 @@ export interface LocationEntity {
    address: string;
    province:  Province; 
    postalCode: string;
+   suburb: string;
 }

@@ -54,6 +54,7 @@ export class ReLocation {
 
   hasChanges(): boolean {
     return (
+       this.parent.suburb !== this.originalParent.suburb ||
       this.parent.city !== this.originalParent.city ||
       this.parent.address !== this.originalParent.address ||
       this.parent.postalCode !== this.originalParent.postalCode ||

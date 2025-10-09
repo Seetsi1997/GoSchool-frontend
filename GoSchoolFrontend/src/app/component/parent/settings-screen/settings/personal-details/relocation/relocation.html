@@ -20,6 +20,11 @@
                     <!-- Column 1 -->
                     <div class="space-y-4">
                         <div>
+                            <label class="block text-sm font-medium text-slate-100 mb-1">Suburb</label>
+                            <input type="text" [(ngModel)]="parent.suburb"
+                                class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
+                        </div>
+                        <div>
                             <label class="block text-sm font-medium text-slate-100 mb-1">City</label>
                             <input type="text" [(ngModel)]="parent.city"
                                 class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />

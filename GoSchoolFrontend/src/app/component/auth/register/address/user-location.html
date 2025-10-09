@@ -17,6 +17,22 @@
         <!-- Form -->
         <form id="contact_us_form" [formGroup]="form">
             <div class="space-y-5 ml-4 mr-4 px-3 md:px-0">
+                <!-- Postal Code -->
+                <div class="relative">
+                    <input type="text" name="suburb" id="suburb" autocomplete="off" formControlName="suburb"
+                        class="px-4 py-2 peer w-full border border-purple-400 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-800 dark:text-gray-50"
+                        placeholder="Enter Suburb" />
+                        <!-- Label -->
+                    <label for="suburb"
+                        class="bg-gray-50 px-2 absolute left-2 -top-3.5 text-gray-600 text-sm transition-all peer-focus:-top-3 peer-focus:bg-gray-50 peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 dark:peer-focus:bg-slate-800 dark:bg-slate-800 dark:text-gray-50">
+                        Suburb
+                    </label>
+                     <!-- Error message -->
+                    <div class="text-pink-600 text-sm"
+                        *ngIf="form.get('suburb')?.touched && form.get('suburb')?.invalid">
+                        {{ getErrorMessage('suburb') }}
+                    </div>
+                </div>
                 <!-- City -->
                 <div class="relative">
                     <input type="text" name="city" id="city" autocomplete="off" formControlName="city"
@@ -37,11 +53,11 @@
                 <div class="relative">
                     <input type="text" name="address" id="address" autocomplete="off" formControlName="address"
                         class="px-4 py-2 peer w-full border border-purple-400 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-800 dark:text-gray-50"
-                        placeholder="Enter your Address" />
+                        placeholder="Enter your Street Address" />
                         <!-- Label -->
                     <label for=""
                         class="bg-gray-50 px-2 absolute left-2 -top-3.5 text-gray-600 text-sm transition-all peer-focus:-top-3 peer-focus:bg-gray-50 peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 dark:peer-focus:bg-slate-800 dark:bg-slate-800 dark:text-gray-50">
-                        Address
+                       Street Address
                     </label>
                      <!-- Error message -->
                     <div class="text-pink-600 text-sm"

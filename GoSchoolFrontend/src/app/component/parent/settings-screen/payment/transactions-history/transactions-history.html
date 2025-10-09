@@ -1,1 +1,43 @@
-<p>transactions-history works!</p>
+<!-- Overlay -->
+<div class="fixed inset-0 bg-slate-200 z-50 flex items-center justify-center p-4">
+    <!-- Modal Container -->
+    <div class="bg-slate-500 rounded-2xl shadow-xl w-full max-w-md max-h-[90vh] overflow-hidden">
+        <!-- Header -->
+        <div class="flex items-center justify-between p-4 border-b border-gray-200">
+            <h2 class="text-xl font-semibold text-slate-100">Transactions History</h2>
+            <button type="button" (click)="goBack()" class="text-gray-400 hover:text-gray-600 transition-colors">
+                <svg class="w-6 h-6 text-slate-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Content -->
+        <div class="p-6 overflow-y-auto max-h-[calc(90vh-80px)]">
+            <div class="space-y-6">
+                <h2 class="text-xl font-semibold text-slate-100">Student Transaction Info</h2>
+
+                <!-- Compact Grid Layout -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Column 1 -->
+                    <div class="space-y-4">
+                       
+                            
+                    </div>
+
+                
+                </div>
+                
+
+                <!-- Action Buttons -->
+                <div class="flex gap-3 pt-4">
+                    <button (click)="goBack()"
+                        class="flex-1 px-4 py-2 text-slate-100 border border-slate-300 rounded-lg transition-colors">
+                        Close
+                    </button>
+                </div>
+            </div>
+              <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

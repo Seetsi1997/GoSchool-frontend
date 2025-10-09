@@ -20,11 +20,16 @@ export class UserLocation {
   selectedProvince: Province | null = null;
 
   validationMessages: { [key: string]: { [key: string]: string } } = {
+    suburb: {
+      required: 'Suburb is required',
+      minlength: 'Suburb must be at least 5 characters long',
+      pattern: 'Suburb can only contain letters',
+    },
     city: {
       required: 'City is required',
       minlength: 'City must be at least 5 characters long',
       maxlength: 'City cannot be more than 30 characters long',
-      pattern: 'City can only contain letters and spaces',
+      pattern: 'City can only contain letters',
     },
     address: {
       required: 'Address is required',
@@ -59,7 +64,7 @@ export class UserLocation {
   }
   
  goNext() {
-  const stepControls = ['city', 'address', 'postalCode', 'province'];
+  const stepControls = ['suburb','city', 'address', 'postalCode', 'province'];
   stepControls.forEach(control => this.form.get(control)?.markAsTouched());
 
   const valid = stepControls.every(control => this.form.get(control)?.valid);
