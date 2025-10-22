@@ -8,10 +8,11 @@ export interface StudentEntity {
   studentUUID: string;
   studentFirstName: string;
   studentSurname: string;
+  schoolName: string;
   monthlyPaymentAmount: number;
   paymentStatus: PaymentStatus;
-  learnerGrade: LearnerGrade;
-  parentDTOS: ParentEntity[];
+  studentGrade: LearnerGrade;
+  parent: ParentEntity[];
   paymentRecordDTO: PaymentRecordEntity[];
   driver: Driver;
 }

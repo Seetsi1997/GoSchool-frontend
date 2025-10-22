@@ -5,7 +5,8 @@
         <!-- Header -->
         <div class="flex items-center justify-between p-4 border-b border-gray-200">
             <h2 class="text-xl font-semibold text-slate-100">Personal Details Setting</h2>
-            <button type="button" (click)="goBack()" class="text-gray-400 hover:text-gray-600 transition-colors">
+            <button type="button" title="goBack" (click)="goBack()"
+                class="text-gray-400 hover:text-gray-600 transition-colors">
                 <svg class="w-6 h-6 text-slate-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -18,39 +19,43 @@
                 <h2 class="text-xl font-semibold text-slate-100">Parents Info</h2>
 
                 <!-- Compact Grid Layout -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
                     <!-- Column 1 -->
                     <div class="space-y-4">
                         <div class="grid grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-sm font-medium text-slate-100 mb-1">Full Name</label>
-                                <input type="text"  [value]="capitalizeRole(parent.firstName)" readonly
+                                <label for="fullName" class="block text-sm font-medium text-slate-100 mb-1">Full
+                                    Name</label>
+                                <input type="text" id="fullName" [value]="capitalizeRole(parent.firstName)" readonly
                                     class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-slate-100 mb-1">Surname</label>
-                                <input type="text"  [value]="capitalizeRole(parent.surname)" readonly
+                                <label for="surname"
+                                    class="block text-sm font-medium text-slate-100 mb-1">Surname</label>
+                                <input type="text" id="surname" [value]="capitalizeRole(parent.surname)" readonly
                                     class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
                             </div>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-slate-100 mb-1">Email Address</label>
-                            <input type="email" [(ngModel)]="parent.email" readonly
+                            <label for="email" class="block text-sm font-medium text-slate-100 mb-1">Email
+                                Address</label>
+                            <input type="email" id="email" [(ngModel)]="parent.email" readonly
                                 class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-slate-100 mb-1">Phone Number</label>
-                            <input type="tel" [(ngModel)]="parent.contact" readonly
+                            <label for="phoneNumber" class="block text-sm font-medium text-slate-100 mb-1">Phone
+                                Number</label>
+                            <input type="tel" id="phoneNumber" [(ngModel)]="parent.contact" readonly
                                 class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-slate-100 mb-1">Suburb</label>
-                            <input type="text"  [value]="capitalizeRole(parent.suburb)" readonly
+                            <label for="suburb" class="block text-sm font-medium text-slate-100 mb-1">Suburb</label>
+                            <input type="text" id="suburb" [value]="capitalizeRole(parent.suburb)" readonly
                                 class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-slate-100 mb-1">City</label>
-                            <input type="text"  [value]="capitalizeRole(parent.city)" readonly
+                            <label for="city" class="block text-sm font-medium text-slate-100 mb-1">City</label>
+                            <input type="text" id="city" [value]="capitalizeRole(parent.city)" readonly
                                 class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
                         </div>
                     </div>
@@ -58,26 +63,30 @@
                     <!-- Column 2 -->
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-sm font-medium text-slate-100 mb-1">StreetAddress</label>
-                            <input type="text" [(ngModel)]="parent.address" readonly
+                            <label for="streetAddress"
+                                class="block text-sm font-medium text-slate-100 mb-1">StreetAddress</label>
+                            <input type="text" id="streetAddress" [(ngModel)]="parent.address" readonly
                                 class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
                         </div>
                         <div class="grid grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-sm font-medium text-slate-100 mb-1">Postal Code</label>
-                                <input type="text" [(ngModel)]="parent.postalCode" readonly
+                                <label for="postalCode" class="block text-sm font-medium text-slate-100 mb-1">Postal
+                                    Code</label>
+                                <input type="text" id="postalCode" [(ngModel)]="parent.postalCode" readonly
                                     class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-slate-100 mb-1">Province</label>
-                                <input type="text"  [value]="capitalizeRole(parent.province)" readonly
+                                <label for="province"
+                                    class="block text-sm font-medium text-slate-100 mb-1">Province</label>
+                                <input type="text" id="province" [value]="capitalizeRole(parent.province)" readonly
                                     class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
                             </div>
                         </div>
                         <div class="flex justify-end mt-0">
-                            <button (click)="openReLocation()"
+                            <button type="button" title="location" (click)="openReLocation()"
                                 class="flex items-center gap-2 bg-purple-500 text-white px-6 py-2 rounded-lg hover:bg-purple-600 transition-colors">
-                                <svg class="w-4 h-4 text-slate-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-4 h-4 text-slate-200" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                 </svg>
@@ -87,10 +96,10 @@
                 </div>
 
                 <!-- Role (Full Width) -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
                     <div class="pb-2">
-                        <label class="block text-sm font-medium text-slate-100 mb-1">Role</label>
-                        <input type="text"  [value]="capitalizeRole(parent.role)" readonly
+                        <label for="role" class="block text-sm font-medium text-slate-100 mb-1">Role</label>
+                        <input type="text" id="role" [value]="capitalizeRole(parent.role)" readonly
                             class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
                     </div>
                 </div>
@@ -99,24 +108,57 @@
                 <h2 class="text-xl font-semibold text-slate-100">Student Info</h2>
 
                 <!-- Compact Grid Layout -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
                     <!-- Column 1 -->
                     <div class="space-y-4">
                         <div class="grid grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-sm font-medium text-slate-100 mb-1">Full Name</label>
-                                <input type="text"
+                                <label for="studentFullName" class="block text-sm font-medium text-slate-100 mb-1">Full
+                                    Name</label>
+                                <input type="text" id="studentFullName"
                                     class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-slate-100 mb-1">Surname</label>
-                                <input type="text"
+                                <label for="studentSurname"
+                                    class="block text-sm font-medium text-slate-100 mb-1">Surname</label>
+                                <input type="text" id="studentSurname"
+                                    class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label for="grade" class="block text-sm font-medium text-slate-100 mb-1">Grade</label>
+                                <input type="text" id="grade"
+                                    class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
+                            </div>
+                            <div>
+                                <label for="status" class="block text-sm font-medium text-slate-100 mb-1">Payment
+                                    Status</label>
+                                <input type="text" id="status"
+                                    class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label for="paymentMethod" class="block text-sm font-medium text-slate-100 mb-1">Payment
+                                    Method</label>
+                                <input type="text" id="paymentMethod"
+                                    class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
+                            </div>
+                            <div>
+                                <label for="amount" class="block text-sm font-medium text-slate-100 mb-1">Amount</label>
+                                <input type="text" id="amount"
                                     class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
                             </div>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-slate-100 mb-1">Grade</label>
-                            <input type="text"
+                            <label for="school" class="block text-sm font-medium text-slate-100 mb-1">School</label>
+                            <input type="text" id="school"
+                                class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
+                        </div>
+                        <div>
+                            <label for="proofOfPayment" class="block text-sm font-medium text-slate-100 mb-1">Proof of Payment</label>
+                            <input type="text" id="proofOfPayment"
                                 class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
                         </div>
                     </div>
@@ -130,7 +172,7 @@
                     </button>
                 </div>
             </div>
-              <router-outlet></router-outlet>
+            <router-outlet></router-outlet>
         </div>
     </div>
 </div>

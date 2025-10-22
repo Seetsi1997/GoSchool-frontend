@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
-import { Parents } from '../../../../../service/serviceParent/parents';
-import { ParentDTO } from '../../../../../dto/parentDTO';
 import { FormsModule } from '@angular/forms';
-import { ReLocation } from './relocation/relocation';
+import { Router, RouterModule } from '@angular/router';
+import { ParentDTO } from '../../../../../dto/parentDTO';
+import { Parents } from '../../../../../service/serviceParent/parents';
 
 @Component({
   selector: 'app-personal-details',
@@ -12,7 +11,7 @@ import { ReLocation } from './relocation/relocation';
   imports: [CommonModule, RouterModule, FormsModule],
   providers: [Parents],
   templateUrl: './personal-details.html',
-  styleUrl: './personal-details.css',
+  styleUrls: ['./personal-details.css'],
 })
 export class PersonalDetails implements OnInit {
   parent: ParentDTO = {} as ParentDTO;
@@ -40,10 +39,10 @@ export class PersonalDetails implements OnInit {
     });
   }
 
-  capitalizeRole(role: string): string {
-    if (!role) return '';
-    return role.charAt(0).toUpperCase() + role.slice(1).toLowerCase();
-  }
+capitalizeRole(value: string | undefined | null): string {
+  if (!value) return '';
+  return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+}
 
   goBack() {
     this.router.navigate(['/parent-dashboard/settings']);
@@ -51,7 +50,7 @@ export class PersonalDetails implements OnInit {
 
   openReLocation() {
     this.router.navigate([
-      '/parent-dashboard/settings/settings-personal-details/settings-relocate',
+      '/parent-dashboard/settings/personal-details/relocate',
     ]);
   }
 }

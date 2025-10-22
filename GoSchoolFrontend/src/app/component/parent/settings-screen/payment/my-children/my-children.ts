@@ -1,45 +1,54 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule, Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { StudentDTO } from '../../../../../dto/studentDTO';
+import { Parents } from '../../../../../service/serviceParent/parents';
 
 @Component({
   selector: 'app-my-children',
+  standalone: true,
   imports: [CommonModule, RouterModule, FormsModule],
+  providers: [Parents],
   templateUrl: './my-children.html',
-  styleUrl: './my-children.css'
+  styleUrls: ['./my-children.css']
 })
-export class MyChildren {
+export class MyChildren implements OnInit {
+  students: StudentDTO[] = [];
+  isLoading = false;
+  error = '';
+  selectedStudent: StudentDTO | null = null;
 
-  selectedStudent: any = null;
-  constructor(private router: Router) { }
+  constructor(private router: Router, private parentService: Parents) { }
 
-  // Sample student data
-  student1 = {
-    id: 'STU001',
-    name: 'Bafo Doe',
-    school: 'Sidinani Senior Secondary School',
-    grade: 'Grade 11',
-    dob: '2007-05-15',
-    parentName: 'Parent Doe',
-    email: 'bafo.doe@school.com',
-    phone: '+1234567890',
-    address: '123 Main St, City, State'
-  };
+  ngOnInit(): void {
+    this.loadStudents();
+  }
 
-  student2 = {
-    id: 'STU002',
-    name: 'John Doe',
-    school: 'Mimosa Senior Secondary School',
-    grade: 'Grade 10',
-    dob: '2008-03-22',
-    parentName: 'Parent Doe',
-    email: 'john.doe@school.com',
-    phone: '+1234567891',
-    address: '124 Main St, City, State'
-  };
+  loadStudents(): void {
+    this.isLoading = true;
+    this.error = '';
 
-  showStudentDetail(student: any) {
+    this.parentService.getAllStudentsForParent().subscribe({
+      next: (data) => {
+        this.students = data;
+        this.isLoading = false;
+        console.log('Loaded students:', this.students);
+        
+        // Debug: Check if grades are present
+        this.students.forEach((student, index) => {
+          console.log(`Student ${index} grade:`, student.studentGrade);
+        });
+      },
+      error: (err) => {
+        this.error = 'Failed to load students. Please check your connection and try again.';
+        this.isLoading = false;
+        console.error('Error loading students:', err);
+      }
+    });
+  }
+  
+  showStudentDetail(student: StudentDTO) {
     this.selectedStudent = student;
   }
 
@@ -51,4 +60,21 @@ export class MyChildren {
     this.router.navigate(['/parent-dashboard/settings']);
   }
 
+  // Add null checking
+  formatGrade(grade: string | null | undefined): string {
+    if (!grade) {
+      return 'Not assigned';
+    }
+    
+   
+    return grade.replace('GRADE_', 'Grade ');
+  }
+
+  capitalizeLetters(value: string): string {
+  if (!value) return '';
+  return value
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(' '); 
+}
 }

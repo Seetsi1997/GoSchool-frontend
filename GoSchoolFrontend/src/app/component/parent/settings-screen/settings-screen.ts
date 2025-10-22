@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-settings-screen',
@@ -14,26 +14,26 @@ export class SettingsScreen {
   constructor(private router: Router) {}
 
   openProfile() {
-    this.router.navigate(['/parent-dashboard/settings/settings-profile']);
+    this.router.navigate(['/parent-dashboard/settings/profile']);
   }
 
   openPersonalDetails() {
-    this.router.navigate(['/parent-dashboard/settings/settings-personal-details']);
+    this.router.navigate(['/parent-dashboard/settings/personal-details']);
   }
 
   openTransactionsHistory() {
-    this.router.navigate(['/parent-dashboard/settings/settings-transactions-history']);
+    this.router.navigate(['/parent-dashboard/settings/transactions-history']);
   }
 
   openMyChildren() {
-    this.router.navigate(['/parent-dashboard/settings/settings-my-children']);
+    this.router.navigate(['/parent-dashboard/settings/my-children']);
   }
 
   openChangePassword() {
-    this.router.navigate(['/parent-dashboard/settings/settings-change-password']);
+    this.router.navigate(['/parent-dashboard/settings/change-password']);
   }
 
   openTermsAndPrivacy() {
-    this.router.navigate(['/parent-dashboard/settings/settings-terms-privacy']);
+    this.router.navigate(['/parent-dashboard/settings/terms-privacy']);
   }
 }

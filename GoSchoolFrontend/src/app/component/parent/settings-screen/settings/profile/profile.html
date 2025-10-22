@@ -6,7 +6,7 @@
     <!-- Header -->
     <div class="flex items-center justify-between p-4 border-b border-gray-200">
       <h2 class="text-xl font-semibold text-slate-100">Profile Settings</h2>
-      <button type="button" (click)="goBack()" class="text-gray-400 hover:text-gray-600 transition-colors">
+      <button type="button" title="goBack" (click)="goBack()" class="text-gray-400 hover:text-gray-600 transition-colors">
         <svg class="w-6 h-6 text-slate-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
@@ -22,7 +22,7 @@
             <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center">
               <span class="text-2xl font-semibold text-purple-600">U</span>
             </div>
-            <button class="absolute bottom-0 right-0 bg-purple-500 text-white p-1 rounded-full">
+            <button  title="image" class="absolute bottom-0 right-0 bg-purple-500 text-white p-1 rounded-full">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
@@ -37,26 +37,26 @@
         <div class="space-y-4">
           <div class="grid grid-cols-2 gap-4">
             <div>
-              <label class="block text-sm font-medium text-slate-100 mb-1">First Name</label>
-              <input type="text" [(ngModel)]="parent.firstName"
+              <label for="firstName" class="block text-sm font-medium text-slate-100 mb-1">First Name</label>
+              <input type="text" id="firstName" [(ngModel)]="parent.firstName"
                 class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
             </div>
             <div>
-              <label class="block text-sm font-medium text-slate-100 mb-1">Surname</label>
-              <input type="text" [(ngModel)]="parent.surname"
+              <label for="surname" class="block text-sm font-medium text-slate-100 mb-1">Surname</label>
+              <input type="text" id="surname" [(ngModel)]="parent.surname"
                 class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
             </div>
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-slate-100 mb-1">Email Address</label>
-            <input type="email" [(ngModel)]="parent.email" readonly
+            <label for="email" class="block text-sm font-medium text-slate-100 mb-1">Email Address</label>
+            <input type="email" id="email" [(ngModel)]="parent.email" readonly
               class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-slate-100 mb-1">Phone Number</label>
-            <input type="tel" [(ngModel)]="parent.contact"
+            <label for="phoneNumber" class="block text-sm font-medium text-slate-100 mb-1">Phone Number</label>
+            <input type="tel" id="phoneNumber" [(ngModel)]="parent.contact"
               class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
           </div>
         </div>

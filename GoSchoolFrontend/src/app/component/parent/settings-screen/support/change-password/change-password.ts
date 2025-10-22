@@ -1,11 +1,19 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-change-password',
-  imports: [],
+  imports: [CommonModule, RouterModule],
   templateUrl: './change-password.html',
-  styleUrl: './change-password.css'
+  styleUrls: ['./change-password.css']
 })
 export class ChangePassword {
+
+
+  constructor(private router: Router) { } 
+    goBack() {
+    this.router.navigate(['/parent-dashboard/settings']);
+  }
 
 }

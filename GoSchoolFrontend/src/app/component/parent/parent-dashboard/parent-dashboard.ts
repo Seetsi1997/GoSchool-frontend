@@ -1,9 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
-import { Logout } from '../../auth/logout/logout';
 import { Router, RouterModule } from '@angular/router';
-import { AddScreen } from '../add-screen/add-screen';
-import { HomeScreen } from '../home-screen/home-screen';
+import { Logout } from '../../auth/logout/logout';
 
 @Component({
   selector: 'app-parent-dashboard',
@@ -47,7 +45,7 @@ homeScreen() {
 
 addScreen() {
   this.setActive('add');
-  this.router.navigate(['/parent-dashboard/add']);
+  this.router.navigate(['/parent-dashboard/add-upload']);
   this.closeSidebar();
 }
 settingsScreen() {

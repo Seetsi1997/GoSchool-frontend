@@ -1,25 +1,27 @@
 import { Routes } from '@angular/router';
-import { Register } from './component/auth/register/register';
-import { Login } from './component/auth/login/login';
 import { ForgotPassword } from './component/auth/forgot-password/forgot-password';
-import { ResetPassword } from './component/auth/reset-password/reset-password';
-import { ParentDashboard } from './component/parent/parent-dashboard/parent-dashboard';
+import { Login } from './component/auth/login/login';
 import { Logout } from './component/auth/logout/logout';
-import { HomeScreen } from './component/parent/home-screen/home-screen';
-import { AddScreen } from './component/parent/add-screen/add-screen';
-import { SettingsScreen } from './component/parent/settings-screen/settings-screen';
-import { DriversDashboard } from './component/drivers/drivers-dashboard/drivers-dashboard';
+import { Register } from './component/auth/register/register';
+import { ResetPassword } from './component/auth/reset-password/reset-password';
+import { AddNewStudent } from './component/drivers/add-new-student/add-new-student';
 import { DriverHomeScreen } from './component/drivers/driver-home-screen/driver-home-screen';
-import { ViewListScreen } from './component/drivers/view-list-screen/view-list-screen';
 import { DriverSettingsScreen } from './component/drivers/driver-settings-screen/driver-settings-screen';
-import {AddNewStudent} from './component/drivers/add-new-student/add-new-student'
-import { Profile} from './component/parent/settings-screen/settings/profile/profile';
-import {  PersonalDetails } from './component/parent/settings-screen/settings/personal-details/personal-details';
+import { DriversDashboard } from './component/drivers/drivers-dashboard/drivers-dashboard';
+import { ViewListScreen } from './component/drivers/view-list-screen/view-list-screen';
+import { AddScreen } from './component/parent/add-screen/add-screen';
+import { AddStudentInfo } from './component/parent/add-screen/information/add-student-info/add-student-info';
+import { UploadProofOfPayment } from './component/parent/add-screen/information/upload-proof-of-payment/upload-proof-of-payment';
+import { HomeScreen } from './component/parent/home-screen/home-screen';
+import { ParentDashboard } from './component/parent/parent-dashboard/parent-dashboard';
+import { MyChildren } from './component/parent/settings-screen/payment/my-children/my-children';
 import { TransactionsHistory } from './component/parent/settings-screen/payment/transactions-history/transactions-history';
-import { MyChildren} from './component/parent/settings-screen/payment/my-children/my-children';
-import {ChangePassword} from './component/parent/settings-screen/support/change-password/change-password';
-import {Privacy} from './component/parent/settings-screen/support/privacy/privacy';
-import {ReLocation} from './component/parent/settings-screen/settings/personal-details/relocation/relocation'
+import { SettingsScreen } from './component/parent/settings-screen/settings-screen';
+import { PersonalDetails } from './component/parent/settings-screen/settings/personal-details/personal-details';
+import { ReLocation } from './component/parent/settings-screen/settings/personal-details/relocation/relocation';
+import { Profile } from './component/parent/settings-screen/settings/profile/profile';
+import { ChangePassword } from './component/parent/settings-screen/support/change-password/change-password';
+import { Privacy } from './component/parent/settings-screen/support/privacy/privacy';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -35,22 +37,29 @@ export const routes: Routes = [
     component: ParentDashboard,
     children: [
       { path: 'home', component: HomeScreen },
-      { path: 'add', component: AddScreen },
+      { path: 'add-upload', component: AddScreen,
+        
+        children: [
+           { path: 'student-info', component: AddStudentInfo },
+           { path: 'proof-payment', component: UploadProofOfPayment }
+        ]
+       },
+         { path: 'add-student', component: AddNewStudent },
       {
         path: 'settings',
         component: SettingsScreen,
         children: [
-          { path: 'settings-profile', component: Profile },
-          { path: 'settings-personal-details', component: PersonalDetails,
+          { path: 'profile', component: Profile },
+          { path: 'personal-details', component: PersonalDetails,
             children: [
-               {path: 'settings-relocate', component: ReLocation}
+               {path: 'relocate', component: ReLocation}
             ]
 
            },
-          { path: 'settings-transactions-history', component: TransactionsHistory },
-          { path: 'settings-my-children', component: MyChildren },
-          { path: 'settings-change-password', component: ChangePassword },
-          { path: 'settings-terms-privacy', component: Privacy },
+          { path: 'transactions-history', component: TransactionsHistory },
+          { path: 'my-children', component: MyChildren },
+          { path: 'change-password', component: ChangePassword },
+          { path: 'terms-privacy', component: Privacy },
           { path: '', redirectTo: 'settings', pathMatch: 'full' }
         ]
       },

@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { ParentDTO } from '../../../../../../dto/parentDTO';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule, Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { ParentDTO } from '../../../../../../dto/parentDTO';
 import { Parents } from '../../../../../../service/serviceParent/parents';
 import { Province } from '../../../../../constant/province';
 
@@ -96,7 +96,7 @@ export class ReLocation {
   }
 
   goBack() {
-    this.router.navigate(['/parent-dashboard/settings/settings-personal-details']);
+    this.router.navigate(['/parent-dashboard/settings/personal-details']);
   }
   capitalizeRole(role: string): string {
     if (!role) return '';

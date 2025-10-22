@@ -1,66 +1,50 @@
 <!-- component -->
-<div class="flex flex-col items-center justify-center p-4">
-  <!-- Title -->
-  <h1
-    class="mb-6 text-2xl text-center font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-500">
-    Upload Proof of Payment
-  </h1>
+ <div class="w-full max-w-md mx-auto p-0">
+  <div>
+    <!-- Title -->
+    <h1 class="text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-500 mb-4">
+      Add/Update Information
+    </h1>
 
-  <!-- Form Container -->
-  <div class="w-full max-w-[650px] bg-slate-500 rounded-lg shadow-md">
-    <form class="py-6 px-9">
-      <!-- Upload Section -->
-      <div class="mb-6 pt-4">
-        <div class="flex items-center justify-between mb-5">
-          <label class="block text-[18px] font-semibold text-slate-200">
-            Upload File
-          </label>
-          <button type="button" (click)="goBack()" class="text-gray-400 hover:text-gray-600 transition-colors">
-            <svg class="w-6 h-6 text-slate-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
+    <!-- Card -->
+    <div class="bg-slate-500 shadow-md rounded-2xl divide-y divide-slate-100">
+      <!-- Row 1 - Profile -->
+      <div class="flex items-center justify-between p-4 cursor-pointer" (click)="openProfile()">
+        <div class="flex items-center gap-3">
+          <!-- Icon -->
+        
+           <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24">
+        <path fill="#FFF1F1" d="M11 17h2v-4h4v-2h-4V7h-2v4H7v2h4v4Zm-6 4q-.825 0-1.413-.588T3 19V5q0-.825.588-1.413T5 3h14q.825 0 1.413.588T21 5v14q0 .825-.588 1.413T19 21H5Z"/>
+      </svg>
+          <!-- Label -->
+          <span class="text-[#FFF1F1] font-medium">Add Student Info</span>
         </div>
-
-        <div class="mb-8">
-          <input type="file" name="file" id="file" class="sr-only" />
-          <label for="file"
-            class="relative flex min-h-[200px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-12 text-center cursor-pointer hover:border-purple-400 transition">
-            <div>
-              <span class="mb-2 block font-semibold text-slate-200">
-                Drop files here
-              </span>
-              <span class="mb-2 block text-base font-medium text-purple-200">
-                Or
-              </span>
-              <span class="inline-flex rounded border border-slate-100 py-2 px-7 text-base font-medium text-slate-200">
-                Browse
-              </span>
-            </div>
-          </label>
-        </div>
-
-        <!-- File Preview -->
-        <div class="mb-5 rounded-md bg-green-500 py-4 px-8 hidden" id="file-preview">
-          <div class="flex items-center justify-between">
-            <span class="truncate pr-3 text-base font-medium text-green-500" id="file-name">
-              <!-- File name will appear here -->
-            </span>
-            <button type="button" class="text-black bg-blue-600">
-              ✕
-            </button>
-          </div>
-        </div>
+        <!-- Next Icon -->
+        <svg class="w-5 h-5 text-[#FFF1F1]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
       </div>
-
-      <!-- Action & Submit Button -->
-
-      <div class="flex gap-3 pt-4">
-        <button (click)="goBack()"
-          class="flex-1 px-4 py-2 text-slate-100 border border-slate-300 rounded-lg transition-colors">
-          Send File
-        </button>
+      
+        
+      <!-- Row 2 - Personal Details -->
+      <div class="flex items-center justify-between p-4 cursor-pointer" (click)="openPersonalDetails()">
+        <div class="flex items-center gap-3">
+          <!-- Icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24"><path fill="#FFF1F1" d="M11 19h2v-4.175l1.6 1.6L16 15l-4-4l-4 4l1.425 1.4L11 14.825V19Zm-5 3q-.825 0-1.413-.588T4 20V4q0-.825.588-1.413T6 2h8l6 6v12q0 .825-.588 1.413T18 22H6Zm7-13h5l-5-5v5Z"/></svg>
+          <!-- Label -->
+          <span class="text-[#FFF1F1] font-medium">Upload Proof Of Payment</span>
+        </div>
+        <!-- Next Icon -->
+        <svg class="w-5 h-5 text-[#FFF1F1]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
       </div>
-    </form>
+    </div>
+  </div>
+
+  
+  <div class="main-content">
+    <!-- This outlet will show either SettingsScreen OR Profile, etc. -->
+    <router-outlet></router-outlet>
   </div>
 </div>

@@ -5,7 +5,7 @@
         <!-- Header -->
         <div class="flex items-center justify-between p-4 border-b border-gray-200">
             <h2 class="text-xl font-semibold text-slate-100">Update Location</h2>
-            <button type="button" (click)="goBack()" class="text-gray-400 hover:text-gray-600 transition-colors">
+            <button type="button" title="goBack" (click)="goBack()" class="text-gray-400 hover:text-gray-600 transition-colors">
                 <svg class="w-6 h-6 text-slate-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -20,30 +20,30 @@
                     <!-- Column 1 -->
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-sm font-medium text-slate-100 mb-1">Suburb</label>
-                            <input type="text" [(ngModel)]="parent.suburb"
+                            <label for="suburb" class="block text-sm font-medium text-slate-100 mb-1">Suburb</label>
+                            <input type="text" id="suburb" [(ngModel)]="parent.suburb"
                                 class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-slate-100 mb-1">City</label>
-                            <input type="text" [(ngModel)]="parent.city"
+                            <label for="city" class="block text-sm font-medium text-slate-100 mb-1">City</label>
+                            <input type="text"  id="city" [(ngModel)]="parent.city"
                                 class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-slate-100 mb-1">Address</label>
-                            <input type="text" [(ngModel)]="parent.address"
+                            <label for="address" class="block text-sm font-medium text-slate-100 mb-1">Address</label>
+                            <input type="text" id="address" [(ngModel)]="parent.address"
                                 class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
                         </div>
                         <div class="grid grid-cols-2 gap-4">
                             <div> 
-                                <label class="block text-sm font-medium text-slate-100 mb-1">Postal Code</label>
-                                <input type="text" [(ngModel)]="parent.postalCode"
+                                <label for="postalCode" class="block text-sm font-medium text-slate-100 mb-1">Postal Code</label>
+                                <input type="text" id="postalCode" [(ngModel)]="parent.postalCode"
                                     class="pl-2 pr-2 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
                             </div>
 
                             <div>
-                                <label class="flex text-sm font-medium text-slate-100 mb-1">Province</label>
-                                <select [(ngModel)]="parent.province" name="province"
+                                <label for="province" class="flex text-sm font-medium text-slate-100 mb-1">Province</label>
+                                <select id="province" [(ngModel)]="parent.province" name="province"
                                     class="px-1 py-[0.6rem] peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50">
                                     <option value="" disabled>Select a Province</option>
                                     <option *ngFor="let province of provinces" [value]="province">

@@ -1,0 +1,72 @@
+
+<!-- Overlay -->
+<div class="fixed inset-0 bg-slate-200 z-50 flex items-center justify-center p-4">
+  <!-- Modal Container -->
+  <div class="bg-slate-500 rounded-2xl shadow-xl w-full max-w-md max-h-[90vh] overflow-hidden">
+       
+  <!-- Title -->
+  <h1
+    class="mt-6 text-2xl text-center font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-500">
+    Upload Proof of Payment
+  </h1>
+
+  <!-- Form Container -->
+  <div class="w-full max-w-[650px] bg-slate-500 rounded-lg shadow-md">
+    <form class="py-6 px-9">
+      <!-- Upload Section -->
+      <div class="mb-6 pt-4">
+        <div class="flex items-center justify-between mb-5">
+          <label for="upload" class="block text-[18px] font-semibold text-slate-200">
+            Upload File
+          </label>
+          <button type="button" id="upload" (click)="goBack()" title="Close upload" aria-label="Close upload" class="text-gray-400 hover:text-gray-600 transition-colors">
+            <svg class="w-6 h-6 text-slate-100" fill="none" stroke="currentColor" viewBox="0 0 28 28">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="mb-8">
+          <input type="file" name="file" id="file" class="sr-only" />
+          <label for="file"
+            class="relative flex min-h-[200px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-12 text-center cursor-pointer hover:border-purple-400 transition">
+            <div>
+              <span class="mb-2 block font-semibold text-slate-200">
+                Drop files here
+              </span>
+              <span class="mb-2 block text-base font-medium text-purple-200">
+                Or
+              </span>
+              <span class="inline-flex rounded border border-slate-100 py-2 px-7 text-base font-medium text-slate-200">
+                Browse
+              </span>
+            </div>
+          </label>
+        </div>
+
+        <!-- File Preview -->
+        <div class="mb-5 rounded-md bg-green-500 py-4 px-8 hidden" id="file-preview">
+          <div class="flex items-center justify-between">
+            <span class="truncate pr-3 text-base font-medium text-green-500" id="file-name">
+              <!-- File name will appear here -->
+            </span>
+            <button type="button" class="text-black bg-blue-600">
+              ✕
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action & Submit Button -->
+
+      <div class="flex gap-3 pt-4">
+        <button type="button"
+          class="flex-1 px-4 py-2 text-slate-100 border border-slate-300 rounded-lg transition-colors">
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+

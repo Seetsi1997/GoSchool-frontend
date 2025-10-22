@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../env/env';
 import { Observable, tap } from 'rxjs';
 import { UserLoginDTO } from '../../dto/userLoginDTO';
+import { environment } from '../../env/env';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +18,8 @@ export class Auth {
     return this.http.post(`${this.apiUrl}/auth/api/users/register`, user);
   }
 
-  login(email: string, password: string): Observable<UserLoginDTO> {
+// Update your login method to store UUID as parentId
+login(email: string, password: string): Observable<UserLoginDTO> {
   return this.http
     .post<UserLoginDTO>(
       `${environment.apiUrl}/auth/api/users/login`,
@@ -33,13 +34,19 @@ export class Auth {
       tap((res: UserLoginDTO) => {
         if (res.token) {
           localStorage.setItem('token', res.token);
-          console.log("✅ Token saved:", res.token);
+          console.log("Token saved:", res.token);
         }
-        // store other info if needed
+        
         localStorage.setItem('uuid', res.uuid);
         localStorage.setItem('role', res.role);
         localStorage.setItem('firstname', res.firstname);
         localStorage.setItem('email', res.email);
+        
+        // QUICK FIX: If user is a parent, store UUID as parentId
+        if (res.role === 'PARENT' || res.role === 'parent') {
+          localStorage.setItem('parentId', res.uuid);
+          console.log("Parent ID stored:", res.uuid);
+        }
       })
     );
 }
