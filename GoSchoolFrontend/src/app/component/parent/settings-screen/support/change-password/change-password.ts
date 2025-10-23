@@ -9,6 +9,9 @@ import { Router, RouterModule } from '@angular/router';
   styleUrls: ['./change-password.css']
 })
 export class ChangePassword {
+  showCurrentPassword= false;
+  showPassword = false;
+  showConfirmPassword = false;
 
 
   constructor(private router: Router) { } 

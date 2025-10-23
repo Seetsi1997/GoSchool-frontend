@@ -15,7 +15,7 @@ import { Province } from '../../../../../constant/province';
 })
 export class ReLocation {
   parent: ParentDTO = {} as ParentDTO;
-  originalParent: ParentDTO = {} as ParentDTO; // Store original data for comparison
+  originalParent: ParentDTO = {} as ParentDTO; 
   isLoading = true;
   isEditing = false;
 
