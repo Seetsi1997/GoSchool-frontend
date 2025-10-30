@@ -49,20 +49,20 @@ export class AddStudentInfo implements OnInit {
     ];
   }
 
-  loadCurrentParent() {
-    this.parents.getCurrentParent().subscribe({
-      next: (parent) => {
-        this.currentParent = parent;
-        const parentFullName = `${parent.firstName}`.trim();
-        this.studentForm.patchValue({
-          parentName: parentFullName
-        });
-      },
-      error: (err) => {
-        console.error('Error fetching parent:', err);
-      }
-    });
-  }
+loadCurrentParent() {
+  this.parents.getCurrentParent().subscribe({
+    next: (parent) => {
+      this.currentParent = parent;
+      const parentFullName = `${parent.firstName}`.trim();
+      this.studentForm.patchValue({
+        parentName: this.capitalizeRole(parentFullName) 
+      });
+    },
+    error: (err) => {
+      console.error('Error fetching parent:', err);
+    }
+  });
+}
 
   submitStudent() {
     if (this.studentForm.invalid || !this.currentParent) {
@@ -77,7 +77,7 @@ export class AddStudentInfo implements OnInit {
       schoolName: this.studentForm.value.schoolName,
       monthlyPaymentAmount: 0,
       studentGrade: this.studentForm.value.studentGrade,
-      parentName: this.studentForm.value.parentName,
+      parentName:  this.studentForm.value.parentName,
       paymentStatus: PaymentStatus.PENDING,
       paymentRecordDTO: [],
       parentPhoneNumber: this.currentParent.phoneNumber,
@@ -103,5 +103,10 @@ export class AddStudentInfo implements OnInit {
 
   goBack() {
     this.router.navigate(['/parent-dashboard/add-upload']);
+  }
+
+   capitalizeRole(role: string): string {
+    if (!role) return '';
+    return role.charAt(0).toUpperCase() + role.slice(1).toLowerCase();
   }
 }
