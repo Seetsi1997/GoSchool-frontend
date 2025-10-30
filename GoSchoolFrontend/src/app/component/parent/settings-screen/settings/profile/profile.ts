@@ -31,20 +31,24 @@ export class Profile implements OnInit {
     this.loadParentData();
   }
 
-  loadParentData() {
-    this.isLoading = true;
-    this.parentService.getCurrentParent().subscribe({
-      next: (data) => {
-        this.parent = data;
-        this.originalParent = { ...data };
-        this.isLoading = false;
-      },
-      error: (error) => {
-        console.error('Error loading parent data:', error);
-        this.isLoading = false;
-      },
-    });
-  }
+loadParentData() {
+  this.isLoading = true;
+  this.parentService.getCurrentParent().subscribe({
+    next: (data) => {
+      data.firstName = this.capitalizeRole(data.firstName ?? '');
+      data.surname = this.capitalizeRole(data.surname ?? '');
+
+      
+      this.parent = data;
+      this.originalParent = { ...data };
+      this.isLoading = false;
+    },
+    error: (error) => {
+      console.error('Error loading parent data:', error);
+      this.isLoading = false;
+    },
+  });
+}
 
   toggleEdit() {
     this.isEditing = !this.isEditing;
@@ -101,8 +105,8 @@ export class Profile implements OnInit {
     this.router.navigate(['/parent-dashboard/settings']);
   }
 
-  capitalizeRole(role: string): string {
-    if (!role) return '';
-    return role.charAt(0).toUpperCase() + role.slice(1).toLowerCase();
-  }
+capitalizeRole(role: string | undefined | null): string {
+  if (!role) return '';
+  return role.charAt(0).toUpperCase() + role.slice(1).toLowerCase();
+}
 }
