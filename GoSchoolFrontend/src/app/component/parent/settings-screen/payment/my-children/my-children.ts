@@ -18,6 +18,8 @@ export class MyChildren implements OnInit {
   isLoading = false;
   error = '';
   selectedStudent: StudentDTO | null = null;
+  loadingMessage = 'Loading students...';
+
 
   constructor(private router: Router, private parentService: Parents) { }
 
@@ -28,22 +30,34 @@ export class MyChildren implements OnInit {
   loadStudents(): void {
     this.isLoading = true;
     this.error = '';
+    this.loadingMessage = 'Loading students...';
+
+    const startTime = Date.now();
+    const minimumLoadTime = 2000; // 2 seconds
 
     this.parentService.getAllStudentsForParent().subscribe({
       next: (data) => {
-        this.students = data;
-        this.isLoading = false;
-        console.log('Loaded students:', this.students);
-        
-        // Debug: Check if grades are present
-        this.students.forEach((student, index) => {
-          console.log(`Student ${index} grade:`, student.studentGrade);
-        });
+        const elapsed = Date.now() - startTime;
+        const remaining = Math.max(0, minimumLoadTime - elapsed);
+
+        setTimeout(() => {
+          this.students = data;
+          this.isLoading = false;
+          
+          this.students.forEach((student, index) => {
+            console.log(`Student ${index} grade:`, student.studentGrade);
+          });
+        }, remaining);
       },
       error: (err) => {
-        this.error = 'Failed to load students. Please check your connection and try again.';
-        this.isLoading = false;
-        console.error('Error loading students:', err);
+        const elapsed = Date.now() - startTime;
+        const remaining = Math.max(0, minimumLoadTime - elapsed);
+
+        setTimeout(() => {
+          this.error = 'Failed to load students. Please check your connection and try again.';
+          this.isLoading = false;
+          console.error('Error loading students:', err);
+        }, remaining);
       }
     });
   }
@@ -66,15 +80,14 @@ export class MyChildren implements OnInit {
       return 'Not assigned';
     }
     
-   
     return grade.replace('GRADE_', 'Grade ');
   }
 
   capitalizeLetters(value: string): string {
-  if (!value) return '';
-  return value
-    .split(' ')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-    .join(' '); 
-}
+    if (!value) return '';
+    return value
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(' '); 
+  }
 }

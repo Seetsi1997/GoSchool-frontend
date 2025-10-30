@@ -13,10 +13,11 @@ import { Parents } from '../../../../../service/serviceParent/parents';
 })
 export class TransactionsHistory {
 
-   constructor(private router: Router) {}
+  hasTransactions = false;
 
-   goBack() {
+  constructor(private router: Router) {}
+
+  goBack() {
     this.router.navigate(['/parent-dashboard/settings']);
   }
-
 }
