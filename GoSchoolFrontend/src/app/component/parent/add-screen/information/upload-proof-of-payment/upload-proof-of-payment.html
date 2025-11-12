@@ -1,64 +1,126 @@
 <!-- Overlay -->
-<div
-  class="fixed inset-0 bg-gradient-to-r from-[#3E4C70] via-[#547A8C] to-[#6D9CAB] z-50 flex items-center justify-center p-4">
+<div class="fixed inset-0 bg-gradient-to-r from-[#3E4C70] via-[#547A8C] to-[#6D9CAB] z-50 flex items-center justify-center p-4">
   <!-- Modal Container -->
-  <div class="bg-slate-500 rounded-2xl shadow-xl w-full max-w-md max-h-[90vh] overflow-hidden">
-    <!-- Title -->
-    <h1
-      class="ml-6 text-[20px] font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-200 to-purple-900 mt-4">
-      Upload Proof of Payment
-    </h1>
+  <div class="bg-slate-500 rounded-2xl shadow-xl w-full max-w-md max-h-[90vh] overflow-hidden flex flex-col">
+    <!-- Header - Fixed -->
+    <div class="flex-shrink-0">
+      <h1 class="ml-6 text-[20px] font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-200 to-purple-900 mt-4">
+        Upload Proof of Payment
+      </h1>
+    </div>
 
-    <!-- Form Container -->
-    <div class="w-full max-w-[650px] bg-slate-500 rounded-lg shadow-md">
-      <form class="py-6 px-9">
-        <!-- Upload Section -->
-        <div class="mb-6 pt-4">
-          <div class="flex items-center justify-between mb-5">
-            <label for="upload" class="block text-[18px] font-semibold text-slate-200">
-              Upload File
-            </label>
-          </div>
-
-          <div class="mb-8">
-            <input type="file" name="file" id="file" class="sr-only" />
-            <label for="file"
-              class="relative flex min-h-[200px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-12 text-center cursor-pointer hover:border-purple-400 transition">
-              <div>
-                <span class="mb-2 block font-semibold text-slate-200"> Drop files here </span>
-                <span class="mb-2 block text-base font-medium text-purple-200"> Or </span>
-                <span
-                  class="inline-flex rounded border border-slate-100 py-2 px-7 text-base font-medium text-slate-200">
-                  Browse
-                </span>
-              </div>
-            </label>
-          </div>
-
-          <!-- File Preview -->
-          <div class="mb-5 rounded-md bg-green-500 py-4 px-8 hidden" id="file-preview">
-            <div class="flex items-center justify-between">
-              <span class="truncate pr-3 text-base font-medium text-green-500" id="file-name">
-                <!-- File name will appear here -->
-              </span>
-              <button type="button" class="text-black bg-blue-600">✕</button>
+    <!-- Form Container - Scrollable -->
+    <div class="flex-1 overflow-y-auto">
+      <div class="w-full bg-slate-500 rounded-lg shadow-md">
+        <!-- Add form binding and (ngSubmit) -->
+        <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()" class="py-6 px-9">
+          
+          <!-- Student Selection -->
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-slate-200 mb-2">Select Student</label>
+            <select name="studentId" formControlName="studentId" title="Select a student" 
+                    class="w-full px-3 py-2 border border-slate-300 rounded-md bg-slate-600 text-slate-100">
+              <option value="">Choose a student</option>
+              <option *ngFor="let student of students" [value]="student.studentUUID">
+                {{ student.studentFirstName }} {{ student.studentSurname }} - {{ student.schoolName }}
+              </option>
+            </select>
+            <div *ngIf="paymentForm.get('studentId')?.invalid && paymentForm.get('studentId')?.touched" 
+                 class="text-red-300 text-sm mt-1">
+              Please select a student
             </div>
           </div>
-        </div>
 
-        <!-- Action & Submit Button -->
+          <!-- Amount -->
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-slate-200 mb-2">Amount (ZAR)</label>
+            <input type="number" name="amount" formControlName="amount" step="0.01" title="Enter payment amount in South African Rand"
+                   class="w-full px-3 py-2 border border-slate-300 rounded-md bg-slate-600 text-slate-100">
+            <div *ngIf="paymentForm.get('amount')?.invalid && paymentForm.get('amount')?.touched" 
+                 class="text-red-300 text-sm mt-1">
+              Valid amount is required
+            </div>
+          </div>
 
-        <div class="flex gap-3 pt-4">
-          <button type="button" (click)="goBack()"
-            class="flex-1 px-4 py-2 text-slate-100 border border-slate-300 rounded-lg transition-colors">
-            Cancel
-          </button>
-          <button type="submit"
-            class="flex-1 px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors disabled:bg-purple-600 disabled:cursor-not-allowed">
-            Submit
-          </button>
-        </div>
-      </form>
+          <!-- Payment Method -->
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-slate-200 mb-2">Payment Method</label>
+            <select name="method" formControlName="method" title="Select payment method"
+                    class="w-full px-3 py-2 border border-slate-300 rounded-md bg-slate-600 text-slate-100">
+              <option value="">Select method</option>
+              <option value="EFT">EFT Transfer</option>
+              <option value="CASH">Cash Only</option>
+              <option value="ONLINE">Online Card</option>
+            </select>
+            <div *ngIf="paymentForm.get('method')?.invalid && paymentForm.get('method')?.touched" 
+                 class="text-red-300 text-sm mt-1">
+              Please select payment method
+            </div>
+          </div>
+
+          <!-- Upload Section -->
+          <div class="mb-6 pt-4">
+            <div class="flex items-center justify-between mb-5">
+              <label class="block text-[18px] font-semibold text-slate-200">
+                Upload Proof of Payment (PDF/Image)
+              </label>
+            </div>
+
+            <div class="mb-8">
+              <!-- FIXED: Remove sr-only class to make file input visible -->
+              <input type="file" id="file" name="file" (change)="onFileSelected($event)" 
+                     accept=".pdf,.jpg,.jpeg,.png" title="Upload proof of payment document" 
+                     class="w-full px-3 py-2 border border-slate-300 rounded-md bg-slate-600 text-slate-100 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-500 file:text-white hover:file:bg-purple-600" />
+            </div>
+
+            <!-- File Preview - IMPROVED -->
+            <div *ngIf="fileName" class="mb-5 rounded-md bg-green-500/20 border border-green-400 py-4 px-8">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <span class="text-green-400 mr-2">✓</span>
+                  <span class="text-base font-medium text-green-200 truncate">
+                    {{ fileName }}
+                  </span>
+                </div>
+                <button type="button" (click)="removeFile()" title="Remove file" 
+                        class="text-green-200 hover:text-white transition-colors">
+                  ✕
+                </button>
+              </div>
+              <p class="text-sm text-green-300 mt-1">File ready for upload</p>
+            </div>
+          </div>
+
+          <!-- Message Display - IMPROVED -->
+          <div *ngIf="message" 
+               [class]="messageType === 'success' ? 
+                        'bg-green-500/20 border border-green-400 text-green-200 px-4 py-3 rounded mb-4' : 
+                        'bg-red-500/20 border border-red-400 text-red-200 px-4 py-3 rounded mb-4'">
+            <div class="flex items-center">
+              <span class="mr-2">{{ messageType === 'success' ? '✓' : '⚠' }}</span>
+              <span>{{ message }}</span>
+            </div>
+            <!-- Show file name in success message -->
+            <div *ngIf="messageType === 'success' && fileName" class="text-sm mt-1 opacity-90">
+              File: <strong>{{ fileName }}</strong>
+            </div>
+          </div>
+
+          <!-- Action & Submit Button - Sticky at bottom -->
+          <div class="sticky bottom-0 bg-slate-500 pt-4 pb-2 mt-6">
+            <div class="flex gap-3">
+              <button type="button" (click)="goBack()" [disabled]="isLoading" title="Cancel payment upload"
+                class="flex-1 px-4 py-2 text-slate-100 border border-slate-300 rounded-lg transition-colors disabled:opacity-50 hover:bg-slate-600">
+                Cancel
+              </button>
+              <button type="submit" [disabled]="isLoading || paymentForm.invalid || !selectedFile" title="Submit payment proof"
+                class="flex-1 px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors disabled:bg-purple-400 disabled:cursor-not-allowed">
+                {{ isLoading ? 'Uploading...' : 'Submit Payment' }}
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>
