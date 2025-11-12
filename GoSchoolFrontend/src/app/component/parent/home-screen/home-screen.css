@@ -1,0 +1,109 @@
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+.drivers-available h1 {
+    margin-bottom: 20px;
+}
+
+.carousel {
+    overflow: hidden;
+    width: 100%;
+    padding: 5px;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 20px;
+    scroll-snap-type: x mandatory;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
+.carousel-track::-webkit-scrollbar {
+    display: none;
+}
+
+.card {
+    flex: 0 0 calc(33.333% - 20px);
+    background: rgb(30, 50, 70, 80);
+    border-radius: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-1px);
+}
+
+.card-info{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.card-info p {
+    margin: 4px 0;
+}
+
+.status {
+    padding: 5px 10px;
+    border-radius: 8px;
+    display: inline-block;
+    font-size: 0.85rem;
+}
+
+.status.completed {
+    background-color: #d4f8e8;
+    color: #2e7d32;
+}
+
+.status.pending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+
+.details-btn {
+    background: linear-gradient(to right, #ab7dff, #9d00ff);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.details-btn:hover {
+    opacity: 1;
+}
+
+
+@media (max-width: 768px) {
+    .card {
+        flex: 0 0 90%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .card {
+        flex: 0 0 calc(50% - 20px);
+    }
+}
+
+@media (min-width: 480px) {
+
+   .carousel {
+    margin-right: 2px;
+    margin-left: 2px;
+}
+   
+}

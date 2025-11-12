@@ -25,30 +25,30 @@ export class Profile implements OnInit {
   popupMessage = '';
   popupType: 'success' | 'error' | 'info' = 'info';
 
-  constructor(private router: Router, private parentService: Parents) {}
+  constructor(private router: Router, private parentService: Parents) { }
 
   ngOnInit() {
     this.loadParentData();
   }
 
-loadParentData() {
-  this.isLoading = true;
-  this.parentService.getCurrentParent().subscribe({
-    next: (data) => {
-      data.firstName = this.capitalizeRole(data.firstName ?? '');
-      data.surname = this.capitalizeRole(data.surname ?? '');
+  loadParentData() {
+    this.isLoading = true;
+    this.parentService.getCurrentParent().subscribe({
+      next: (data) => {
+        data.firstName = this.capitalizeRole(data.firstName ?? '');
+        data.surname = this.capitalizeRole(data.surname ?? '');
 
-      
-      this.parent = data;
-      this.originalParent = { ...data };
-      this.isLoading = false;
-    },
-    error: (error) => {
-      console.error('Error loading parent data:', error);
-      this.isLoading = false;
-    },
-  });
-}
+
+        this.parent = data;
+        this.originalParent = { ...data };
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error loading parent data:', error);
+        this.isLoading = false;
+      },
+    });
+  }
 
   toggleEdit() {
     this.isEditing = !this.isEditing;
@@ -105,8 +105,8 @@ loadParentData() {
     this.router.navigate(['/parent-dashboard/settings']);
   }
 
-capitalizeRole(role: string | undefined | null): string {
-  if (!role) return '';
-  return role.charAt(0).toUpperCase() + role.slice(1).toLowerCase();
-}
+  capitalizeRole(role: string | undefined | null): string {
+    if (!role) return '';
+    return role.charAt(0).toUpperCase() + role.slice(1).toLowerCase();
+  }
 }

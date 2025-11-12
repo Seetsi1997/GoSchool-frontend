@@ -73,6 +73,12 @@
                         *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
                         {{ getErrorMessage('password') }}
                     </div>
+                    <div *ngIf="loginError" class="text-pink-600 text-sm" >
+        
+           
+            {{ loginError }}
+        
+    </div>
                 </div>
                 <!-- Forgot Password Link -->
                 <p class="text-right text-sm mt-3">

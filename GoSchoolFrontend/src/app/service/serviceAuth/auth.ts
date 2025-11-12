@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 import { UserLoginDTO } from '../../dto/userLoginDTO';
 import { environment } from '../../env/env';
 
@@ -18,7 +18,7 @@ export class Auth {
     return this.http.post(`${this.apiUrl}/auth/api/users/register`, user);
   }
 
-// Update your login method to store UUID as parentId
+  // Updated login method with proper error handling
 login(email: string, password: string): Observable<UserLoginDTO> {
   return this.http
     .post<UserLoginDTO>(
@@ -34,23 +34,31 @@ login(email: string, password: string): Observable<UserLoginDTO> {
       tap((res: UserLoginDTO) => {
         if (res.token) {
           localStorage.setItem('token', res.token);
-          console.log("Token saved:", res.token);
         }
-        
         localStorage.setItem('uuid', res.uuid);
         localStorage.setItem('role', res.role);
         localStorage.setItem('firstname', res.firstname);
         localStorage.setItem('email', res.email);
-        
-        // QUICK FIX: If user is a parent, store UUID as parentId
+
         if (res.role === 'PARENT' || res.role === 'parent') {
           localStorage.setItem('parentId', res.uuid);
-          console.log("Parent ID stored:", res.uuid);
         }
+      }),
+      catchError((error: HttpErrorResponse) => {
+        // Suppress 401 errors from console entirely
+        if (error.status !== 401) {
+          console.error('Login error:', error);
+        }
+        
+        // Re-throw without logging to console
+        return throwError(() => ({
+          ...error,
+          // Optional: Prevent browser from logging to console
+          message: 'Login failed'
+        }));
       })
     );
 }
-
 
   logout(): Observable<any> {
     const token = sessionStorage.getItem('token');
@@ -89,19 +97,42 @@ login(email: string, password: string): Observable<UserLoginDTO> {
     return this.http.post(`${this.apiUrl}/auth/api/users/forgot-password`, { email });
   }
 
-  /**
-   * 
-   * forgotPassword(payload: { phoneNumber: string }): Observable<any> {
-  return this.http.post(`${this.apiUrl}/auth/api/users/forgot-password`, payload);
-}
-   * 
-   */
-
   resetPassword(token: string, newPassword: string, confirmPassword: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/auth/api/users/reset-password`, {
       token,
       newPassword,
       confirmPassword,
     });
+  }
+
+  changePassword(currentPassword: string, newPassword: string, confirmPassword: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    
+    if (!token) {
+      // Return an observable error instead of throwing
+      return throwError(() => new Error('No authentication token found. Please login again.'));
+    }
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+
+    const body = {
+      currentPassword,
+      newPassword,
+      confirmPassword
+    };
+
+    return this.http.post(`${this.apiUrl}/auth/api/users/change-password`, body, { headers })
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          // Don't log 401 errors to console
+          if (error.status !== 401 && error.status !== 400) {
+            console.error('Change password error:', error);
+          }
+          return throwError(() => error);
+        })
+      );
   }
 }

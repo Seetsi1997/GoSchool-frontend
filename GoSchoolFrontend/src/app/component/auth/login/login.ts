@@ -1,7 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
-import { Router, RouterLink, RouterModule } from '@angular/router';
-import { Auth } from '../../../service/serviceAuth/auth';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -9,8 +7,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { UserLoginDTO } from '../../../dto/userLoginDTO';
-import { Role } from '../../constant/role';
+import { Router, RouterModule } from '@angular/router';
+import { Auth } from '../../../service/serviceAuth/auth';
 
 @Component({
   selector: 'app-login',
@@ -47,7 +45,6 @@ export class Login implements OnInit {
   constructor(private router: Router, private auth: Auth, private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    // initialize only loginForm
     this.loginForm = this.formBuilder.group({
       email: [
         '',
@@ -86,60 +83,65 @@ export class Login implements OnInit {
   }
 
   onSubmit() {
-    if (this.loginForm.valid) {
-      this.loading = true; // show spinner immediately
+  // Clear previous errors when form is submitted again
+  this.loginError = '';
 
-      const email = this.loginForm.get('email')?.value;
-      const password = this.loginForm.get('password')?.value;
+  if (this.loginForm.valid) {
+    this.loading = true;
 
-      this.auth.login(email, password).subscribe({
-        next: (response: UserLoginDTO) => {
-          // Save session info
-          sessionStorage.setItem('token', response.token);
-          sessionStorage.setItem('userRole', response.role);
-          sessionStorage.setItem('userEmail', response.email);
-          sessionStorage.setItem('userId', response.uuid.toString());
-          sessionStorage.setItem('userName', response.firstname);
+    const email = this.loginForm.get('email')?.value;
+    const password = this.loginForm.get('password')?.value;
 
-          this.userRole = response.role as Role;
-          this.userName = response.firstname;
-          this.loginError = '';
+    this.auth.login(email, password).subscribe({
+      next: (response: any) => {
+        // Save session info
+        sessionStorage.setItem('token', response.token);
+        sessionStorage.setItem('userRole', response.role);
+        sessionStorage.setItem('userEmail', email);
+        sessionStorage.setItem('userId', response.uuid);
+        sessionStorage.setItem('userName', response.firstName);
 
-          // Keep spinner visible until navigation starts
-          setTimeout(() => {
-            this.loading = false; 
+        this.userRole = response.role;
+        this.userName = response.firstName;
+        this.loginError = '';
 
-            switch (this.userRole) {
-              case Role.DRIVER:
-                this.router.navigate(['/drivers-dashboard']);
-                break;
-              case Role.PARENT:
-                this.router.navigate(['/parent-dashboard']);
-                break;
-              default:
-                this.router.navigate(['/drivers-dashboard']);
-            }
-          }, 2000);
-        },
-        error: (err) => {
-          this.loading = false;
+        this.loading = false;
 
-          if (err.error?.error) {
-            this.loginError = err.error.error;
-          } else if (err.error?.message) {
-            this.loginError = err.error.message;
-          } else if (typeof err.error === 'string') {
-            this.loginError = err.error;
-          } else {
-            this.loginError = 'Login failed. Please try again.';
-          }
+        // Navigate based on role
+        switch (this.userRole) {
+          case 'DRIVER':
+            this.router.navigate(['/drivers-dashboard']);
+            break;
+          case 'PARENT':
+            this.router.navigate(['/parent-dashboard']);
+            break;
+          default:
+            this.router.navigate(['/drivers-dashboard']);
+        }
+      },
+      error: (err) => {
+        this.loading = false;
 
-          this.userRole = null;
-          this.userName = null;
-        },
-      });
-    } else {
-      this.loginForm.markAllAsTouched();
-    }
+        // Clear any existing session data
+        sessionStorage.clear();
+
+        // Extract user-friendly error message
+        if (err.error?.error) {
+          this.loginError = err.error.error;
+        } else if (err.status === 401) {
+          this.loginError = 'Wrong email or password';
+        } else if (err.status === 0) {
+          this.loginError = 'Network error. Please check your connection.';
+        } else {
+          this.loginError = 'Login failed. Please try again.';
+        }
+
+        this.userRole = null;
+        this.userName = null;
+      },
+    });
+  } else {
+    this.loginForm.markAllAsTouched();
   }
+}
 }

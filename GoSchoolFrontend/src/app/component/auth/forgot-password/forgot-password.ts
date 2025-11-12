@@ -28,11 +28,11 @@ export class ForgotPassword {
     this.error = '';
     this.auth.forgotPassword(this.email).subscribe({
       next: (response) => {
-        this.message = 'Password reset link sent to your contact.';
+        this.message = 'Password reset link sent to your email address.';
         this.router.navigate(["/login"])
       },
       error: (err) => {
-        this.error = 'Error sending password reset link. Please check your contact.';
+        this.error = 'Error sending password reset link. Please check your email address.';
         console.error(err);
       }
     });

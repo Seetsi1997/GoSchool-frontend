@@ -1,21 +1,50 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { ParentDTO } from '../../../dto/parentDTO';
+import { Parents } from '../../../service/serviceParent/parents';
 import { Logout } from '../../auth/logout/logout';
 
 @Component({
   selector: 'app-parent-dashboard',
-  imports: [CommonModule, Logout, RouterModule],
+  imports: [CommonModule, Logout, RouterModule, RouterModule, FormsModule],
+  providers: [Parents],
   templateUrl: './parent-dashboard.html',
   styleUrl: './parent-dashboard.css'
 })
-export class ParentDashboard {
+export class ParentDashboard  implements OnInit{
   isSidebarOpen = false;
-  activeItem: string = 'home';
+  activeItem: string = '';
+  parent: ParentDTO = {} as ParentDTO;
+  isLoading = true;
 
   @ViewChild(Logout) logoutComponent!: Logout;
 
-  constructor(private router: Router){}
+  constructor(private router: Router, private parentService:  Parents){}
+
+  ngOnInit() {
+    this.loadParentData();
+  }
+
+loadParentData() {
+  this.isLoading = true;
+  this.parentService.getCurrentParent().subscribe({
+    next: (data) => {
+      data.firstName = this.capitalizeRole(data.firstName ?? '');
+      data.surname = this.capitalizeRole(data.surname ?? '');
+
+      
+      this.parent = data;
+      this.isLoading = false;
+    },
+    error: (error) => {
+      console.error('Error loading parent data:', error);
+      this.isLoading = false;
+    },
+  });
+}
+
 
   toggleSidebar(event: Event) {
     event.stopPropagation();
@@ -54,5 +83,8 @@ settingsScreen() {
   this.closeSidebar();
 }
 
-
+capitalizeRole(role: string | undefined | null): string {
+  if (!role) return '';
+  return role.charAt(0).toUpperCase() + role.slice(1).toLowerCase();
+}
 }

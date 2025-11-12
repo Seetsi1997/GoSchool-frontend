@@ -1,0 +1,19 @@
+
+.welcome-user{
+    padding-left: 12px;
+    margin-top: 18px;
+}
+
+.welcome-user p{
+  color: #deedef;
+  text-align: left;
+  font-size: 16px;
+  font-style: oblique;
+  font-weight: 500;
+}
+
+.welcome-user p span{
+    font-style: normal;
+    color: rgb( 30, 50, 70, 80);
+    text-align: center;
+}
