@@ -16,54 +16,42 @@
     <div class="space-y-5 ml-4 mr-4 px-3 md:px-0">
       <!-- Register Info -->
 
-      <div class="border-b pb-4 border-gray-400">
+      <div class="border-b pb-4 border-slate-500">
         <div class="text-gray-500 dark:text-gray-400 mb-2 font-semibold">Register Info</div>
         <table class="w-full text-left table-auto min-w-max">
-          <thead>
-            <tr class="flex items-center justify-between border-b border-b pb-4 border-slate-500">
-              <th>
-                <p class="block text-sm font-normal leading-none text-slate-500">Name</p>
-              </th>
-              <th>
-                <p class="block text-sm font-normal leading-none text-slate-500">Surname</p>
-              </th>
-            </tr>
-          </thead>
+     
           <tbody>
-            <tr class="flex items-center justify-between">
-              <td class="p-4">
-                <p class="block text-sm text-purple-600">
-                 {{ capitalizeRole(form.get('firstName')?.value) }}
-                </p>
+            <tr class=" border-t pt-4 border-slate-500">
+              <td class="p-2">
+                <p class="sm:hidden text-[15px] text-gray-500">Name</p>
+                <p class="text-sm text-purple-600">{{ capitalizeRole(form.get('firstName')?.value) }}</p>
               </td>
-              <td class="p-4">
-                <p class="block text-sm text-purple-600">
-                  {{ capitalizeRole(form.get('surname')?.value) }}
-                </p>
+
+              <td class="p-2">
+                <p class="sm:hidden text-[15px] text-gray-500">Surname</p>
+                <p class="text-sm text-purple-600">{{ capitalizeRole(form.get('surname')?.value) }}</p>
               </td>
             </tr>
           </tbody>
-          <thead>
-            <tr class="flex items-center justify-between border-b border-b pb-4 border-slate-500">
-              <th>
-                <p class="block text-sm font-normal leading-none text-slate-500">Email</p>
-              </th>
-              <th>
-                <p class="block text-sm font-normal leading-none text-slate-500">Contact</p>
-              </th>
+
+          <thead class="hidden sm:table-header-group">
+            <tr class="border-t pt-4 border-slate-500">
+              <th class="p-2 text-sm font-normal text-slate-500">Email</th>
+              <th class="p-2 text-sm font-normal text-slate-500">Contact</th>
             </tr>
           </thead>
+
+          <!-- Email / Contact row -->
           <tbody>
-            <tr class="flex items-center justify-between">
-              <td class="p-4">
-                <p class="block text-sm text-purple-600">
-                  {{ form.get('email')?.value }}
-                </p>
+            <tr>
+              <td class="p-2">
+                <p class="sm:hidden text-[15px] text-gray-500">Email</p>
+                <p class="text-sm text-purple-600">{{ form.get('email')?.value }}</p>
               </td>
-              <td class="p-4">
-                <p class="block text-sm text-purple-600">
-                  {{ form.get('contact')?.value }}
-                </p>
+
+              <td class="p-2">
+                <p class="sm:hidden text-[15px] text-gray-500">Contact</p>
+                <p class="text-sm text-purple-600">{{ form.get('contact')?.value }}</p>
               </td>
             </tr>
           </tbody>
@@ -71,114 +59,132 @@
       </div>
 
       <!-- Address Info -->
-      <div class="border-b pb-4 border-gray-400">
+      <div class="border-b border-b pb-4 border-slate-500">
         <div class="text-gray-500 dark:text-gray-400 mb-2 font-semibold">Address</div>
-        <table class="w-full text-left table-auto min-w-max">
-          <thead>
-            <tr class="flex items-center justify-between border-b border-b pb-4 border-slate-500">
-              <th>
-                <p class="block text-sm font-normal leading-none text-slate-500">Suburb</p>
-              </th>
-              <th>
-                <p class="block text-sm font-normal leading-none text-slate-500">City</p>
-              </th>
-              <th>
-                <p class="block text-sm font-normal leading-none text-slate-500">Street Address</p>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="flex items-center justify-between">
-              <td class="p-4">
-                <p class="block text-sm text-purple-600">
-                  {{ capitalizeRole(form.get('suburb')?.value) }}
-                </p>
-              </td>
-              <td class="p-4">
-                <p class="block text-sm text-purple-600">
-                 {{ capitalizeRole(form.get('city')?.value) }}
-                </p>
-              </td>
-              <td class="p-4">
-                <p class="block text-sm text-purple-600">
-                 {{ capitalizeRole(form.get('address')?.value) }}
-                </p>
-              </td>
-            </tr>
-          </tbody>
-          <thead>
-            <tr class="flex items-center justify-between border-b border-b pb-4 border-slate-500">
-              <th>
-                <p class="block text-sm font-normal leading-none text-slate-500">Province</p>
-              </th>
-              <th>
-                <p class="block text-sm font-normal leading-none text-slate-500">Postal Code</p>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="flex items-center justify-between">
-              <td class="p-4">
-                <p class="block text-sm text-purple-600">
-                  {{ capitalizeRole(form.get('province')?.value) }}
-                </p>
-              </td>
-              <td class="p-4">
-                <p class="block text-sm text-purple-600">
-                  {{ form.get('postalCode')?.value }}
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left table-auto min-w-max">
+
+            <!-- Desktop headers -->
+            <thead class="hidden sm:table-header-group">
+              <tr class="border-b border-slate-500">
+                <th class="p-2 text-sm font-normal text-slate-500">Street Address</th>
+              </tr>
+            </thead>
+
+            <!-- Street Address -->
+            <tbody class="border-t border-slate-500">
+              <tr>
+                <td class="p-2">
+                  <p class="sm:hidden text-[15px] text-gray-500">Street Address</p>
+                  <p class="text-sm text-purple-600">{{ capitalizeRole(form.get('address')?.value) }}</p>
+                </td>
+            </tbody>
+
+            <!-- Suburb  / City row-->
+            <thead class="hidden sm:table-header-group">
+              <tr class="border-b border-slate-500">
+                <th class="p-2 text-sm font-normal text-slate-500">Suburb</th>
+                <th class="p-2 text-sm font-normal text-slate-500">City</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2">
+                  <p class="sm:hidden text-[15px] text-gray-500">Suburb</p>
+                  <p class="text-sm text-purple-600">{{ capitalizeRole(form.get('suburb')?.value) }}</p>
+                </td>
+                <td class="p-2">
+                  <p class="sm:hidden text-[15px] text-gray-500">City</p>
+                  <p class="text-sm text-purple-600">{{ capitalizeRole(form.get('city')?.value) }}</p>
+                </td>
+              </tr>
+
+            </tbody>
+
+            <!-- Province / Postal Code row -->
+            <thead class="hidden sm:table-header-group">
+              <tr class="border-b border-slate-500">
+                <th class="p-2 text-sm font-normal text-slate-500">Province</th>
+                <th class="p-2 text-sm font-normal text-slate-500">Postal Code</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td class="p-2">
+                  <p class="sm:hidden text-[15px] text-gray-500">Province</p>
+                  <p class="text-sm text-purple-600">{{ capitalizeRole(form.get('province')?.value) }}</p>
+                </td>
+
+                <td class="p-2">
+                  <p class="sm:hidden text-[15px] text-gray-500">Postal Code</p>
+                  <p class="text-sm text-purple-600">{{ form.get('postalCode')?.value }}</p>
+                </td>
+              </tr>
+            </tbody>
+
+          </table>
+        </div>
       </div>
+
+
 
       <!-- Account Info -->
       <div class="border-b pb-4 border-gray-400">
-        <div class="text-gray-500 dark:text-gray-400 mb-2 font-semibold">Account</div>
-        <table class="w-full text-left table-auto min-w-max">
-          <thead>
-            <tr class="flex items-center justify-between border-b border-b pb-4 border-slate-500">
-              <th>
-                <p class="block text-sm font-normal leading-none text-slate-500">Username</p>
-              </th>
-              <th>
-                <p class="block text-sm font-normal leading-none text-slate-500">Email</p>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="flex items-center justify-between">
-              <td class="p-4">
-                <p class="block text-sm text-purple-600">
-                  {{ capitalizeRole(form.get('firstName')?.value) }}
-                </p>
-              </td>
-              <td class="p-4">
-                <p class="block text-sm text-purple-600">
-                  {{ form.get('email')?.value }}
-                </p>
-              </td>
-            </tr>
-          </tbody>
-          <thead>
-            <tr class="flex items-center justify-between border-b border-b pb-4 border-slate-500">
-              <th>
-                <p class="block text-sm font-normal leading-none text-slate-500">Role</p>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="flex items-center justify-between">
-              <td class="p-4">
-                <p class="block text-sm text-purple-600">
-                  {{ capitalizeRole(form.get('role')?.value) }}
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  <div class="text-gray-500 dark:text-gray-400 mb-2 font-semibold">Account</div>
+
+  <table class="w-full text-left table-auto min-w-max ps-1 pe-1">
+
+    <!-- Username / Email headers (desktop only) -->
+    <thead class="hidden sm:table-header-group">
+      <tr class="border-t border-slate-500 pt-3">
+        <th class="p-2 text-sm font-normal text-slate-500">Username</th>
+        <th class="p-2 text-sm font-normal text-slate-500">Email</th>
+      </tr>
+    </thead>
+
+    <!-- Username / Email row -->
+    <tbody>
+      <tr class="border-t border-slate-500">
+        <td class="p-2">
+          <p class="sm:hidden text-[15px] text-gray-500">Username</p>
+          <p class="text-sm text-purple-600 pt-1">
+            {{ capitalizeRole(form.get('firstName')?.value) }}
+          </p>
+        </td>
+
+        <td class="p-2">
+          <p class="sm:hidden text-[15px] text-gray-500">Email</p>
+          <p class="text-sm text-purple-600 pt-1">
+            {{ form.get('email')?.value }}
+          </p>
+        </td>
+      </tr>
+    </tbody>
+
+    <!-- Role header (desktop only) -->
+    <thead class="hidden sm:table-header-group">
+      <tr class="border-t border-slate-500 pt-3">
+        <th class="p-2 text-sm font-normal text-slate-500">Role</th>
+      </tr>
+    </thead>
+
+    <!-- Role row -->
+    <tbody>
+      <tr>
+        <td class="p-2">
+          <p class="sm:hidden text-[15px] text-gray-500">Role</p>
+          <p class="text-sm text-purple-600">
+            {{ capitalizeRole(form.get('role')?.value) }}
+          </p>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
+</div>
+
 
       <!-- Buttons -->
       <div class="flex space-x-4 mt-4">

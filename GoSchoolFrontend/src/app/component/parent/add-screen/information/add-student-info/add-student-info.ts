@@ -85,7 +85,8 @@ loadCurrentParent() {
       parentAddress: this.currentParent.address,
       parentCity: this.currentParent.city,
       parentPostalCode: this.currentParent.postalCode,
-      parentProvince: this.currentParent.province
+      parentProvince: this.currentParent.province,
+      parentUUID: this.currentParent.parentUUID
     };
 
     const parentId = this.currentParent.parentUUID;

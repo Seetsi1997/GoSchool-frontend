@@ -19,5 +19,6 @@ export interface StudentDTO {
   parentCity: string;
   parentPostalCode: string;
   parentProvince: Province;
+  parentUUID: string;
 }
   

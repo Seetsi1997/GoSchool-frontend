@@ -61,7 +61,7 @@ export class Parents {
   // Get current student 
   getAllStudentsForParent(): Observable<StudentDTO[]> {
     const token = localStorage.getItem('token');
-    const parentId = localStorage.getItem('parentId');
+    const parentId = localStorage.getItem('parentUUID');
 
 
     if (!parentId) {

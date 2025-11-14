@@ -43,7 +43,7 @@ export class UploadProofOfPayment {
     this.studentService.getMyStudents().subscribe({
       next: (students) => {
         this.students = students;
-        console.log('Loaded students:', students);
+       // console.log('Loaded students:', students);
       },
       error: (error) => {
         this.showMessage('Failed to load students. Please try again.', 'error');

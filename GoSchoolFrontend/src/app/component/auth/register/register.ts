@@ -44,7 +44,8 @@ export class Register {
           Validators.minLength(2),
           Validators.pattern(/^[A-Za-z\s]+$/),
         ]),
-        contact: new FormControl('', [Validators.required, Validators.pattern(/^\d{10,11}$/)]),
+        contact: new FormControl('', [Validators.required, 
+          Validators.pattern(/^((\+27|27)|0)[5-9]\d{8}$/)]),
         email: new FormControl('', [
           Validators.required,
           Validators.email,
@@ -113,7 +114,7 @@ export class Register {
   }
 
   const formData = this.form.value;
-  console.log('Submitting form:', formData);
+  //console.log('Submitting form:', formData);
 
   let request$: Observable<any>;
   switch (formData.role) {

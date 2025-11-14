@@ -30,8 +30,8 @@ export class RegisterUserInfo {
       pattern: 'Surname can only contain letters and spaces',
     },
     contact: {
-      required: 'Contact is required',
-      pattern: 'Contact must be 10 or 11 digits, numbers only',
+      required: 'Contact number is required',
+      pattern: 'Invalid South African number. Use: 0712345678 or +27712345678',
     },
     email: {
       required: 'Email is required',

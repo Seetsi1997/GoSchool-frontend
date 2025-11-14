@@ -1,30 +1,15 @@
 <!-- Overlay -->
 <div
-  class="fixed inset-0 bg-gradient-to-r from-[#3E4C70] via-[#547A8C] to-[#6D9CAB] z-50 flex items-center justify-center p-4"
->
+  class="fixed inset-0 bg-gradient-to-r from-[#3E4C70] via-[#547A8C] to-[#6D9CAB] z-50 flex items-center justify-center p-4">
   <!-- Modal Container -->
   <div class="bg-slate-500 rounded-2xl shadow-xl w-full max-w-4xl max-h-[90vh] overflow-hidden">
     <!-- Header -->
     <div class="flex items-center justify-between p-4 border-b border-gray-200">
       <h2 class="text-xl font-semibold text-slate-100">Student Details</h2>
-      <button
-        type="button"
-        title="goBack"
-        (click)="goBack()"
-        class="text-purple-300 transition-colors"
-      >
-        <svg
-          class="w-5 h-5 bg-clip-text bg-gradient-to-r from-purple-200 to-purple-900"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M6 18L18 6M6 6l12 12"
-          />
+      <button type="button" title="goBack" (click)="goBack()" class="text-purple-300 transition-colors">
+        <svg class="w-5 h-5 bg-clip-text bg-gradient-to-r from-purple-200 to-purple-900" fill="none"
+          stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
     </div>
@@ -41,26 +26,16 @@
         </div>
 
         <!-- Error State -->
-        <div
-          *ngIf="error && !isLoading"
-          class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4"
-        >
+        <div *ngIf="error && !isLoading" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
           {{ error }}
         </div>
 
         <!-- No Students State -->
         <div *ngIf="!isLoading && !error && students.length === 0" class="text-center py-8">
           <div class="flex flex-col items-center justify-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="34px"
-              viewBox="0 -960 960 960"
-              width="34px"
-              fill="#6D9C"
-            >
+            <svg xmlns="http://www.w3.org/2000/svg" height="34px" viewBox="0 -960 960 960" width="34px" fill="#6D9C">
               <path
-                d="M40-160v-112q0-34 17.5-62.5T104-378q62-31 126-46.5T360-440q66 0 130 15.5T616-378q29 15 46.5 43.5T680-272v112H40Zm720 0v-120q0-44-24.5-84.5T666-434q51 6 96 20.5t84 35.5q36 20 55 44.5t19 53.5v120H760ZM360-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47Zm400-160q0 66-47 113t-113 47q-11 0-28-2.5t-28-5.5q27-32 41.5-71t14.5-81q0-42-14.5-81T544-792q14-5 28-6.5t28-1.5q66 0 113 47t47 113ZM120-240h480v-32q0-11-5.5-20T580-306q-54-27-109-40.5T360-360q-56 0-111 13.5T140-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T440-640q0-33-23.5-56.5T360-720q-33 0-56.5 23.5T280-640q0 33 23.5 56.5T360-560Zm0 320Zm0-400Z"
-              />
+                d="M40-160v-112q0-34 17.5-62.5T104-378q62-31 126-46.5T360-440q66 0 130 15.5T616-378q29 15 46.5 43.5T680-272v112H40Zm720 0v-120q0-44-24.5-84.5T666-434q51 6 96 20.5t84 35.5q36 20 55 44.5t19 53.5v120H760ZM360-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47Zm400-160q0 66-47 113t-113 47q-11 0-28-2.5t-28-5.5q27-32 41.5-71t14.5-81q0-42-14.5-81T544-792q14-5 28-6.5t28-1.5q66 0 113 47t47 113ZM120-240h480v-32q0-11-5.5-20T580-306q-54-27-109-40.5T360-360q-56 0-111 13.5T140-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T440-640q0-33-23.5-56.5T360-720q-33 0-56.5 23.5T280-640q0 33 23.5 56.5T360-560Zm0 320Zm0-400Z" />
             </svg>
             <h3 class="text-lg font-semibold text-white mb-2">No Students Found</h3>
             <p class="text-slate-300">There are currently no children added to your system.</p>
@@ -72,28 +47,18 @@
           <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               <!-- Student Card -->
-              <div
-                *ngFor="let student of students"
+              <div *ngFor="let student of students"
                 class="bg-[#85c5db] shadow-md rounded-2xl p-4 w-full min-w-[280px] min-h-[180px] flex flex-col justify-between hover:shadow-xl transition cursor-pointer"
-                (click)="showStudentDetail(student)"
-              >
+                (click)="showStudentDetail(student)">
                 <div class="flex items-start mb-3">
-                  <svg
-                    class="w-12 h-12 rounded-full border-2 border-[#deedef] flex-shrink-0"
-                    width="49px"
-                    height="49px"
-                    viewBox="0 0 49 49"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg class="w-12 h-12 rounded-full border-2 border-[#deedef] flex-shrink-0" width="49px" height="49px"
+                    viewBox="0 0 49 49" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M24.5 25.98C29.4725 25.98 33.5 21.9227 33.5 16.9133C33.5 11.904 29.4725 7.84668 24.5 7.84668C19.5275 7.84668 15.5 11.904 15.5 16.9133C15.5 21.9227 19.5275 25.98 24.5 25.98Z"
-                      fill="#deedef"
-                    />
+                      fill="#deedef" />
                     <path
                       d="M17.3786 29.2021C17.8814 29.0785 18.3971 29.3313 18.6254 29.7991L22.6893 32.7994C24.5 32.799 24.5 32.7995 26.3105 32.7991L30.3746 29.7991C30.6029 29.3313 31.1186 29.0785 31.6214 29.2021C37.0255 30.5301 42.5 33.238 42.5 37.3116V41.845H6.5V37.3116C6.5 33.238 11.9745 30.5301 17.3786 29.2021Z"
-                      fill="#deedef"
-                    />
+                      fill="#deedef" />
                   </svg>
                   <div class="ml-4 flex-1 min-w-0">
                     <h4 class="text-lg font-semibold text-[#deedef] truncate">
@@ -107,9 +72,7 @@
                 </div>
                 <div class="block">
                   <div class="flex justify-center">
-                    <div
-                      class="flex gap-3 items-center justify-center border-t border-[#375a67] pt-3 w-2/5"
-                    ></div>
+                    <div class="flex gap-3 items-center justify-center border-t border-[#375a67] pt-3 w-2/5"></div>
                   </div>
                   <div class="ml-1">
                     <p class="text-[#375a67] font-semibold">John Doe Driver</p>
@@ -118,8 +81,7 @@
 
                 <div class="flex gap-3 pt-3">
                   <button
-                    class="w-full px-3 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors text-sm"
-                  >
+                    class="w-full px-3 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors text-sm">
                     View Details
                   </button>
                 </div>
@@ -130,10 +92,8 @@
 
         <!-- Action Buttons -->
         <div class="flex gap-3 pt-4">
-          <button
-            (click)="goBack()"
-            class="flex-1 px-4 py-2 text-slate-100 border border-slate-300 rounded-lg transition-colors"
-          >
+          <button (click)="goBack()"
+            class="flex-1 px-4 py-2 text-slate-100 border border-slate-300 rounded-lg transition-colors">
             Close
           </button>
         </div>
@@ -144,32 +104,16 @@
 </div>
 
 <!-- Student Detail Popup -->
-<div
-  *ngIf="selectedStudent"
-  class="fixed inset-0 bg-gradient-to-r from-[#3E4C70] via-[#547A8C] to-[#6D9CAB] bg-opacity-50 z-[60] flex items-center justify-center p-4"
->
+<div *ngIf="selectedStudent"
+  class="fixed inset-0 bg-gradient-to-r from-[#3E4C70] via-[#547A8C] to-[#6D9CAB] bg-opacity-50 z-[60] flex items-center justify-center p-4">
   <div class="bg-slate-500 rounded-2xl shadow-xl w-full max-w-md max-h-[90vh] flex flex-col">
     <!-- Header -->
     <div class="flex items-center justify-between p-4 border-b border-gray-200 flex-shrink-0">
       <h2 class="text-xl font-semibold text-slate-100">Student Details</h2>
-      <button
-        type="button"
-        title="close"
-        (click)="closeStudentDetail()"
-        class="text-purple-300 transition-colors"
-      >
-        <svg
-          class="w-5 h-5 bg-clip-text bg-gradient-to-r from-purple-200 to-purple-900"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M6 18L18 6M6 6l12 12"
-          />
+      <button type="button" title="close" (click)="closeStudentDetail()" class="text-purple-300 transition-colors">
+        <svg class="w-5 h-5 bg-clip-text bg-gradient-to-r from-purple-200 to-purple-900" fill="none"
+          stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
     </div>
@@ -178,22 +122,14 @@
     <div class="p-6 overflow-y-auto flex-1">
       <div class="space-y-4">
         <div class="flex items-center mb-6">
-          <svg
-            class="w-16 h-16 rounded-full border-2 border-[#F5F5F5] flex-shrink-0"
-            width="49px"
-            height="49px"
-            viewBox="0 0 49 49"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+          <svg class="w-16 h-16 rounded-full border-2 border-[#F5F5F5] flex-shrink-0" width="49px" height="49px"
+            viewBox="0 0 49 49" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M24.5 25.98C29.4725 25.98 33.5 21.9227 33.5 16.9133C33.5 11.904 29.4725 7.84668 24.5 7.84668C19.5275 7.84668 15.5 11.904 15.5 16.9133C15.5 21.9227 19.5275 25.98 24.5 25.98Z"
-              fill="#F5F5F5"
-            />
+              fill="#F5F5F5" />
             <path
               d="M17.3786 29.2021C17.8814 29.0785 18.3971 29.3313 18.6254 29.7991L22.6893 32.7994C24.5 32.799 24.5 32.7995 26.3105 32.7991L30.3746 29.7991C30.6029 29.3313 31.1186 29.0785 31.6214 29.2021C37.0255 30.5301 42.5 33.238 42.5 37.3116V41.845H6.5V37.3116C6.5 33.238 11.9745 30.5301 17.3786 29.2021Z"
-              fill="#F5F5F5"
-            />
+              fill="#F5F5F5" />
           </svg>
           <div class="ml-4">
             <h3 class="text-xl font-bold text-slate-200">
@@ -229,25 +165,15 @@
               </p>
             </div>
           </div>
+          <!-- In Student Detail Popup  -->
           <div class="flex justify-end mt-2">
-            <button
-              type="button"
-              title="currentStudent"
-              class="flex items-center gap-2 bg-purple-500 text-white px-6 py-2 rounded-lg hover:bg-purple-600 transition-colors"
-            >
-              <svg
-                class="w-4 h-4 text-slate-200"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                />
+            <button type="button" title="Edit Student" (click)="openEditPopup(selectedStudent)"
+              class="flex items-center gap-2 bg-purple-500 text-white px-6 py-2 rounded-lg hover:bg-purple-600 transition-colors">
+              <svg class="w-4 h-4 text-slate-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
               </svg>
+              Edit
             </button>
           </div>
         </div>
@@ -257,55 +183,37 @@
           <h4 class="text-xl font-semibold text-slate-100">Parent Information</h4>
           <div class="space-y-2 text-gray-500 mt-2">
             <div class="bg-slate-200 p-3 rounded-lg flex items-center space-x-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="24px"
-                viewBox="0 -960 960 960"
-                width="24px"
-                fill="#375a67"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                fill="#375a67">
                 <path
-                  d="M560-520h280v-200H560v200Zm140-50-100-70v-40l100 70 100-70v40l-100 70ZM80-120q-33 0-56.5-23.5T0-200v-560q0-33 23.5-56.5T80-840h800q33 0 56.5 23.5T960-760v560q0 33-23.5 56.5T880-120H80Zm556-80h244v-560H80v560h4q42-75 116-117.5T360-360q86 0 160 42.5T636-200ZM360-400q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35ZM182-200h356q-34-38-80.5-59T360-280q-51 0-97 21t-81 59Zm178-280q-17 0-28.5-11.5T320-520q0-17 11.5-28.5T360-560q17 0 28.5 11.5T400-520q0 17-11.5 28.5T360-480Zm120 0Z"
-                />
+                  d="M560-520h280v-200H560v200Zm140-50-100-70v-40l100 70 100-70v40l-100 70ZM80-120q-33 0-56.5-23.5T0-200v-560q0-33 23.5-56.5T80-840h800q33 0 56.5 23.5T960-760v560q0 33-23.5 56.5T880-120H80Zm556-80h244v-560H80v560h4q42-75 116-117.5T360-360q86 0 160 42.5T636-200ZM360-400q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35ZM182-200h356q-34-38-80.5-59T360-280q-51 0-97 21t-81 59Zm178-280q-17 0-28.5-11.5T320-520q0-17 11.5-28.5T360-560q17 0 28.5 11.5T400-520q0 17-11.5 28.5T360-480Zm120 0Z" />
               </svg>
               <p class="text-sm text-gray-500 font-semibold">
                 <span class="text-[#375a67] font-semibold">{{ selectedStudent.parentEmail }}</span>
               </p>
             </div>
             <div class="bg-slate-200 p-3 rounded-lg flex items-center space-x-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="24px"
-                viewBox="0 -960 960 960"
-                width="24px"
-                fill="#375a67"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                fill="#375a67">
                 <path
-                  d="M798-120q-125 0-247-54.5T329-329Q229-429 174.5-551T120-798q0-18 12-30t30-12h162q14 0 25 9.5t13 22.5l26 140q2 16-1 27t-11 19l-97 98q20 37 47.5 71.5T387-386q31 31 65 57.5t72 48.5l94-94q9-9 23.5-13.5T670-390l138 28q14 4 23 14.5t9 23.5v162q0 18-12 30t-30 12ZM241-600l66-66-17-94h-89q5 41 14 81t26 79Zm358 358q39 17 79.5 27t81.5 13v-88l-94-19-67 67ZM241-600Zm358 358Z"
-                />
+                  d="M798-120q-125 0-247-54.5T329-329Q229-429 174.5-551T120-798q0-18 12-30t30-12h162q14 0 25 9.5t13 22.5l26 140q2 16-1 27t-11 19l-97 98q20 37 47.5 71.5T387-386q31 31 65 57.5t72 48.5l94-94q9-9 23.5-13.5T670-390l138 28q14 4 23 14.5t9 23.5v162q0 18-12 30t-30 12ZM241-600l66-66-17-94h-89q5 41 14 81t26 79Zm358 358q39 17 79.5 27t81.5 13v-88l-94-19-67 67ZM241-600Zm358 358Z" />
               </svg>
               <p class="text-sm text-gray-500 font-semibold">
                 <span class="text-[#375a67] font-semibold">{{
                   selectedStudent.parentPhoneNumber
-                }}</span>
+                  }}</span>
               </p>
             </div>
             <div class="bg-slate-200 p-3 rounded-lg flex items-center space-x-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="24px"
-                viewBox="0 -960 960 960"
-                width="24px"
-                fill="#375a67"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                fill="#375a67">
                 <path
-                  d="M440-400h80v-120h120v-80H520v-120h-80v120H320v80h120v120Zm40 214q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"
-                />
+                  d="M440-400h80v-120h120v-80H520v-120h-80v120H320v80h120v120Zm40 214q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z" />
               </svg>
               <p class="text-sm text-gray-500 font-semibold">
                 <span class="text-[#375a67] font-semibold">{{
                   capitalizeLetters(selectedStudent.parentAddress)
-                }}</span>
+                  }}</span>
               </p>
             </div>
           </div>
@@ -315,53 +223,33 @@
           <h4 class="text-xl font-semibold text-slate-100">Driver Information</h4>
           <div class="space-y-2 text-gray-500 mt-2">
             <div class="bg-slate-200 p-3 rounded-lg flex items-center space-x-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="24px"
-                viewBox="0 -960 960 960"
-                width="24px"
-                fill="#375a67"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                fill="#375a67">
                 <path
-                  d="M560-520h280v-200H560v200Zm140-50-100-70v-40l100 70 100-70v40l-100 70ZM80-120q-33 0-56.5-23.5T0-200v-560q0-33 23.5-56.5T80-840h800q33 0 56.5 23.5T960-760v560q0 33-23.5 56.5T880-120H80Zm556-80h244v-560H80v560h4q42-75 116-117.5T360-360q86 0 160 42.5T636-200ZM360-400q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35ZM182-200h356q-34-38-80.5-59T360-280q-51 0-97 21t-81 59Zm178-280q-17 0-28.5-11.5T320-520q0-17 11.5-28.5T360-560q17 0 28.5 11.5T400-520q0 17-11.5 28.5T360-480Zm120 0Z"
-                />
+                  d="M560-520h280v-200H560v200Zm140-50-100-70v-40l100 70 100-70v40l-100 70ZM80-120q-33 0-56.5-23.5T0-200v-560q0-33 23.5-56.5T80-840h800q33 0 56.5 23.5T960-760v560q0 33-23.5 56.5T880-120H80Zm556-80h244v-560H80v560h4q42-75 116-117.5T360-360q86 0 160 42.5T636-200ZM360-400q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35ZM182-200h356q-34-38-80.5-59T360-280q-51 0-97 21t-81 59Zm178-280q-17 0-28.5-11.5T320-520q0-17 11.5-28.5T360-560q17 0 28.5 11.5T400-520q0 17-11.5 28.5T360-480Zm120 0Z" />
               </svg>
               <p class="text-sm text-gray-500 font-semibold">
                 <span class="text-[#375a67] font-semibold">joe@gmail.com</span>
               </p>
             </div>
             <div class="bg-slate-200 p-3 rounded-lg flex items-center space-x-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="24px"
-                viewBox="0 -960 960 960"
-                width="24px"
-                fill="#375a67"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                fill="#375a67">
                 <path
-                  d="M798-120q-125 0-247-54.5T329-329Q229-429 174.5-551T120-798q0-18 12-30t30-12h162q14 0 25 9.5t13 22.5l26 140q2 16-1 27t-11 19l-97 98q20 37 47.5 71.5T387-386q31 31 65 57.5t72 48.5l94-94q9-9 23.5-13.5T670-390l138 28q14 4 23 14.5t9 23.5v162q0 18-12 30t-30 12ZM241-600l66-66-17-94h-89q5 41 14 81t26 79Zm358 358q39 17 79.5 27t81.5 13v-88l-94-19-67 67ZM241-600Zm358 358Z"
-                />
+                  d="M798-120q-125 0-247-54.5T329-329Q229-429 174.5-551T120-798q0-18 12-30t30-12h162q14 0 25 9.5t13 22.5l26 140q2 16-1 27t-11 19l-97 98q20 37 47.5 71.5T387-386q31 31 65 57.5t72 48.5l94-94q9-9 23.5-13.5T670-390l138 28q14 4 23 14.5t9 23.5v162q0 18-12 30t-30 12ZM241-600l66-66-17-94h-89q5 41 14 81t26 79Zm358 358q39 17 79.5 27t81.5 13v-88l-94-19-67 67ZM241-600Zm358 358Z" />
               </svg>
               <p class="text-sm text-gray-500 font-semibold">
                 <span class="text-[#375a67] font-semibold">1234567890</span>
               </p>
             </div>
             <div class="bg-slate-200 p-3 rounded-lg flex items-center space-x-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="24px"
-                viewBox="0 -960 960 960"
-                width="24px"
-                fill="#375a67"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                fill="#375a67">
                 <path
-                  d="M440-400h80v-120h120v-80H520v-120h-80v120H320v80h120v120Zm40 214q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"
-                />
+                  d="M440-400h80v-120h120v-80H520v-120h-80v120H320v80h120v120Zm40 214q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z" />
               </svg>
               <p class="text-sm text-gray-500 font-semibold">
-                <span class="text-[#375a67] font-semibold"
-                  >Maja Street, Sangweni, Gauteng, 1677</span
-                >
+                <span class="text-[#375a67] font-semibold">Maja Street, Sangweni, Gauteng, 1677</span>
               </p>
             </div>
           </div>
@@ -371,11 +259,113 @@
 
     <!-- Action Buttons - Always visible at the bottom -->
     <div class="flex gap-3 p-4 border-t border-gray-200 flex-shrink-0">
-      <button
-        (click)="closeStudentDetail()"
-        class="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium"
-      >
+      <button (click)="closeStudentDetail()"
+        class="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium">
         Close
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Student Popup -->
+<div *ngIf="showEditPopup && studentToEdit"
+  class="fixed inset-0 bg-black bg-opacity-70 z-[70] flex items-center justify-center p-4">
+  <div class="bg-slate-700 rounded-2xl shadow-xl w-full max-w-md max-h-[90vh] flex flex-col">
+    <!-- Header -->
+    <div class="flex items-center justify-between p-4 border-b border-slate-600 flex-shrink-0">
+      <h2 class="text-xl font-semibold text-slate-100">Edit Student Information</h2>
+      <button type="button" title="close" (click)="closeEditPopup()"
+        class="text-slate-300 hover:text-white transition-colors" [disabled]="isSaving">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Edit Form Content -->
+    <div class="p-6 overflow-y-auto flex-1">
+      <div class="space-y-4">
+        <!-- Student Info Header -->
+        <div class="flex items-center mb-4">
+          <svg class="w-12 h-12 rounded-full border-2 border-slate-400 flex-shrink-0" width="49px" height="49px"
+            viewBox="0 0 49 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M24.5 25.98C29.4725 25.98 33.5 21.9227 33.5 16.9133C33.5 11.904 29.4725 7.84668 24.5 7.84668C19.5275 7.84668 15.5 11.904 15.5 16.9133C15.5 21.9227 19.5275 25.98 24.5 25.98Z"
+              fill="#cbd5e1" />
+            <path
+              d="M17.3786 29.2021C17.8814 29.0785 18.3971 29.3313 18.6254 29.7991L22.6893 32.7994C24.5 32.799 24.5 32.7995 26.3105 32.7991L30.3746 29.7991C30.6029 29.3313 31.1186 29.0785 31.6214 29.2021C37.0255 30.5301 42.5 33.238 42.5 37.3116V41.845H6.5V37.3116C6.5 33.238 11.9745 30.5301 17.3786 29.2021Z"
+              fill="#cbd5e1" />
+          </svg>
+          <div class="ml-4">
+            <h3 class="text-lg font-bold text-slate-200">
+              {{ capitalizeLetters(studentToEdit.studentFirstName) }} {{ capitalizeLetters(studentToEdit.studentSurname)
+              }}
+            </h3>
+          </div>
+        </div>
+
+        <!-- Editable Fields -->
+        <div class="space-y-4">
+          <!-- School Name -->
+          <div>
+            <label for="editSchoolName" class="block text-sm font-medium text-slate-100 mb-2">
+              School Name *
+            </label>
+            <input type="text" id="editSchoolName" [(ngModel)]="studentToEdit.schoolName"
+              class="w-full px-3 py-2 border border-slate-500 bg-slate-600 text-slate-100 rounded-md focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
+              placeholder="Enter school name" [disabled]="isSaving">
+          </div>
+
+          <!-- Grade -->
+          <div>
+            <label for="editStudentGrade" class="block text-sm font-medium text-slate-100 mb-2">
+              Grade *
+            </label>
+            <select id="editStudentGrade" [(ngModel)]="studentToEdit.studentGrade"
+              class="w-full px-3 py-2 border border-slate-500 bg-slate-600 text-slate-100 rounded-md focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
+              [disabled]="isSaving">
+              <option value="" disabled>Select Grade</option>
+              <option *ngFor="let grade of availableGrades" [value]="grade.value">
+                {{ grade.label }}
+              </option>
+            </select>
+          </div>
+          <!-- Read-only Info -->
+          <div class="grid grid-cols-2 gap-4 pt-2">
+            <div class="bg-slate-600 p-3 rounded-lg">
+              <p class="text-sm text-slate-300 font-semibold">Payment Status</p>
+              <p class="text-slate-100 font-semibold">
+                {{ capitalizeLetters(studentToEdit.paymentStatus) }}
+              </p>
+            </div>
+            <div class="bg-slate-600 p-3 rounded-lg">
+              <p class="text-sm text-slate-300 font-semibold">Monthly Amount</p>
+              <p class="text-slate-100 font-semibold">R {{ studentToEdit.monthlyPaymentAmount }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="flex gap-3 p-4 border-t border-slate-600 flex-shrink-0">
+      <button (click)="closeEditPopup()" [disabled]="isSaving"
+        class="flex-1 px-4 py-2 text-slate-100 border border-slate-400 rounded-lg hover:bg-slate-600 disabled:opacity-50 transition-colors">
+        Cancel
+      </button>
+      <button (click)="saveStudentChanges()"
+        [disabled]="isSaving || !studentToEdit.schoolName || !studentToEdit.studentGrade"
+        class="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center">
+        <span *ngIf="!isSaving">Save Changes</span>
+        <span *ngIf="isSaving" class="flex items-center">
+          <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+            </path>
+          </svg>
+          Saving...
+        </span>
       </button>
     </div>
   </div>
