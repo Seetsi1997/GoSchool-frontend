@@ -64,6 +64,7 @@ export class Parents {
     const parentId = localStorage.getItem('parentUUID');
 
 
+
     if (!parentId) {
       return throwError(() => new Error('Please log in as a parent to view students.'));
     }

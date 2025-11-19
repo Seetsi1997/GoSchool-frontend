@@ -1,0 +1,187 @@
+<div
+  class="fixed inset-0 bg-gradient-to-r from-[#3E4C70] via-[#547A8C] to-[#6D9CAB] bg-opacity-50 z-[60] flex items-center justify-center p-4">
+  <div class="bg-slate-500 rounded-2xl shadow-xl w-full max-w-md max-h-[90vh] flex flex-col">
+    <!-- Header -->
+    <div class="flex items-center justify-between p-4 border-b border-gray-200 flex-shrink-0">
+      <h2 class="text-xl font-semibold text-slate-100">Student Details</h2>
+      <button type="button" title="close" (click)="onClose()" class="text-purple-300 transition-colors">
+        <svg class="w-5 h-5 bg-clip-text bg-gradient-to-r from-purple-200 to-purple-900" fill="none"
+          stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Student Detail Content -->
+    <div class="p-6 overflow-y-auto flex-1">
+      <div class="space-y-4">
+        <div class="flex items-center mb-6">
+          <svg class="w-16 h-16 rounded-full border-2 border-[#F5F5F5] flex-shrink-0" width="49px" height="49px"
+            viewBox="0 0 49 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M24.5 25.98C29.4725 25.98 33.5 21.9227 33.5 16.9133C33.5 11.904 29.4725 7.84668 24.5 7.84668C19.5275 7.84668 15.5 11.904 15.5 16.9133C15.5 21.9227 19.5275 25.98 24.5 25.98Z"
+              fill="#F5F5F5" />
+            <path
+              d="M17.3786 29.2021C17.8814 29.0785 18.3971 29.3313 18.6254 29.7991L22.6893 32.7994C24.5 32.799 24.5 32.7995 26.3105 32.7991L30.3746 29.7991C30.6029 29.3313 31.1186 29.0785 31.6214 29.2021C37.0255 30.5301 42.5 33.238 42.5 37.3116V41.845H6.5V37.3116C6.5 33.238 11.9745 30.5301 17.3786 29.2021Z"
+              fill="#F5F5F5" />
+          </svg>
+          <div class="ml-4">
+            <h3 class="text-xl font-bold text-slate-200">
+              {{ capitalizeLetters(student!.studentFirstName) }}
+            </h3>
+            <p class="text-gray-200">{{ capitalizeLetters(student!.schoolName) }}</p>
+          </div>
+        </div>
+
+        <!-- Student Information Details -->
+        <div class="flex flex-col">
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-slate-200 p-3 rounded-lg">
+              <p class="text-sm text-gray-500 font-semibold">Grade</p>
+              <p class="text-[#375a67] font-semibold">
+                {{ formatGrade(student!.studentGrade) }}
+              </p>
+            </div>
+            <div class="bg-slate-200 p-3 rounded-lg">
+              <p class="text-sm text-gray-500 font-semibold">Parent Name</p>
+              <p class="text-[#375a67] font-semibold">
+                {{ capitalizeLetters(student!.parentName) }}
+              </p>
+            </div>
+            <div class="bg-slate-200 p-3 rounded-lg">
+              <p class="text-sm text-gray-500 font-semibold">Amount</p>
+              <p class="text-[#375a67] font-semibold">{{ student!.monthlyPaymentAmount }}</p>
+            </div>
+            <div class="bg-slate-200 p-3 rounded-lg">
+              <p class="text-sm text-gray-500 font-semibold">Status</p>
+              <p class="text-[#375a67] font-semibold">
+                {{ capitalizeLetters(student!.paymentStatus) }}
+              </p>
+            </div>
+          </div>
+          <div class="flex justify-end mt-2">
+            <button type="button" title="Edit Student" (click)="onEdit()"
+              class="flex items-center gap-2 bg-purple-500 text-white px-6 py-2 rounded-lg hover:bg-purple-600 transition-colors">
+              <svg class="w-4 h-4 text-slate-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+              </svg>
+              Edit
+            </button>
+          </div>
+        </div>
+
+        <!-- Parent Details -->
+        <div class="mt-4">
+          <h4 class="text-xl font-semibold text-slate-100">Parent Information</h4>
+          <div class="space-y-2 text-gray-500 mt-2">
+            <div class="bg-slate-200 p-3 rounded-lg flex items-center space-x-2">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                fill="#375a67">
+                <path
+                  d="M560-520h280v-200H560v200Zm140-50-100-70v-40l100 70 100-70v40l-100 70ZM80-120q-33 0-56.5-23.5T0-200v-560q0-33 23.5-56.5T80-840h800q33 0 56.5 23.5T960-760v560q0 33-23.5 56.5T880-120H80Zm556-80h244v-560H80v560h4q42-75 116-117.5T360-360q86 0 160 42.5T636-200ZM360-400q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35ZM182-200h356q-34-38-80.5-59T360-280q-51 0-97 21t-81 59Zm178-280q-17 0-28.5-11.5T320-520q0-17 11.5-28.5T360-560q17 0 28.5 11.5T400-520q0 17-11.5 28.5T360-480Zm120 0Z" />
+              </svg>
+              <p class="text-sm text-gray-500 font-semibold">
+                <span class="text-[#375a67] font-semibold">{{ student!.parentEmail }}</span>
+              </p>
+            </div>
+            <div class="bg-slate-200 p-3 rounded-lg flex items-center space-x-2">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                fill="#375a67">
+                <path
+                  d="M798-120q-125 0-247-54.5T329-329Q229-429 174.5-551T120-798q0-18 12-30t30-12h162q14 0 25 9.5t13 22.5l26 140q2 16-1 27t-11 19l-97 98q20 37 47.5 71.5T387-386q31 31 65 57.5t72 48.5l94-94q9-9 23.5-13.5T670-390l138 28q14 4 23 14.5t9 23.5v162q0 18-12 30t-30 12ZM241-600l66-66-17-94h-89q5 41 14 81t26 79Zm358 358q39 17 79.5 27t81.5 13v-88l-94-19-67 67ZM241-600Zm358 358Z" />
+              </svg>
+              <p class="text-sm text-gray-500 font-semibold">
+                <span class="text-[#375a67] font-semibold">{{ student!.parentPhoneNumber }}</span>
+              </p>
+            </div>
+            <div class="bg-slate-200 p-3 rounded-lg flex items-center space-x-2">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                fill="#375a67">
+                <path
+                  d="M440-400h80v-120h120v-80H520v-120h-80v120H320v80h120v120Zm40 214q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z" />
+              </svg>
+              <p class="text-sm text-gray-500 font-semibold">
+                <span class="text-[#375a67] font-semibold">{{ capitalizeLetters(student!.parentAddress) }}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Driver Details -->
+        <div class="mt-4">
+          <h4 class="text-xl font-semibold text-slate-100">Driver Information</h4>
+          <div class="space-y-2 text-gray-500 mt-2">
+
+            <!-- Use the hasDriverInfo() method to check if we should show driver section -->
+            <ng-container *ngIf="hasDriverInfo(); else noDriver">
+
+              <!-- Driver Name -->
+              <div class="bg-slate-200 p-3 rounded-lg flex items-center space-x-2" *ngIf="getDriverName()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" viewBox="0 0 20 20"
+                  fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                    clip-rule="evenodd" />
+                </svg>
+                <p class="text-sm text-gray-500 font-semibold">
+                  Driver: <span class="text-[#375a67] font-semibold">{{ getDriverName() }}</span>
+                </p>
+              </div>
+
+              <!-- Email -->
+              <div class="bg-slate-200 p-3 rounded-lg flex items-center space-x-2" *ngIf="getDriverEmail()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" viewBox="0 0 20 20"
+                  fill="currentColor">
+                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                </svg>
+                <p class="text-sm text-gray-500 font-semibold">
+                  Email: <span class="text-[#375a67] font-semibold">{{ getDriverEmail() }}</span>
+                </p>
+              </div>
+
+              <!-- Phone -->
+              <div class="bg-slate-200 p-3 rounded-lg flex items-center space-x-2" *ngIf="getDriverContact()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" viewBox="0 0 20 20"
+                  fill="currentColor">
+                  <path
+                    d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                </svg>
+                <p class="text-sm text-gray-500 font-semibold">
+                  Phone: <span class="text-[#375a67] font-semibold">{{ getDriverContact() }}</span>
+                </p>
+              </div>
+
+              <!-- Address -->
+              <div class="bg-slate-200 p-3 rounded-lg flex items-center space-x-2" *ngIf="getDriverAddress()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" viewBox="0 0 20 20"
+                  fill="currentColor">
+                  <path fill-rule="evenodd"
+                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                    clip-rule="evenodd" />
+                </svg>
+                <p class="text-sm text-gray-500 font-semibold">
+                  Address: <span class="text-[#375a67] font-semibold">{{ getDriverAddress() }}</span>
+                </p>
+              </div>
+
+            </ng-container>
+
+            <ng-template #noDriver>
+              <p class="text-gray-300 italic">No driver assigned to this student.</p>
+            </ng-template>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="flex gap-3 p-4 border-t border-gray-200 flex-shrink-0">
+      <button (click)="onClose()"
+        class="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium">
+        Close
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,107 @@
+<div class="fixed inset-0 animated-background  bg-gradient-to-r from-[#3E4C70] via-[#547A8C] to-[#6D9CAB] z-[70] flex items-center justify-center p-4">
+  <div class="bg-slate-700 rounded-2xl shadow-xl w-full max-w-md max-h-[90vh] flex flex-col">
+    <!-- Header -->
+    <div class="flex items-center justify-between p-4 border-b border-slate-600 flex-shrink-0">
+      <h2 class="text-xl font-semibold text-slate-100">Edit Student Information</h2>
+      <button type="button" title="close" (click)="onClose()" class="text-slate-300 hover:text-white transition-colors"
+        [disabled]="isSaving">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Edit Form Content -->
+    <div class="p-6 overflow-y-auto flex-1">
+      <div class="space-y-4">
+        <!-- Student Info Header -->
+        <div class="flex items-center mb-4">
+          <svg class="w-12 h-12 rounded-full border-2 border-slate-400 flex-shrink-0" width="49px" height="49px"
+            viewBox="0 0 49 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M24.5 25.98C29.4725 25.98 33.5 21.9227 33.5 16.9133C33.5 11.904 29.4725 7.84668 24.5 7.84668C19.5275 7.84668 15.5 11.904 15.5 16.9133C15.5 21.9227 19.5275 25.98 24.5 25.98Z"
+              fill="#cbd5e1" />
+            <path
+              d="M17.3786 29.2021C17.8814 29.0785 18.3971 29.3313 18.6254 29.7991L22.6893 32.7994C24.5 32.799 24.5 32.7995 26.3105 32.7991L30.3746 29.7991C30.6029 29.3313 31.1186 29.0785 31.6214 29.2021C37.0255 30.5301 42.5 33.238 42.5 37.3116V41.845H6.5V37.3116C6.5 33.238 11.9745 30.5301 17.3786 29.2021Z"
+              fill="#cbd5e1" />
+          </svg>
+          <div class="ml-4">
+            <h3 class="text-lg font-bold text-slate-200">
+              {{ capitalizeLetters(student!.studentFirstName) }} {{ capitalizeLetters(student!.studentSurname) }}
+            </h3>
+            <!-- Show current grade info -->
+            <p class="text-slate-300 text-sm mt-1" *ngIf="studentGrade">
+              Current {{ getCurrentGradeLabel() }}
+            </p>
+          </div>
+        </div>
+
+        <!-- Editable Fields -->
+        <div class="space-y-4">
+          <!-- School Name -->
+          <div>
+            <label for="editSchoolName" class="block text-sm font-medium text-slate-100 mb-2">
+              School Name <span class="text-red-500">*</span>
+            </label>
+            <input type="text" id="editSchoolName" [(ngModel)]="schoolName"
+              class="w-full px-3 py-2 border border-slate-500 bg-slate-600 text-slate-100 rounded-md focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
+              placeholder="Enter school name" [disabled]="isSaving">
+          </div>
+
+          <!-- Grade -->
+          <div>
+            <label for="editStudentGrade" class="block text-sm font-medium text-slate-100 mb-2">
+              Grade <span class="text-red-500">*</span>
+            </label>
+
+            <select id="editStudentGrade" [(ngModel)]="studentGrade"
+              class="w-full px-3 py-2 border border-slate-500 bg-slate-600 text-slate-100 rounded-md focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
+              [disabled]="isSaving">
+
+              <option [ngValue]="''" disabled>Select Grade</option>
+
+              <option *ngFor="let grade of availableGrades" [ngValue]="grade.value">
+                {{ grade.label }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Read-only Info -->
+          <div class="grid grid-cols-2 gap-4 pt-2">
+            <div class="bg-slate-600 p-3 rounded-lg">
+              <p class="text-sm text-slate-300 font-semibold">Payment Status</p>
+              <p class="text-slate-100 font-semibold">
+                {{ capitalizeLetters(student!.paymentStatus) }}
+              </p>
+            </div>
+            <div class="bg-slate-600 p-3 rounded-lg">
+              <p class="text-sm text-slate-300 font-semibold">Monthly Amount</p>
+              <p class="text-slate-100 font-semibold">R {{ student!.monthlyPaymentAmount }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="flex gap-3 p-4 border-t border-slate-600 flex-shrink-0">
+      <button (click)="onClose()" [disabled]="isSaving"
+        class="flex-1 px-4 py-2 text-slate-100 border border-slate-400 rounded-lg hover:bg-slate-600 disabled:opacity-50 transition-colors">
+        Cancel
+      </button>
+      <button (click)="onSave()" [disabled]="!canSave"
+        class="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center">
+        <span *ngIf="!isSaving">Save Changes</span>
+        <span *ngIf="isSaving" class="flex items-center">
+          <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+            </path>
+          </svg>
+          Saving...
+        </span>
+      </button>
+    </div>
+  </div>
+</div>

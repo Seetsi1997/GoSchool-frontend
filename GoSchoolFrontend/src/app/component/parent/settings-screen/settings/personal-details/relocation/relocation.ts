@@ -98,8 +98,12 @@ export class ReLocation {
   goBack() {
     this.router.navigate(['/parent-dashboard/settings/personal-details']);
   }
-  capitalizeRole(role: string): string {
-    if (!role) return '';
-    return role.charAt(0).toUpperCase() + role.slice(1).toLowerCase();
+capitalizeRole(value: string): string {
+    if (!value) return '';
+    return value
+      .split(' ')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(' ');
   }
+
 }

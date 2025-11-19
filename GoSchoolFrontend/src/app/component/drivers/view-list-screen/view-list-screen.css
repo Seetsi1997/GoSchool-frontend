@@ -1,0 +1,322 @@
+.status-indicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+.status-indicator.online {
+  background: linear-gradient(135deg, #28a745, #20c997);
+}
+.status-indicator.offline {
+  background: linear-gradient(135deg, #dc3545, #e83e8c);
+}
+
+.nav-pills {
+  display: flex;
+  gap: 8px;
+  padding: 15px 0; /* Changed from 60px to 15px */
+  margin: 0;
+  list-style: none;
+  flex-wrap: wrap;
+}
+.nav-pills li {
+  list-style: none;
+}
+.nav-pills li a {
+  display: inline-block;
+  padding: 8px 16px;
+  font-weight: 600;
+  font-size: 13px;
+  border-radius: 20px;
+  background: rgba(255, 228, 228, 0.85);
+  color: #3E4C70;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  text-decoration: none;
+}
+.nav-pills li a:hover {
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+.nav-pills li.active a {
+  background: linear-gradient(to right, #3E4C70, #2A7B9B);
+  color: #fff !important;
+  box-shadow: 0 3px 8px rgba(42, 123, 155, 0.4);
+}
+.tab-content {
+  padding: 15px;
+  background: transparent;
+  animation: fadeIn 0.25s ease-in-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.section-header p {
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  font-weight: 600;
+  color: #2A7B9B;
+  text-align: center;
+  padding: 15px;
+  background: linear-gradient(135deg, #f8f9fa,   #3E4C70);
+  border-radius: 10px;
+  border-left: 4px solid #2A7B9B;
+}
+.table {
+  width: 100%;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.table thead th {
+  background: #2A7B9B;
+  color: #fff;
+  font-weight: 600;
+  padding: 12px 8px;
+  font-size: 12px;
+}
+.table tbody tr:hover {
+  background: #f1f9ff;
+}
+.table td {
+  padding: 10px 8px;
+  vertical-align: middle;
+  border-bottom: 1px solid #dee2e6;
+}
+.input-group {
+  display: flex;
+  width: 100%;
+  margin-bottom: 15px;
+}
+.input-group input {
+  border-radius: 10px 0 0 10px;
+  border: 2px solid #2A7B9B;
+  height: 44px;
+  padding-left: 12px;
+  flex: 1;
+  font-size: 14px;
+}
+.input-group-addon {
+  background: #2A7B9B;
+  border: 2px solid #2A7B9B;
+  color: white;
+  border-radius: 0 10px 10px 0;
+  cursor: pointer;
+  transition: 0.3s;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+}
+.input-group-addon:hover {
+  background: #216680;
+}
+.refresh-btn {
+  position: fixed;
+  right: 20px;
+  top: 80px;
+  background: #2A7B9B;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+.refresh-btn:hover {
+  background: #216680;
+  transform: scale(1.05);
+}
+.navbar {
+  background: #fff;
+  border-bottom: 2px solid #e9ecef;
+  padding: 15px 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+.all-student p,
+.paid-student p,
+.unpaid-student p {
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+  padding: 15px;
+  background: linear-gradient(135deg, #ffdfdf, #2A7B);
+  border-radius: 10px;
+  border-left: 4px solid #2A7B9B;
+}
+
+/* Fixed missing dot */
+.status-indicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.status-indicator.online {
+  background: linear-gradient(135deg, #28a745, #20c997);
+}
+
+.status-indicator.offline {
+  background: linear-gradient(135deg, #dc3545, #e83e8c);
+}
+
+
+
+@media (max-width: 767px){
+  .nav-pills {
+    justify-content: center;
+    gap: 6px;
+    padding: 15px 0;
+    margin-top: 0;
+  }
+}
+
+/* Mobile-first responsive adjustments */
+@media (max-width: 480px) {
+  .container-fluid {
+    padding: 0 10px;
+    margin-bottom: 5%;
+  }
+  
+  .nav-pills {
+    justify-content: space-around;
+    gap: 6px;
+    padding: 15px 0; /* Fixed: Reduced from 85px to 15px */
+    margin-top: 0;
+  }
+  
+  .nav-pills li a {
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 16px;
+  }
+  
+  .tab-content {
+    padding: 10px;
+    margin-top: 5px;
+  }
+  
+  .input-group input {
+    height: 40px;
+    font-size: 13px;
+  }
+  
+  .input-group .input-group-addon {
+    padding: 0 12px;
+    min-width: 45px;
+  }
+  
+  .table {
+    font-size: 12px;
+  }
+  
+  .table thead th {
+    padding: 10px 6px;
+    font-size: 11px;
+  }
+  
+  .table td {
+    padding: 8px 6px;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+  .nav-pills {
+    padding: 10px 0; /* Fixed: Reduced from 69px to 10px */
+    justify-content: space-between;
+  }
+  
+  .nav-pills li {
+    flex: 1;
+    min-width: auto;
+  }
+  
+  .nav-pills li a {
+    font-size: 11px;
+    padding: 6px 8px;
+  }
+  
+  .input-group {
+    flex-direction: column;
+  }
+  
+  .input-group input {
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+  
+  .input-group .input-group-addon {
+    border-radius: 8px;
+    height: 40px;
+  }
+}
+
+/* Hide horizontal scrollbar but keep functionality */
+.nav-pills::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-pills {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Ensure tables are properly scrollable on mobile */
+.table-responsive {
+  border: none;
+}
+
+/* Improve touch targets for mobile */
+.nav-pills li a,
+.input-group .input-group-addon,
+.table td {
+  cursor: pointer;
+}
+
+/* Loading states for better mobile UX */
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Focus states for accessibility */
+.nav-pills li a:focus,
+.input-group input:focus {
+  outline: 2px solid #2A7B9B;
+  outline-offset: 2px;
+}
+
+/* Add container-fluid styles if missing */
+.container-fluid {
+  margin-bottom: 3%;
+  padding: 0 15px;
+}
+
+/* Style for the top-bar wrapper if needed */
+.top-bar {
+  margin-top: 60px;
+}

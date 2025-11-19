@@ -12,53 +12,56 @@ export class Auth {
   public currentUser: any = null;
   private logoutTimer: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   register(user: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/auth/api/users/register`, user);
   }
 
   // Updated login method with proper error handling
-login(email: string, password: string): Observable<UserLoginDTO> {
-  return this.http
-    .post<UserLoginDTO>(
-      `${environment.apiUrl}/auth/api/users/login`,
-      { email, password },
-      {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-        }),
-      }
-    )
-    .pipe(
-      tap((res: UserLoginDTO) => {
-        if (res.token) {
+  login(email: string, password: string): Observable<UserLoginDTO> {
+    return this.http
+      .post<UserLoginDTO>(
+        `${environment.apiUrl}/auth/api/users/login`,
+        { email, password },
+        {
+          headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+          }),
+        }
+      )
+      .pipe(
+        tap((res: UserLoginDTO) => {
+          if (res.token) {
+            localStorage.setItem('token', res.token);
+          }
           localStorage.setItem('token', res.token);
-        }
-        localStorage.setItem('uuid', res.uuid);
-        localStorage.setItem('role', res.role);
-        localStorage.setItem('firstname', res.firstname);
-        localStorage.setItem('email', res.email);
+          localStorage.setItem('uuid', res.uuid);
+          localStorage.setItem('role', res.role);
+          localStorage.setItem('firstName', res.firstName);
+          localStorage.setItem('email', res.email);
 
-        if (res.role === 'PARENT' || res.role === 'parent') {
-          localStorage.setItem('parentId', res.uuid);
-        }
-      }),
-      catchError((error: HttpErrorResponse) => {
-        // Suppress 401 errors from console entirely
-        if (error.status !== 401) {
-          console.error('Login error:', error);
-        }
-        
-        // Re-throw without logging to console
-        return throwError(() => ({
-          ...error,
-          // Optional: Prevent browser from logging to console
-          message: 'Login failed'
-        }));
-      })
-    );
-}
+          if (res.role === 'PARENT') {
+           localStorage.setItem('parentUUID', res.parentUUID?.toString());
+           localStorage.setItem('parentFirstname', res.parentFirstName);
+
+          }
+        }),
+        catchError((error: HttpErrorResponse) => {
+          // Suppress 401 errors from console entirely
+          if (error.status !== 401) {
+            console.error('Login error:', error);
+          }
+
+          // Re-throw without logging to console
+          return throwError(() => ({
+            ...error,
+            // Optional: Prevent browser from logging to console
+            message: 'Login failed'
+          }));
+        })
+      );
+  }
 
   logout(): Observable<any> {
     const token = sessionStorage.getItem('token');
@@ -107,7 +110,7 @@ login(email: string, password: string): Observable<UserLoginDTO> {
 
   changePassword(currentPassword: string, newPassword: string, confirmPassword: string): Observable<any> {
     const token = localStorage.getItem('token');
-    
+
     if (!token) {
       // Return an observable error instead of throwing
       return throwError(() => new Error('No authentication token found. Please login again.'));

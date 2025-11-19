@@ -1,3 +1,4 @@
+import { DriverRouteDetails } from "./DriverRouteDetails";
 import { LocationEntity } from "./location";
 import { Users } from "./Users";
 
@@ -10,5 +11,6 @@ export interface Driver {
     driverLocation: LocationEntity;
     totalNumberOfStudents?: number;
     assignedStudents: number[];
+    routeDetails?: DriverRouteDetails[];
     userAccount: Users;
 }

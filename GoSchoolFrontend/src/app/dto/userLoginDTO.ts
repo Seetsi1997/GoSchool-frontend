@@ -1,8 +1,10 @@
 export interface UserLoginDTO{
     token: string;
     email: string;
-    firstname: string;
+    firstName: string;
     password: string;
     uuid: string;
     role: string;
+    parentFirstName: string;
+    parentUUID: string;
 }

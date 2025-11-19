@@ -12,7 +12,7 @@ export interface StudentEntity {
   monthlyPaymentAmount: number;
   paymentStatus: PaymentStatus;
   studentGrade: LearnerGrade;
-  parent: ParentEntity[];
+  parent: ParentEntity;
   paymentRecordDTO: PaymentRecordEntity[];
   driver: Driver;
 }

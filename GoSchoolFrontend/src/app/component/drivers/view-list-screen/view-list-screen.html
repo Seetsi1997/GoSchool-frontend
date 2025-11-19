@@ -1,1 +1,122 @@
-<p>view-list-screen works!</p>
+<div class="container-fluid">
+    <!-- Tab navigation (always visible) -->
+    <div class="top-bar">
+        <ul class="nav nav-pills">
+            <li [class.active]="currentTab === 'all'">
+                <a (click)="onTabChange('all')">All Student</a>
+            </li>
+            <li [class.active]="currentTab === 'paid'">
+                <a (click)="onTabChange('paid')">Student Paid</a>
+            </li>
+            <li [class.active]="currentTab === 'unpaid'">
+                <a (click)="onTabChange('unpaid')">Student Unpaid</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- No students message -->
+<div *ngIf="!hasStudents" class="alert alert-info mt-2">
+  <div class="space-y-6">
+    <!-- No Transactions Message -->
+    <div class="text-center py-8">
+      <div class="flex flex-col items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" height="34px" viewBox="0 -960 960 960" width="34px" fill="#6D9C">
+          <path d="m787-145 28-28-75-75v-112h-40v128l87 87Zm-587 25q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v268q-19-9-39-15.5t-41-9.5v-243H200v560h242q3 22 9.5 42t15.5 38H200Zm0-120v40-560 243-3 280Zm80-40h163q3-21 9.5-41t14.5-39H280v80Zm0-160h244q32-30 71.5-50t84.5-27v-3H280v80Zm0-160h400v-80H280v80ZM720-40q-83 0-141.5-58.5T520-240q0-83 58.5-141.5T720-440q83 0 141.5 58.5T920-240q0 83-58.5 141.5T720-40Z"/>
+        </svg>
+
+        <!-- Dynamic Heading -->
+        <h3 class="text-lg font-semibold text-white mb-2">
+          {{ currentTab === 'all' ? 'No Students Assigned Yet' : 
+             currentTab === 'paid' ? 'No Paid Students at the Moment' : 
+             'No Unpaid Students at the Moment' }}
+        </h3>
+
+        <!-- Dynamic Paragraph -->
+        <p class="text-slate-300">
+          {{ currentTab === 'all' ? 
+             'You currently have no assigned students. Once a student is assigned to you, their details will appear here.' :
+             currentTab === 'paid' ?
+             'No students have completed payments yet.' :
+             'No students have pending payments at the moment.' }}
+        </p>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Students tables -->
+    <div *ngIf="hasStudents">
+        <div [ngSwitch]="currentTab">
+            <!-- All Students -->
+            <div *ngSwitchCase="'all'" class="tab-content">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Grade</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let student of assignedStudents">
+                            <td>{{student.studentFirstName}} {{student.studentSurname}}</td>
+                            <td>{{student.studentGrade}}</td>
+                            <td>
+                                <span [class.status-indicator]="true" [class.online]="student.paymentStatus === 'PAID'"
+                                    [class.offline]="student.paymentStatus !== 'PAID'">
+                                </span>
+                                {{student.paymentStatus === 'PAID' ? 'Active' : 'Inactive'}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Paid Students -->
+            <div *ngSwitchCase="'paid'" class="tab-content">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Grade</th>
+                            <th>Payment Date</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let student of paidStudents">
+                            <td>{{student.studentFirstName}} {{student.studentSurname}}</td>
+                            <td>{{student.studentGrade}}</td>
+                            <td><!-- bind paymentRecordDTOS[0]?.date --></td>
+                            <td>{{student.monthlyPaymentAmount | currency}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Unpaid Students -->
+            <div *ngSwitchCase="'unpaid'" class="tab-content">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Grade</th>
+                            <th>Due Date</th>
+                            <th>Amount Due</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let student of unpaidStudents">
+                            <td>{{student.studentFirstName}} {{student.studentSurname}}</td>
+                            <td>{{student.studentGrade}}</td>
+                            <td><!-- bind paymentRecordDTOS[0]?.dueDate --></td>
+                            <td>{{student.monthlyPaymentAmount | currency}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

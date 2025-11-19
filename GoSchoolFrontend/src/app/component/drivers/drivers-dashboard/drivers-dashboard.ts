@@ -3,15 +3,16 @@ import { Logout } from '../../auth/logout/logout';
 
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Sidebar } from './sidebar/sidebar';
 
 @Component({
   selector: 'app-drivers-dashboard',
-  imports: [CommonModule, Logout, RouterModule],
+  imports: [CommonModule, Logout, RouterModule, Sidebar, Logout],
   templateUrl: './drivers-dashboard.html',
   styleUrl: './drivers-dashboard.css',
 })
 export class DriversDashboard {
-  isSidebarOpen = false;
+   isSidebarOpen = false;
   activeItem: string = 'home';
 
   @ViewChild(Logout) logoutComponent!: Logout;
@@ -27,10 +28,35 @@ export class DriversDashboard {
     this.isSidebarOpen = false;
   }
 
+  onSidebarToggle() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+  }
+
+  onMenuItemClick(itemId: string) {
+    this.setActive(itemId);
+    
+    switch(itemId) {
+      case 'home':
+        this.homeScreen();
+        break;
+      case 'view':
+        this.viewScreen();
+        break;
+      case 'add':
+        this.addScreen();
+        break;
+      case 'settings':
+        this.settingsScreen();
+        break;
+      case 'logout':
+        this.openLogoutDialog();
+        break;
+    }
+  }
+
   openLogoutDialog() {
     this.setActive('logout');
     this.logoutComponent.openDialog();
-    this.closeSidebar();
   }
 
   setActive(item: string) {
@@ -38,26 +64,18 @@ export class DriversDashboard {
   }
 
   homeScreen() {
-    this.setActive('home');
     this.router.navigate(['/drivers-dashboard/home']);
-    this.closeSidebar();
   }
 
   viewScreen() {
-    this.setActive('view');
     this.router.navigate(['/drivers-dashboard/view']);
-    this.closeSidebar();
   }
   
-   addScreen() {
-    this.setActive('add');
+  addScreen() {
     this.router.navigate(['/drivers-dashboard/add']);
-    this.closeSidebar();
   }
 
   settingsScreen() {
-    this.setActive('settings');
     this.router.navigate(['/drivers-dashboard/settings']);
-    this.closeSidebar();
   }
 }

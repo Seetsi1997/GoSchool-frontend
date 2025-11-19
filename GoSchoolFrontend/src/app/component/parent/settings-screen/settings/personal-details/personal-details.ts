@@ -39,11 +39,14 @@ export class PersonalDetails implements OnInit {
     });
   }
 
-capitalizeRole(value: string | undefined | null): string {
-  if (!value) return '';
-  return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
-}
 
+capitalizeRole(value: string | undefined | null): string {
+    if (!value) return '';
+    return value
+      .split(' ')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(' ');
+  }
   goBack() {
     this.router.navigate(['/parent-dashboard/settings']);
   }

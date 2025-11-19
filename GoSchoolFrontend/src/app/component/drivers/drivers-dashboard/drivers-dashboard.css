@@ -1,0 +1,65 @@
+.dashboard-container {
+  background: linear-gradient(to right, #2A7B9B, #2A7B);
+  color: #1f2937; 
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Header */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(to left,#3E4C70, #547A8C, #6D9CAB);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  z-index: 10;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.menu-btn {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.menu-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.app-title {
+  font-size: 24px;
+  font-weight: 600;
+  background: linear-gradient(to right, #f9fafb, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Main Content */
+.main-content {
+  padding: 30px 20px;
+  min-height: calc(100vh - 80px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header {
+    padding: 12px 15px;
+  }
+  
+  .app-title {
+    font-size: 20px;
+  }
+  
+  .main-content {
+    padding: 20px 15px;
+  }
+}

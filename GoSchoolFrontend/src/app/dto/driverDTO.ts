@@ -6,7 +6,7 @@ export interface DriverDTO {
     driverName: string;
     driverSurname: string;
     email: string;
-    driverContact: string;
+    contact: string;
     driverLocation: LocationDTO; 
     totalNumberOfStudents: number;
     assignedStudents: StudentDTO[]; 

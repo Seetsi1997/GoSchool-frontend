@@ -1,34 +1,170 @@
-<div class="container">
-     <div class="drivers-available">
-          <h1 class="text-[20px] font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-200 to-purple-900">
-               Drivers Available
-          </h1>
+<div class="flex-1 flex flex-col overflow-hidden">
+  <div class="container">
+    <div class="drivers-available">
+      <h1
+        class="text-[20px] font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-200 to-purple-900">
+        Drivers Available
+      </h1>
 
-          <div class="carousel">
-               <div class="carousel-track">
-                    <div class="card">
-                         <div class="card-info">
-                               <div class="driver-name">
-                                   <p><strong>Name</strong> </p>
-                                   <span>Jimmy Johnson</span>
-                              </div>
-                              <div class="driver-location">
-                                  <p><strong>Location:</strong></p>
-                                  <span>Midrand</span>
-                              </div>
-                         </div>
-                         <div class="card-created">
-                              
-                               <div class="driver-location">
-                                   <p><strong>Created:</strong> Sep 14, 2025</p>
-                              </div>
-                              
-                             
-                              <p class="status completed">Completed</p>
-                         </div>
-                         <button class="details-btn">View Details</button>
-                    </div>
-               </div>
+      <div class="carousel">
+        <div class="carousel-track">
+          <div class="card" *ngFor="let driver of drivers; let i = index">
+            <div>
+              <div class="driver-info">
+                <div class="driver-avatar">
+                  {{ driver.driverName[0] }}{{ driver.driverSurname[0] }}
+                </div>
+                <div>
+                  <div class="card-info">
+                    <span><strong>{{ driver.driverName }} {{ driver.driverSurname }}</strong></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-child">
+                <div class="card-status">
+                  <p class="status completed">
+                    {{ driver.assignedStudents?.length > 0 ? 'Available' : 'Not Available' }}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-view flex justify-center">
+              <button type="button" class="details-btn" (click)="openModal(driver, i)">
+                View Details
+              </button>
+            </div>
           </div>
-     </div>
+        </div>
+
+        <!-- Dynamic navigation dots -->
+        <div class="carousel-nav">
+          <div class="nav-dot" *ngFor="let driver of drivers; let i = index" [class.active]="i === currentIndex"></div>
+        </div>
+      </div>
+
+      <!-- Show message if no drivers -->
+      @if(drivers.length === 0){
+      <p class="text-gray-400 italic mt-4">No drivers available at the moment.</p>
+      }
+    </div>
+  </div>
+
+  <!-- Popup Modal -->
+  <input type="checkbox" id="modal-toggle" class="modal-toggle" />
+  @if (selectedDriver) {
+  <div class="modal">
+    <div class="modal-content">
+      <label for="modal-toggle" class="close-btn">&times;</label>
+
+      <!-- Header -->
+      <div class="modal-header">
+        <div class="modal-avatar">
+          {{ selectedDriver.driverName[0] }}{{ selectedDriver.driverSurname[0] }}
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold">
+            {{ capitalizeRole(selectedDriver.driverName) }}
+            {{ capitalizeRole(selectedDriver.driverSurname) }}
+          </h2>
+          <p class="text-gray-300">Contact: {{ selectedDriver.contact }}</p>
+        </div>
+        <div class="modal-status">
+          {{ selectedDriver.assignedStudents?.length > 0 ? 'Available' : 'Not Available' }}
+        </div>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body">
+        <!-- Driver Info -->
+        <div class="info-section">
+          <h3>Driver Information</h3>
+          <div class="info-item">
+            <span class="info-label">Name:</span>
+            <span class="info-value">{{ capitalizeRole(selectedDriver.driverName) }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Surname:</span>
+            <span class="info-value">{{ capitalizeRole(selectedDriver.driverSurname) }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Total Students:</span>
+            <span class="info-value">{{ selectedDriver.totalNumberOfStudents }}</span>
+          </div>
+        </div>
+
+        <!-- Location -->
+        <div class="info-section">
+          <h3>Location Details</h3>
+          <div class="info-item">
+            <span class="info-label">City:</span>
+            <span class="info-value">{{
+              capitalizeRole(selectedDriver.driverLocation?.city)}}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Province:</span>
+            <span class="info-value">{{
+              capitalizeRole(selectedDriver.driverLocation?.province)
+              }}</span>
+          </div>
+        </div>
+
+        <!-- Students -->
+        <div class="info-section students">
+          <h3>Assigned Students</h3>
+
+           @if(!selectedDriver?.assignedStudents || selectedDriver.assignedStudents.length === 0){
+              <p class="text-gray-400 text-sm italic">No students assigned at the moment</p>
+           }
+
+          @if(selectedDriver?.assignedStudents?.length > 0){
+            @for(student of selectedDriver.assignedStudents; track student.id){
+                 <div class="students-list">
+            <div class="student-item">
+              <div class="font-medium">
+                {{ student.studentFirstName }} {{ student.studentSurname }}
+              </div>
+              <div class="text-sm text-gray-400">Grade {{ student.studentGrade }}</div>
+            </div>
+          </div>
+            }
+
+          }
+        </div>
+
+        <!-- Transport / Route Details -->
+        <div class="info-section">
+          <h3>Transport Details</h3>
+
+          @if (selectedDriver?.routeDetails?.length > 0) { 
+            @for(route of selectedDriver.routeDetails; track route.id){
+          <div>
+            <div class="route-card p-3 rounded mb-3 bg-gray-900/30">
+              <div class="info-item">
+                <span class="info-label">School:</span>
+                <span class="info-value">{{ route.schoolName }}</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Pickup:</span>
+                <span class="info-value">{{ route.pickupTime }}</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Drop-off:</span>
+                <span class="info-value">{{ route.dropOffTime }}</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Monthly Fee:</span>
+                <span class="info-value">R{{ route.monthlyFee }}</span>
+              </div>
+            </div>
+          </div>
+          } }@else{
+          <p class="text-gray-400 italic text-sm">Not available at the moment.</p>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+  }
 </div>
