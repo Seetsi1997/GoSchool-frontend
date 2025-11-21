@@ -22,6 +22,7 @@ import { ReLocation } from './component/parent/settings-screen/settings/personal
 import { Profile } from './component/parent/settings-screen/settings/profile/profile';
 import { ChangePassword } from './component/parent/settings-screen/support/change-password/change-password';
 import { Privacy } from './component/parent/settings-screen/support/privacy/privacy';
+import {Account} from './component/drivers/driver-settings-screen/components/account-profile-screen/account/account';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -75,7 +76,7 @@ export const routes: Routes = [
       { path: 'view', component:  ViewListScreen },
       { path: 'settings', component: DriverSettingsScreen,
         children: [
-            {path: 'profile', component: Profile }
+            {path: 'account', component: Account }
         ]
        },
       { path: 'add', component: AddNewStudent },

@@ -3,15 +3,16 @@ import { CommonModule } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { SvgService } from '../../../service/SvgService/svg-service';
+import { Account } from "./components/account-profile-screen/account/account";
 
 @Component({
   selector: 'app-driver-settings-screen',
-  imports: [CommonModule],
+  imports: [CommonModule, Account],
   templateUrl: './driver-settings-screen.html',
   styleUrl: './driver-settings-screen.css'
 })
 export class DriverSettingsScreen {
-  selectedTab = 'account'; // default tab
+  selectedTab = 'account'; 
 
    privacyItems: any[] = [];
      

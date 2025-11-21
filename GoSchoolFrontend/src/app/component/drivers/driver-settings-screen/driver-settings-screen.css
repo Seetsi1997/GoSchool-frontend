@@ -107,7 +107,7 @@
   max-width: 42rem;
   max-height: 70vh;
   overflow: hidden;
-  padding-bottom: 20px;
+  padding-bottom: 60px;
 }
 
 /* Modal Header */
@@ -130,6 +130,7 @@
 /* Modal Content */
 .content {
   padding: 1.5rem;
+  margin-bottom: 12pxs;
   overflow-y: auto;
   max-height: calc(90vh - 80px);
 }
@@ -183,7 +184,7 @@
   border-radius: 0.5rem;
   padding: 1.5rem;
   border: 1px solid #475569;
-  margin-bottom: 1rem;
+  margin-bottom: 3.9rem;
 }
 
 .contact-section h3 {
@@ -241,13 +242,12 @@
 /* LAST UPDATED            */
 /* ----------------------- */
 .last-updated {
-  padding-bottom: 45px;
-  margin-bottom: 45px;
+  padding-bottom: 170px;
   text-align: center;
 }
 
 .last-updated p {
-  margin-top: 10px;
+  margin-bottom: 10px;
   color: #94a3b8;
   font-size: 0.75rem;
 }
@@ -341,6 +341,7 @@
   .container {
     margin-top: 60px;
   }
+
   .list-group-item {
     padding: 10px 12px;
     font-size: 13px;
@@ -359,20 +360,30 @@
     flex-direction: column;
     gap: 0.3rem;
   }
+
+  .last-updated {
+    padding-bottom: 10px;
+    text-align: center;
+  }
 }
 
-@media (min-width: 380px) {
+@media (max-width: 380px) {
   .container {
     margin-top: 60px;
   }
 
   .contact-item {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 0.3rem;
   }
 
   .social-icons {
     flex-direction: column;
+  }
+
+  .last-updated {
+    padding-bottom: 10px;
+    text-align: center;
   }
 }

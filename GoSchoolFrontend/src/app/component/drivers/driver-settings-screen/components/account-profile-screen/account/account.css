@@ -1,0 +1,144 @@
+.wrapper {
+    margin-top: 50px;
+    width: 320px;
+    height: 540px;
+    background: rgba(30, 50, 70, 0.8);
+    transition: background 0.6s ease;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+}
+
+.profile {
+    margin-top: 2.2em;
+    position: relative;
+}
+
+.profile:after {
+    width: 100%;
+    height: 1px;
+    content: ' ';
+    display: block;
+    margin-top: 1.3em;
+    background: #E9EFF6;
+}
+
+.dark-mode .profile:after {
+    background: #3a4257;
+}
+
+.check {
+    position: absolute;
+    right: 5em;
+    bottom: 12.7em;
+}
+
+.check i {
+    color: #fff;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 100%;
+    background: linear-gradient(to bottom right, #C90A6D, #FF48A0);
+}
+
+.thumbnail {
+    width: 124px;
+    height: 124px;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1.5em;
+    border-radius: 100%;
+    box-shadow: 0 13px 26px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.2);
+    object-fit: cover; /* Ensures image covers the circle properly */
+    border: 3px solid rgba(255, 255, 255, 0.2); /* Optional: adds a subtle border */
+}
+
+.name {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.dark-mode .name {
+    color: #FDFEFF;
+}
+
+.description {
+    color: #cbd1ff;
+    font-size: 14px;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 1.3em;
+}
+
+.dark-mode .description {
+    color: #FDFEFF;
+}
+
+.btn {
+    color: #fff;
+    width: 130px;
+    height: 42px;
+    outline: none;
+    border: none;
+    display: block;
+    cursor: pointer;
+    font-weight: 300;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 70px;
+    background: linear-gradient(to bottom right, #C90A6D, #ffa7d2);
+    transition: transform 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.social-icons {
+    display: flex;
+    margin-top: 1.2em;
+    justify-content: center;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.icon a {
+    color: #fff;
+    width: 60px;
+    height: 60px;
+    font-size: 28px;
+    line-height: 60px;
+    text-align: center;
+    border-radius: 30px;
+    box-shadow: 0 13px 26px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.icon h4 {
+    color: #ccd1fa;
+    border: 1px solid #E9EFF6;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 30px;
+    box-shadow: 0 13px 26px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.2);
+    font-size: 12px;
+    margin-top: 1.3em;
+    margin-bottom: 0.2em;
+}
+
+.icon p {
+    color: #666B7D;
+    font-size: 12px;
+}
+
