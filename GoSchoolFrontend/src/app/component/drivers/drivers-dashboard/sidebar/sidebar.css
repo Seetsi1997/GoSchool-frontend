@@ -146,7 +146,8 @@
   background-clip: text;
 }
 
-.menu-icon {
+.menu-icon,
+.settings-section .menu-item .menu-icon {
   width: 45px;
   height: 45px;
   border-radius: 12px;
@@ -159,7 +160,14 @@
   font-size: 18px;
 }
 
-.menu-item:hover .menu-icon {
+.settings-section .menu-item .menu-icon {
+  transform: rotateX(180deg);
+
+}
+
+
+.menu-item:hover .menu-icon,
+.settings-section .menu-item:hover .menu-icon {
   background: rgba(1, 255, 221, 0.05);
 }
 
