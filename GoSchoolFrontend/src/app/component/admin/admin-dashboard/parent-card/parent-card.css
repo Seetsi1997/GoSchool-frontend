@@ -1,0 +1,180 @@
+
+/* Parent Card Container */
+.parent-card {
+  background: linear-gradient(45deg, rgb(122, 67, 108),  rgb(5, 72, 73));
+  padding: 12px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  border: none;
+  cursor: pointer;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.parent-card:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+/* Dark Mode Support */
+.dark-mode .parent-card {
+  background: #1f2937;
+}
+
+/* Parent Card Header */
+.parent-card-header {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  color: #111827;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+/* Dark Mode for Header */
+.dark-mode .parent-card-header {
+  color: #ffffff;
+}
+
+/* Responsive Layout for Header */
+@media (min-width: 1280px) {
+  .parent-card-header {
+    flex-direction: row;
+    border-bottom: 1px solid rgba(229, 231, 235, 0.75);
+  }
+  
+  .dark-mode .parent-card-header {
+    border-bottom-color: rgba(55, 65, 81, 0.75);
+  }
+}
+
+@media (max-width: 1279px) {
+  .parent-card-header {
+    flex-direction: column;
+    text-align: center;
+    border-bottom: 1px solid rgba(229, 231, 235, 0.75);
+  }
+  
+  .dark-mode .parent-card-header {
+    border-bottom-color: rgba(55, 65, 81, 0.75);
+  }
+}
+
+/* Parent Avatar */
+.parent-avatar {
+  width: 28px;
+  height: 28px;
+  margin-right: 8px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.parent-card-header p{
+    font-size: 15px;
+    font-weight: 500;
+    color: #dbeafe;
+}
+
+@media (max-width: 1279px) {
+  .parent-avatar {
+    margin-right: 0;
+    margin-bottom: 8px;
+  }
+}
+
+/* Parent Card Content */
+.parent-card-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* Parent Badge */
+.parent-badge {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  padding: 4px 8px;
+  background: linear-gradient(45deg, rgb(53, 40, 153), rgb(63, 90, 87));
+  color: #dbeafe;
+  font-weight: 500;
+  border-radius: 6px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dark-mode .parent-badge {
+  background: #111827;
+  color: #10b981;
+}
+
+.parent-location {
+  margin-left: auto;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: #dbeafe;
+  text-align: right;
+}
+
+.dark-mode .parent-location {
+  color: #9ca3af;
+}
+
+@media (max-width: 639px) {
+  .parent-card-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .parent-location {
+    margin-left: 0;
+    text-align: left;
+    width: 100%;
+    padding-top: 8px;
+    border-top: 1px solid #e5e7eb;
+  }
+  
+  .dark-mode .parent-location {
+    border-top-color: #374151;
+  }
+}
+
+@media (max-width: 479px) {
+  .parent-card {
+    padding: 10px;
+  }
+  
+  .parent-badge {
+    font-size: 0.7rem;
+    padding: 3px 6px;
+  }
+}
+
+.parent-card:focus {
+  outline: 2px solid #059669;
+  outline-offset: 2px;
+}
+
+.parent-card:focus:not(:focus-visible) {
+  outline: none;
+}
+
+@media print {
+  .parent-card {
+    box-shadow: none;
+    border: 1px solid #d1d5db;
+    break-inside: avoid;
+  }
+  
+  .parent-badge {
+    background-color: transparent;
+    border: 1px solid #059669;
+  }
+}

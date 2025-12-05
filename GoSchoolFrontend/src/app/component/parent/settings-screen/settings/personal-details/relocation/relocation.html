@@ -1,53 +1,48 @@
-<!-- Overlay -->
-<div class="fixed inset-0 bg-gradient-to-r from-[#3E4C70] via-[#547A8C] to-[#6D9CAB] z-50 flex items-center justify-center p-4">
+<!-- HTML with class names only -->
+<div class="location-modal-overlay">
     <!-- Modal Container -->
-    <div class="bg-slate-500 rounded-2xl shadow-xl w-full max-w-md max-h-[90vh] overflow-hidden">
+    <div class="location-modal-container">
         <!-- Header -->
-        <div class="flex items-center justify-between p-4 border-b border-gray-200">
-            <h2 class="text-xl font-semibold text-slate-100">Update Location</h2>
-            <button type="button" title="goBack" (click)="goBack()" class="text-purple-300 transition-colors">
-                <svg class="w-5 h-5 bg-clip-text bg-gradient-to-r from-purple-200 to-purple-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="location-modal-header">
+            <h2 class="location-modal-title">Update Location</h2>
+            <button type="button" title="goBack" (click)="goBack()" class="location-close-button">
+                <svg class="location-close-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
         </div>
 
         <!-- Content -->
-        <div class="p-6 overflow-y-auto max-h-[calc(90vh-80px)]">
-            <div class="space-y-4">
+        <div class="location-modal-content">
+            <div class="location-modal-inner">
                 <!-- Form Fields -->
-                <div class="space-y-4">
+                <div class="location-form-fields">
                     <!-- Column 1 -->
-                    <div class="space-y-4">
-                        <div>
-                            <label for="suburb" class="block text-sm font-medium text-slate-100 mb-1">Suburb</label>
-                            <input type="text" id="suburb" [(ngModel)]="parent.suburb"
-                                class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
+                    <div class="location-form-column">
+                        <div class="form-field">
+                            <label for="suburb" class="form-label">Suburb</label>
+                            <input type="text" id="suburb" [(ngModel)]="parent.suburb" class="form-input" />
                         </div>
-                        <div>
-                            <label for="city" class="block text-sm font-medium text-slate-100 mb-1">City</label>
-                            <input type="text"  id="city" [(ngModel)]="parent.city"
-                                class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
+                        <div class="form-field">
+                            <label for="city" class="form-label">City</label>
+                            <input type="text"  id="city" [(ngModel)]="parent.city" class="form-input" />
                         </div>
-                        <div>
-                            <label for="address" class="block text-sm font-medium text-slate-100 mb-1">Address</label>
-                            <input type="text" id="address" [(ngModel)]="parent.address"
-                                class="px-4 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
+                        <div class="form-field">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" id="address" [(ngModel)]="parent.address" class="form-input" />
                         </div>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div> 
-                                <label for="postalCode" class="block text-sm font-medium text-slate-100 mb-1">Postal Code</label>
-                                <input type="text" id="postalCode" [(ngModel)]="parent.postalCode"
-                                    class="pl-2 pr-2 py-2 peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50" />
+                        <div class="form-grid">
+                            <div class="form-field"> 
+                                <label for="postalCode" class="form-label">Postal Code</label>
+                                <input type="text" id="postalCode" [(ngModel)]="parent.postalCode" class="form-input" />
                             </div>
 
-                            <div>
-                                <label for="province" class="flex text-sm font-medium text-slate-100 mb-1">Province</label>
-                                <select id="province" [(ngModel)]="parent.province" name="province"
-                                    class="px-1 py-[0.6rem] peer w-full border border-slate-300 bg-gray-50 shadow-sm placeholder-transparent text-purple-600 focus:outline-none rounded-md focus:border-purple-600 focus:ring focus:ring-purple-300 focus:ring-opacity-50 dark:bg-slate-500 dark:text-gray-50">
+                            <div class="form-field">
+                                <label for="province" class="form-label">Province</label>
+                                <select id="province" [(ngModel)]="parent.province" name="province" class="form-select">
                                     <option value="" disabled>Select a Province</option>
                                     <option *ngFor="let province of provinces" [value]="province">
-                                        {{ province.replace(' ', ' ') }}
+                                        {{ formatProvinceDisplay(province ) }}
                                     </option>
                                 </select>
                             </div>
@@ -55,13 +50,11 @@
                     </div>
 
                     <!-- Action Buttons -->
-                    <div class="flex gap-3 pt-4">
-                        <button (click)="goBack()"
-                            class="flex-1 px-4 py-2 text-slate-100 border border-slate-300 rounded-lg transition-colors">
+                    <div class="action-buttons">
+                        <button (click)="goBack()" class="cancel-button">
                             Cancel
                         </button>
-                        <button (click)="saveChanges()"
-                            class="flex-1 px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors">
+                        <button (click)="saveChanges()" class="save-button">
                             Save Changes
                         </button>
                     </div>
@@ -71,42 +64,39 @@
     </div>
 
     <!-- Centered Popup Overlay -->
-    <div *ngIf="showPopup" class="fixed inset-0 bg-gradient-to-r from-[#3E4C70] via-[#547A8C] to-[#6D9CAB] bg-opacity-50 z-[60] flex items-center justify-center p-4">
-        <div class="bg-slate-500 rounded-2xl shadow-xl w-full max-w-sm mx-auto transform transition-all">
+    <div *ngIf="showPopup" class="popup-overlay">
+        <div class="popup-container">
             <!-- Header -->
-            <div class="flex items-center justify-between p-4 border-b border-gray-200">
-                <div class="flex items-center space-x-2">
+            <div class="popup-header">
+                <div class="popup-header-content">
                     <!-- Success Icon -->
-                    <div *ngIf="popupType === 'success'"
-                        class="w-6 h-6 bg-green-500 text-slate-100 rounded-full flex items-center justify-center">
-                        <span class="text-white text-sm font-bold">✓</span>
+                    <div *ngIf="popupType === 'success'" class="popup-icon success-icon">
+                        <span>✓</span>
                     </div>
                     <!-- Error Icon -->
-                    <div *ngIf="popupType === 'error'"
-                        class="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center">
-                        <span class="text-red-500 text-sm font-bold">!</span>
+                    <div *ngIf="popupType === 'error'" class="popup-icon error-icon">
+                        <span>!</span>
                     </div>
                     <!-- Info Icon -->
-                    <div *ngIf="popupType === 'info'"
-                        class="w-6 h-6 bg-blue-500 text-slate-100 rounded-full flex items-center justify-center">
-                        <span class="text-slate-100 text-sm font-bold">i</span>
+                    <div *ngIf="popupType === 'info'" class="popup-icon info-icon">
+                        <span>i</span>
                     </div>
-                    <h3 class="text-lg font-semibold text-slate-100">{{ popupTitle }}</h3>
+                    <h3 class="popup-title">{{ popupTitle }}</h3>
                 </div>
             </div>
 
             <!-- Content -->
-            <div class="p-4">
-                <p class="text-slate-100">{{ popupMessage }}</p>
+            <div class="popup-content">
+                <p class="popup-message">{{ popupMessage }}</p>
             </div>
 
             <!-- Actions -->
-            <div class="flex justify-end p-4 border-t border-gray-200">
+            <div class="popup-actions">
                 <button (click)="closePopup()" [ngClass]="{
-            'bg-green-500 hover:bg-green-600': popupType === 'success',
-            'bg-red-500 hover:bg-red-600': popupType === 'error',
-            'bg-blue-500 hover:bg-blue-600': popupType === 'info'
-          }" class="flex-1 px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors">
+          'popup-button-success': popupType === 'success',
+          'popup-button-error': popupType === 'error',
+          'popup-button-info': popupType === 'info'
+        }" class="popup-button">
                     OK
                 </button>
             </div>

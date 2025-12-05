@@ -1,0 +1,126 @@
+<div class="location-modal-overlay">
+    <!-- Modal Container -->
+    <div class="location-modal-container">
+        <!-- Header -->
+        <div class="location-modal-header">
+            <h2 class="location-modal-title">Update Location</h2>
+            <button type="button" title="goBack" (click)="goBack()" class="location-close-button">
+                <svg class="location-close-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Content -->
+        <div class="location-modal-content">
+            <!-- Loading State -->
+             @if (isLoading) {
+                 <div class="loading-state">
+                <p class="loading-text">Loading location data...</p>
+            </div>
+             }
+           
+            <!-- Form Content -->
+             @if (!isLoading) {
+                 <div class="location-modal-inner">
+                <!-- Form Fields -->
+                <div class="location-form-fields">
+                    <!-- Column 1 -->
+                    <div class="location-form-column">
+                       <div class="form-field">
+                            <label for="suburb" class="form-label">Suburb</label>
+                            <input type="text" id="suburb" [(ngModel)]="driver.driverLocation.suburb" class="form-input" />
+                        </div>
+
+                        <div class="form-field">
+                            <label for="city" class="form-label">City</label>
+                            <input type="text" id="city" [(ngModel)]="driver.driverLocation.city" class="form-input" />
+                        </div>
+
+                        <div class="form-field">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" id="address" [(ngModel)]="driver.driverLocation.address" class="form-input" />
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label for="postalCode" class="form-label">Postal Code</label>
+                                <input type="text" id="postalCode" [(ngModel)]="driver.driverLocation.postalCode" class="form-input" />
+                            </div>
+
+                            <div class="form-field">
+                                <label for="province" class="form-label">Province</label>
+                                <select id="province" [(ngModel)]="driver.driverLocation.province" class="form-select">
+                                    <option [value]="null" disabled>Select a Province</option>
+                                    <option *ngFor="let p of provinces" [value]="p">{{ formatProvinceDisplay(p) }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <button (click)="goBack()" class="cancel-button">
+                            Cancel
+                        </button>
+                        <button (click)="saveChanges()" class="save-button">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+             }
+           
+        </div>
+    </div>
+
+    <!-- Centered Popup Overlay -->
+     @if (showPopup) {
+          <div  class="popup-overlay">
+        <div class="popup-container">
+            <!-- Header -->
+            <div class="popup-header">
+                <div class="popup-header-content">
+                    
+                     @if (popupType === 'success') {
+                        <!-- Success Icon -->
+                        <div  class="popup-icon success-icon">
+                        <span>✓</span>
+                    </div>
+                     } 
+                     @else if (popupType === 'error') {
+                        <!-- Error Icon -->
+                        <div class="popup-icon error-icon">
+                        <span>!</span>
+                    </div>
+                     } @else if(popupType === 'info'){
+                    <!-- Info Icon -->
+                    <div class="popup-icon info-icon">
+                        <span>i</span>
+                    </div>
+                     }
+                
+                    <h3 class="popup-title">{{ popupTitle }}</h3>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="popup-content">
+                <p class="popup-message">{{ popupMessage }}</p>
+            </div>
+
+            <!-- Actions -->
+            <div class="popup-actions">
+                <button (click)="closePopup()" [ngClass]="{
+                    'popup-button-success': popupType === 'success',
+                    'popup-button-error': popupType === 'error',
+                    'popup-button-info': popupType === 'info'
+                }" class="popup-button">
+                    OK
+                </button>
+            </div>
+        </div>
+    </div>
+     }
+  
+</div>

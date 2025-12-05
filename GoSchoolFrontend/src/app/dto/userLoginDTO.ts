@@ -7,4 +7,6 @@ export interface UserLoginDTO{
     role: string;
     parentFirstName: string;
     parentUUID: string;
+    driverUUID: string;
+    driverName: string;
 }

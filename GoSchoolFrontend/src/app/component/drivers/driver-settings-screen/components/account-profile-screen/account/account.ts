@@ -64,11 +64,14 @@ export class Account  implements OnInit {
     });
   }
 
-  capitalizeRole(role: string | undefined | null): string {
-    if (!role) return '';
-    return role.charAt(0).toUpperCase() + role.slice(1).toLowerCase();
+  capitalizeRole(value:string | undefined | null): string {
+    if (!value) return '';
+    return value
+      .split(' ')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(' ');
   }
-
+  
   getDisplayName(): string {
     if (this.driver.driverName || this.driver.contact) {
       return this.capitalizeRole(this.driver.driverName);

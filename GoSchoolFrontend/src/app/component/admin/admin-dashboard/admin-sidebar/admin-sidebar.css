@@ -1,0 +1,89 @@
+/* ----------- Sidebar ----------- */
+.sidebar {
+  width: 80px;
+  height: 100vh;
+  background: linear-gradient(45deg, rgb(223, 43, 193), rgb(247, 114, 139));
+  border-right: 0.1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+}
+
+.logo-section {
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  width: 36px;
+  color: #fff;
+}
+
+.sidebar-buttons {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  align-items: center;
+  gap: 18px;
+}
+
+.sidebar-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.25s ease;
+}
+
+.sidebar-btn .icon {
+  width: 22px;
+  stroke: #fff;
+  stroke-width: 1.8;
+}
+
+.sidebar-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.sidebar-btn.active {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.sidebar-btn.active .icon {
+  stroke: #d4378d; /* soft pinkish accent */
+}
+
+/* ----------- Mobile Sidebar (Row Layout) ----------- */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: 60px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .sidebar-buttons {
+    flex-direction: row;
+    margin-top: 0;
+    width: 100%;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  .sidebar-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+  }
+}

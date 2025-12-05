@@ -1,0 +1,28 @@
+<div class="sidebar">
+  <div class="logo-section"></div>
+
+  <div class="sidebar-buttons">
+
+    <button 
+      class="sidebar-btn"
+      (click)="select('home')"
+      [class.active]="activeSection === 'home'">
+      <img [src]="activeSection === 'home' ? 'png/home_black.png' : 'svg/home.svg'" class="icon" alt="home">
+    </button>
+
+    <button 
+      class="sidebar-btn"
+      (click)="select('view')"
+      [class.active]="activeSection === 'view'">
+      <img [src]="activeSection === 'view' ? 'png/view_black.png' : 'svg/view.svg'" class="icon" alt="view">
+    </button>
+
+    <button 
+      class="sidebar-btn"
+      (click)="select('settings')"
+      [class.active]="activeSection === 'settings'">
+      <img [src]="activeSection === 'settings' ? 'png/settings_black.png' : 'svg/settings.svg'" class="icon" alt="settings">
+    </button>
+
+  </div>
+</div>

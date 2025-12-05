@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-settings-screen',
@@ -11,29 +11,35 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class SettingsScreen {
   
-  constructor(private router: Router) {}
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+
+  // Check if we're on the base settings route (no child route active)
+  isBaseSettingsRoute(): boolean {
+    return this.router.url === '/parent-dashboard/settings' || 
+           this.router.url === '/parent-dashboard/settings/';
+  }
 
   openProfile() {
-    this.router.navigate(['/parent-dashboard/settings/profile']);
+    this.router.navigate(['profile'], { relativeTo: this.activatedRoute });
   }
 
   openPersonalDetails() {
-    this.router.navigate(['/parent-dashboard/settings/personal-details']);
+    this.router.navigate(['personal-details'], { relativeTo: this.activatedRoute });
   }
 
   openTransactionsHistory() {
-    this.router.navigate(['/parent-dashboard/settings/transactions-history']);
+    this.router.navigate(['transactions-history'], { relativeTo: this.activatedRoute });
   }
 
   openMyChildren() {
-    this.router.navigate(['/parent-dashboard/settings/my-children']);
+    this.router.navigate(['my-children'], { relativeTo: this.activatedRoute });
   }
 
   openChangePassword() {
-    this.router.navigate(['/parent-dashboard/settings/change-password']);
+    this.router.navigate(['change-password'], { relativeTo: this.activatedRoute });
   }
 
   openTermsAndPrivacy() {
-    this.router.navigate(['/parent-dashboard/settings/terms-privacy']);
+    this.router.navigate(['terms-privacy'], { relativeTo: this.activatedRoute });
   }
 }

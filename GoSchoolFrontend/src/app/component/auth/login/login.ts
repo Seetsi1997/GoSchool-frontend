@@ -115,8 +115,10 @@ export class Login implements OnInit {
           case 'PARENT':
             this.router.navigate(['/parent-dashboard']);
             break;
+          case 'ADMIN':
+            this.router.navigate(['/admin-dashboard']);
           default:
-            this.router.navigate(['/drivers-dashboard']);
+            this.router.navigate(['/admin-dashboard']);
         }
       },
       error: (err) => {

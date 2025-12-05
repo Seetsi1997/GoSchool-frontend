@@ -15,7 +15,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class Profile implements OnInit {
   parent: ParentDTO = {} as ParentDTO;
-  originalParent: ParentDTO = {} as ParentDTO; // Store original data for comparison
+  originalParent: ParentDTO = {} as ParentDTO; 
   isLoading = true;
   isEditing = false;
 

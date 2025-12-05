@@ -23,14 +23,20 @@ import { Profile } from './component/parent/settings-screen/settings/profile/pro
 import { ChangePassword } from './component/parent/settings-screen/support/change-password/change-password';
 import { Privacy } from './component/parent/settings-screen/support/privacy/privacy';
 import {Account} from './component/drivers/driver-settings-screen/components/account-profile-screen/account/account';
+import { DriverProfile } from './component/drivers/driver-settings-screen/components/driver-profile/driver-profile';
+import { DriverLocation } from './component/drivers/driver-settings-screen/components/driver-profile/driver-location/driver-location';
+import { AdminDashboard } from './component/admin/admin-dashboard/admin-dashboard';
 
 export const routes: Routes = [
+  
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: Login },
   { path: 'register', component: Register }, 
   { path: 'forgot-password', component: ForgotPassword },
   { path: 'reset-password', component: ResetPassword },
   { path: 'logout', component: Logout },
+
+  {path: 'admin-dashboard', component: AdminDashboard},
 
   // Parent Dashboard
  {
@@ -76,7 +82,12 @@ export const routes: Routes = [
       { path: 'view', component:  ViewListScreen },
       { path: 'settings', component: DriverSettingsScreen,
         children: [
-            {path: 'account', component: Account }
+            {path: 'account', component: Account },
+            {path: 'profile', component: DriverProfile,
+              children: [ 
+                {path: 'relocate', component: DriverLocation} 
+              ]
+            }
         ]
        },
       { path: 'add', component: AddNewStudent },

@@ -1,8 +1,11 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, tap, throwError } from 'rxjs';
+import { DriverDTO } from '../../dto/driverDTO';
+import { ParentDTO } from '../../dto/parentDTO';
 import { UserLoginDTO } from '../../dto/userLoginDTO';
 import { environment } from '../../env/env';
+import { Users } from '../../model/Users';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +18,17 @@ export class Auth {
   constructor(private http: HttpClient) { }
 
   register(user: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/auth/api/users/register`, user);
+    return this.http.post(`${this.apiUrl}/auth/api/users/admin/register`, user);
+  }
+
+  getCurrentAdmin(): Observable<Users> {
+    const token = localStorage.getItem('token');
+    console.log("login admin token", token)
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.get<Users>(`${this.apiUrl}/auth/api/users/admin/profile`, { headers });
   }
 
   // Updated login method with proper error handling
@@ -28,7 +41,9 @@ export class Auth {
           headers: new HttpHeaders({
             'Content-Type': 'application/json',
           }),
+
         }
+
       )
       .pipe(
         tap((res: UserLoginDTO) => {
@@ -42,10 +57,23 @@ export class Auth {
           localStorage.setItem('email', res.email);
 
           if (res.role === 'PARENT') {
-           localStorage.setItem('parentUUID', res.parentUUID?.toString());
-           localStorage.setItem('parentFirstname', res.parentFirstName);
+            localStorage.setItem('parentUUID', res.parentUUID?.toString() || '');
+            localStorage.setItem('parentFirstname', res.parentFirstName);
 
           }
+          if (res.role === 'DRIVER') {
+            localStorage.setItem('driverUUID', res.driverUUID?.toString() || '');
+            localStorage.setItem('driverName', res.driverName);
+
+          }
+
+          if (res.role === 'ADMIN') {
+            localStorage.setItem('uuid', res.uuid);
+            localStorage.setItem('firstName', res.firstName);
+
+          }
+
+
         }),
         catchError((error: HttpErrorResponse) => {
           // Suppress 401 errors from console entirely
@@ -138,4 +166,27 @@ export class Auth {
         })
       );
   }
+
+  getListParent(): Observable<ParentDTO[]> {
+    const token = localStorage.getItem('token');
+    console.log("admin token", token)
+    return this.http.get<ParentDTO[]>(`${this.apiUrl}/auth/api/users/admin/parents`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+  }
+
+  getListDriver(): Observable<DriverDTO[]> {
+    const token = localStorage.getItem('token');
+    console.log("admin token", token)
+    return this.http.get<DriverDTO[]>(`${this.apiUrl}/auth/api/users/admin/drivers`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+  }
+
 }

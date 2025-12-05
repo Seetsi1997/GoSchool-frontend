@@ -1,17 +1,16 @@
-import { Component } from '@angular/core';
-import { RegisterUserInfo } from "./details/register-user-info";
-import { UserLocation } from './address/user-location';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { ReviewSubmit } from './review-submit/review-submit';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators, } from '@angular/forms';
-import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { Auth } from '../../../service/serviceAuth/auth';
-import { AccontSetup } from './account-setup/account-setup';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Parents } from '../../../service/serviceParent/parents';
+import { Auth } from '../../../service/serviceAuth/auth';
 import { Driver } from '../../../service/serviceDriver/driver';
+import { Parents } from '../../../service/serviceParent/parents';
 import { Role } from '../../constant/role';
+import { AccontSetup } from './account-setup/account-setup';
+import { UserLocation } from './address/user-location';
+import { RegisterUserInfo } from "./details/register-user-info";
+import { ReviewSubmit } from './review-submit/review-submit';
 
 @Component({
   selector: 'app-register',
@@ -120,6 +119,7 @@ export class Register {
   switch (formData.role) {
     case Role.DRIVER: request$ = this.driver.register(formData); break;
     case Role.PARENT: request$ = this.parents.register(formData); break;
+    case Role.ADMIN: request$ = this.auth.register(formData); break;
     default: request$ = this.auth.register(formData);
   }
 

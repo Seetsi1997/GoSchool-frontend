@@ -1,0 +1,160 @@
+<div class="container">
+  
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p>Loading driver information...</p>
+  </div>
+
+  <!-- Driver Information -->
+  <div *ngIf="currentDriver && !isLoading" class="card driver-profile">
+    <div class="card-header">
+      <h5>My Driver Profile</h5>
+    </div>
+    <div class="card-body">
+      <div class="profile-grid">
+        <div class="profile-col">
+          <p><strong>Driver ID:</strong> {{ currentDriver.driverUUID }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Routes Management -->
+  <div *ngIf="currentDriver && !isLoading" class="card routes-management">
+    <div class="card-header header-with-button">
+      <h5>My School Routes</h5>
+      <button class="btn btn-primary btn-sm" (click)="startAddingRoute()">
+        + Add New School Route
+      </button>
+    </div>
+    <div class="card-body">
+      <div *ngIf="driverRoutes.length === 0" class="alert alert-info">
+        You haven't added any school routes yet. Click the button above to add your first route.
+      </div>
+
+      <div *ngIf="driverRoutes.length > 0" class="table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>School Name</th>
+              <th>Pickup Time</th>
+              <th>Drop-off Time</th>
+              <th>Monthly Fee</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let route of driverRoutes">
+              <td>{{ capitalizeRole( route.schoolName) }}</td>
+              <td>{{ route.pickupTime }}</td>
+              <td>{{ route.dropOffTime }}</td>
+              <td>R {{ route.monthlyFee | number:'1.2-2' }}</td>
+              <td>
+                <button class="btn btn-outline-danger btn-sm" 
+                        *ngIf="route.id">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Overlay -->
+  <div *ngIf="isAddingRoute" class="modal-overlay" (click)="cancelAddRoute()"></div>
+
+  <!-- Add Route Modal -->
+  <div *ngIf="isAddingRoute && currentDriver" class="modal">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h5>Add New School Route</h5>
+        <button class="close-button" (click)="cancelAddRoute()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="routeForm">
+          <!-- School Name -->
+          <div class="form-group">
+            <label for="schoolName" class="form-label">School Name <span class="text-red-400">*</span></label>
+            <input
+              type="text"
+              id="schoolName"
+              class="form-control"
+              formControlName="schoolName"
+              [class.is-invalid]="isFieldInvalid('schoolName')"
+              placeholder="Enter school name">
+            <div *ngIf="isFieldInvalid('schoolName')" class="invalid-feedback">
+              {{ getFieldError('schoolName') }}
+            </div>
+          </div>
+
+          <!-- Pickup Time -->
+          <div class="form-group">
+            <label for="pickupTime" class="form-label">Pickup Time <span class="text-red-400">*</span></label>
+            <input
+              type="time"
+              id="pickupTime"
+              class="form-control"
+              formControlName="pickupTime"
+              [class.is-invalid]="isFieldInvalid('pickupTime')">
+            <div *ngIf="isFieldInvalid('pickupTime')" class="invalid-feedback">
+              {{ getFieldError('pickupTime') }}
+            </div>
+          </div>
+
+          <!-- Drop-off Time -->
+          <div class="form-group">
+            <label for="dropOffTime" class="form-label">Drop-off Time <span class="text-red-400">*</span></label>
+            <input
+              type="time"
+              id="dropOffTime"
+              class="form-control"
+              formControlName="dropOffTime"
+              [class.is-invalid]="isFieldInvalid('dropOffTime')">
+            <div *ngIf="isFieldInvalid('dropOffTime')" class="invalid-feedback">
+              {{ getFieldError('dropOffTime') }}
+            </div>
+          </div>
+
+          <!-- Monthly Fee -->
+          <div class="form-group">
+            <label for="monthlyFee" class="form-label">Monthly Fee (R) <span class="text-red-400">*</span></label>
+            <input
+              type="number"
+              id="monthlyFee"
+              class="form-control"
+              formControlName="monthlyFee"
+              [class.is-invalid]="isFieldInvalid('monthlyFee')"
+              min="0"
+              step="0.01"
+              placeholder="0.00">
+            <div *ngIf="isFieldInvalid('monthlyFee')" class="invalid-feedback">
+              {{ getFieldError('monthlyFee') }}
+            </div>
+          </div>
+
+          <!-- Form Actions -->
+          <div class="form-actions">
+            <button type="button" class="btn btn-primary" (click)="addNewRoute()" [disabled]="routeForm.invalid">
+              Save
+            </button>
+            <button type="button" class="btn btn-secondary" (click)="cancelAddRoute()">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- No Driver Logged In -->
+  <div *ngIf="!currentDriver && !isLoading" class="alert alert-warning no-driver">
+    <h5>Driver Access Required</h5>
+    <p>You need to be logged in as a driver to manage school routes.</p>
+    <a routerLink="/login" class="btn btn-primary">Login as Driver</a>
+  </div>
+</div>

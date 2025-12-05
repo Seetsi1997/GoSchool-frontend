@@ -1,0 +1,211 @@
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Driver Card Container */
+.driver-card {
+  background: linear-gradient(45deg, rgb(5, 72, 73), rgb(122, 67, 108));
+  padding: 12px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.driver-card:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+/* Dark Mode Support */
+.dark-mode .driver-card {
+  background: #1f2937;
+}
+
+/* Driver Card Header */
+.driver-card-header {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  color: #111827;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  width: 100%;
+  border-bottom: 1px solid rgba(229, 231, 235, 0.75);
+}
+
+/* Dark Mode for Header */
+.dark-mode .driver-card-header {
+  color: #ffffff;
+  border-bottom-color: rgba(55, 65, 81, 0.75);
+}
+
+/* Driver Avatar */
+.driver-avatar {
+  width: 28px;
+  height: 28px;
+  margin-right: 8px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.driver-card-header p{
+    font-size: 15px;
+    font-weight: 500;
+    color: #dbeafe;
+}
+
+@media (max-width: 1279px) {
+  .driver-avatar {
+    margin-right: 0;
+    margin-bottom: 8px;
+  }
+}
+
+/* Driver Card Content */
+.driver-card-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Driver Badges (Common Styles) */
+.driver-badge {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  padding: 4px 8px;
+  background: linear-gradient(45deg, rgb(53, 40, 153), rgb(63, 90, 87));
+  color: #dbeafe;
+  font-weight: 500;
+  border-radius: 6px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Dark Mode for Badges */
+.dark-mode .driver-badge {
+  background: #111827;
+  color: #dbeafe;
+}
+
+/* Specific Badge: Student Count */
+.driver-student-count {
+  /* Inherits all .driver-badge styles */
+}
+
+/* Specific Badge: Contact */
+.driver-contact {
+  margin-left: 12px;
+}
+
+@media (max-width: 639px) {
+  .driver-contact {
+    margin-left: 0;
+  }
+}
+
+/* Driver Location */
+.driver-location {
+  margin-left: auto;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: #dbeafe;
+  text-align: right;
+}
+
+/* Dark Mode for Location */
+.dark-mode .driver-location {
+  color: #9ca3af;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 639px) {
+  .driver-card-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .driver-location {
+    margin-left: 0;
+    text-align: left;
+    width: 100%;
+    padding-top: 8px;
+    border-top: 1px solid #e5e7eb;
+  }
+  
+  .dark-mode .driver-location {
+    border-top-color: #374151;
+  }
+}
+
+/* For extra small screens */
+@media (max-width: 479px) {
+  .driver-card {
+    padding: 10px;
+  }
+  
+  .driver-badge {
+    font-size: 0.7rem;
+    padding: 3px 6px;
+  }
+}
+
+/* Animation for hover effects */
+@keyframes cardHover {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-1px);
+  }
+}
+
+/* Focus state for accessibility */
+.driver-card:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.driver-card:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Print styles */
+@media print {
+  .driver-card {
+    box-shadow: none;
+    border: 1px solid #d1d5db;
+    break-inside: avoid;
+  }
+  
+  .driver-badge {
+    background-color: transparent;
+    border: 1px solid #3b82f6;
+  }
+}
+
+@media (min-width: 1280px) {
+  .driver-card-header {
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 1279px) {
+  .driver-card-header {
+    flex-direction: column;
+    text-align: center;
+  }
+}

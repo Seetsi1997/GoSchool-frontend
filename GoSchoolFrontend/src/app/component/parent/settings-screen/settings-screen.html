@@ -1,146 +1,141 @@
-<div class="w-full max-w-md mx-auto p-0 ">
-  <div>
-    <!-- Title -->
-    <h1 class="text-[20px] font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-100 to-purple-900 mb-4">
-      Settings
-    </h1>
+<!-- Main Settings View -->
+<div *ngIf="isBaseSettingsRoute()" class="settings-container">
+  <!-- Title -->
+  <h1 class="section-title">Settings</h1>
 
-    <!-- Card -->
-    <div class="bg-gradient-to-l from-[#3E4C70] via-[#547A8C] to-[#6D9CAB] shadow-md rounded-2xl divide-y divide-slate-100">
-      <!-- Row 1 - Profile -->
-      <div class="flex items-center justify-between p-4 cursor-pointer" (click)="openProfile()">
-        <div class="flex items-center gap-3">
-          <!-- Icon -->
-          <svg class="w-6 h-6 text-[#FFF1F1]" fill="currentColor" viewBox="0 0 35 35" xmlns="http://www.w3.org/2000/svg">
-            <g data-name="search" id="search-2">
-              <path d="M14.07,8.63H11.93a2.53,2.53,0,0,0-2.61,2.42v2.83a1.93,1.93,0,0,0,1.07,1.69v3.35a1.59,1.59,0,0,0,1.54,1.64h2.14a1.59,1.59,0,0,0,1.54-1.64V15.57a1.93,1.93,0,0,0,1.07-1.69V11.05A2.53,2.53,0,0,0,14.07,8.63Zm-.46,9.93H12.39V13.83H11.32V11.05c0-.2.25-.42.61-.42h2.14c.36,0,.61.22.61.42l0,2.75s0,0-.09,0h-1v4.73Z" />
-              <path d="M13,8.18a1.37,1.37,0,1,0-1.37-1.36A1.37,1.37,0,0,0,13,8.18Z" />
-              <path d="M29.16,24.71l-3.44-3.44a1.82,1.82,0,0,0-1.41-.59,2,2,0,0,0-1.42.59l-.1.11-.86-.87A11.49,11.49,0,0,0,21.25,5,11.48,11.48,0,0,0,5,5,11.48,11.48,0,0,0,20.51,21.93l.87.86-.11.1a2,2,0,0,0,0,2.83l3.44,3.44a2,2,0,0,0,2.82,0l1.63-1.63A2,2,0,0,0,29.16,24.71ZM6.44,19.84a9.48,9.48,0,1,1,13.4,0A9.48,9.48,0,0,1,6.44,19.84Zm19.68,7.91-3.44-3.44,1.63-1.63,3.44,3.44Z" />
-            </g>
-          </svg>
-          <!-- Label -->
-          <span class="text-[#FFF1F1] font-medium">Profile</span>
-        </div>
-        <!-- Next Icon -->
-        <svg class="w-5 h-5 text-[#FFF1F1]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-        </svg>
-      </div>
-      
-      <!-- Row 2 - Personal Details -->
-      <div class="flex items-center justify-between p-4 cursor-pointer" (click)="openPersonalDetails()">
-        <div class="flex items-center gap-3">
-          <!-- Icon -->
-          <svg class="w-6 h-6 text-[#FFF1F1]" fill="currentColor" viewBox="0 0 40 40">
-            <path d="M17.5,16.383a8.067,8.067,0,1,1,8.067-8.067A8.076,8.076,0,0,1,17.5,16.383Zm0-13.633a5.567,5.567,0,1,0,5.567,5.566A5.573,5.573,0,0,0,17.5,2.75Z" />
-            <path d="M31.477,34.75a1.25,1.25,0,0,1-1.23-1.037A12.663,12.663,0,0,0,17.5,22.852,12.663,12.663,0,0,0,4.753,33.713a1.25,1.25,0,0,1-2.464-.426A15.1,15.1,0,0,1,17.5,20.352,15.1,15.1,0,0,1,32.711,33.287a1.25,1.25,0,0,1-1.02,1.444A1.2,1.2,0,0,1,31.477,34.75Z" />
-          </svg>
-          <!-- Label -->
-          <span class="text-[#FFF1F1] font-medium">Personal Details</span>
-        </div>
-        <!-- Next Icon -->
-        <svg class="w-5 h-5 text-[#FFF1F1]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-        </svg>
-      </div>
-    </div>
-  </div>
-
-  <!-- Payment Title -->
-  <h1 class="text-[20px] font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-200 to-purple-900 mt-4">
-    Payment
-  </h1>
-
-  <div class="bg-gradient-to-l from-[#3E4C70] via-[#547A8C] to-[#6D9CAB] shadow-md rounded-2xl divide-y mt-4 divide-slate-100">
-    <!-- Row 1 - Transactions History -->
-    <div class="flex items-center justify-between p-4 cursor-pointer" (click)="openTransactionsHistory()">
-      <div class="flex items-center gap-3">
+  <!-- Settings Card -->
+  <div class="settings-card">
+    <!-- Profile Row -->
+    <div (click)="openProfile()" class="settings-row">
+      <div class="row-content">
         <!-- Icon -->
-        <svg fill="#FFF1F1" width="25px" height="25px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
-          <path d="M221.419 490.47c103.339 0 180.565-39.936 180.565-75.605v-58.752c-39.467 29.141-104.235 47.488-180.565 47.488S80.32 385.254 40.854 356.113v58.752c0 35.669 77.227 75.605 180.565 75.605zm0 117.376c106.411 0 180.565-39.851 180.565-75.605v-48.427c-39.467 29.141-104.235 47.531-180.565 47.531S80.32 512.956 40.854 483.814v48.427c0 35.755 74.155 75.605 180.565 75.605zm0 127.019c103.339 0 180.565-39.936 180.565-75.605v-58.069c-39.467 29.141-104.235 47.531-180.565 47.531S80.32 630.333 40.854 601.191v58.069c0 35.669 77.227 75.605 180.565 75.605zm0 128.043c103.339 0 180.565-39.893 180.565-75.605V728.21c-39.467 29.141-104.235 47.531-180.565 47.531S80.32 757.352 40.854 728.21v59.093c0 35.712 77.227 75.605 180.565 75.605zm0-651.392c-106.411 0-180.565 39.851-180.565 75.605 0 35.797 74.155 75.648 180.565 75.648s180.565-39.851 180.565-75.648c0-35.755-74.155-75.605-180.565-75.605zm0-40.875c126.208 0 221.397 50.091 221.397 116.48v510.507c0 4.395-1.408 8.448-3.755 11.819-18.603 55.083-105.899 94.379-217.643 94.379S22.378 864.53 3.775 809.447C1.428 806.076.02 802.023.02 797.628V287.121c0-66.389 95.189-116.48 221.397-116.48zm685.376 288.431c67.797 23.424 113.365 87.381 113.365 159.147 0 92.843-75.52 168.363-168.363 168.363-61.44 0-118.059-33.536-147.669-87.509-5.419-9.856-1.792-22.272 8.107-27.691 9.856-5.461 22.315-1.835 27.733 8.064 22.443 40.875 65.28 66.261 111.829 66.261 70.315 0 127.488-57.216 127.488-127.488 0-54.357-34.475-102.784-85.803-120.533-10.667-3.669-16.341-15.317-12.672-25.984s15.317-16.299 25.984-12.629zm-82.804-2.863c0 92.843-75.52 168.363-168.32 168.363-92.843 0-168.32-75.52-168.32-168.363 0-92.8 75.477-168.32 168.32-168.32 92.8 0 168.32 75.52 168.32 168.32zm-168.32 127.488c70.272 0 127.488-57.173 127.488-127.488 0-70.272-57.216-127.488-127.488-127.488s-127.488 57.216-127.488 127.488c0 70.315 57.216 127.488 127.488 127.488z"/>
+        <svg class="row-icon" fill="currentColor" viewBox="0 0 35 35" xmlns="http://www.w3.org/2000/svg">
+          <g data-name="search" id="search-2">
+            <path
+              d="M14.07,8.63H11.93a2.53,2.53,0,0,0-2.61,2.42v2.83a1.93,1.93,0,0,0,1.07,1.69v3.35a1.59,1.59,0,0,0,1.54,1.64h2.14a1.59,1.59,0,0,0,1.54-1.64V15.57a1.93,1.93,0,0,0,1.07-1.69V11.05A2.53,2.53,0,0,0,14.07,8.63Zm-.46,9.93H12.39V13.83H11.32V11.05c0-.2.25-.42.61-.42h2.14c.36,0,.61.22.61.42l0,2.75s0,0-.09,0h-1v4.73Z" />
+            <path d="M13,8.18a1.37,1.37,0,1,0-1.37-1.36A1.37,1.37,0,0,0,13,8.18Z" />
+            <path
+              d="M29.16,24.71l-3.44-3.44a1.82,1.82,0,0,0-1.41-.59,2,2,0,0,0-1.42.59l-.1.11-.86-.87A11.49,11.49,0,0,0,21.25,5,11.48,11.48,0,0,0,5,5,11.48,11.48,0,0,0,20.51,21.93l.87.86-.11.1a2,2,0,0,0,0,2.83l3.44,3.44a2,2,0,0,0,2.82,0l1.63-1.63A2,2,0,0,0,29.16,24.71ZM6.44,19.84a9.48,9.48,0,1,1,13.4,0A9.48,9.48,0,0,1,6.44,19.84Zm19.68,7.91-3.44-3.44,1.63-1.63,3.44,3.44Z" />
+          </g>
         </svg>
         <!-- Label -->
-        <span class="text-[#FFF1F1] font-medium">Transactions History</span>
+        <span class="row-label">Profile</span>
       </div>
       <!-- Next Icon -->
-      <svg class="w-5 h-5 text-[#FFF1F1]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <svg class="next-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
       </svg>
     </div>
 
-    <!-- Row 2 - My Children -->
-    <div class="flex items-center justify-between p-4 cursor-pointer" (click)="openMyChildren()">
-      <div class="flex items-center gap-3">
+    <!-- Personal Details Row -->
+    <div (click)=" openPersonalDetails()" class="settings-row">
+      <div class="row-content">
         <!-- Icon -->
-        <svg fill="#FFF1F1" width="20px" height="20px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
-          <path d="M746 835.28L544.529 723.678c74.88-58.912 95.216-174.688 95.216-239.601v-135.12c0-89.472-118.88-189.12-238.288-189.12-119.376 0-241.408 99.664-241.408 189.12v135.12c0 59.024 24.975 178.433 100.624 239.089L54 835.278S0 859.342 0 889.342v81.088c0 29.84 24.223 54.064 54 54.064h692c29.807 0 54.031-24.224 54.031-54.064v-81.087c0-31.808-54.032-54.064-54.032-54.064zm-9.967 125.215H64.002V903.28c4.592-3.343 11.008-7.216 16.064-9.536 1.503-.688 3.007-1.408 4.431-2.224l206.688-112.096c18.848-10.224 31.344-29.184 33.248-50.528s-7.008-42.256-23.712-55.664c-53.664-43.024-76.656-138.32-76.656-189.152V348.96c0-45.968 86.656-125.12 177.408-125.12 92.432 0 174.288 78.065 174.288 125.12v135.12c0 50.128-15.568 145.84-70.784 189.28a64.098 64.098 0 0 0-24.224 55.664 64.104 64.104 0 0 0 33.12 50.849l201.472 111.6c1.777.975 4.033 2.031 5.905 2.848 4.72 2 10.527 5.343 14.783 8.288v57.887zM969.97 675.936L765.505 564.335c74.88-58.912 98.224-174.688 98.224-239.601v-135.12c0-89.472-121.872-190.128-241.28-190.128-77.6 0-156.943 42.192-203.12 96.225 26.337 1.631 55.377 1.664 80.465 9.664 33.711-26.256 76.368-41.872 122.656-41.872 92.431 0 177.278 79.055 177.278 126.128v135.12c0 50.127-18.56 145.84-73.775 189.28a64.098 64.098 0 0 0-24.224 55.664 64.104 64.104 0 0 0 33.12 50.848l204.465 111.6c1.776.976 4.032 2.032 5.904 2.848 4.72 2 10.527 5.344 14.783 8.288v56.912H830.817c19.504 14.72 25.408 35.776 32.977 64h106.192c29.807 0 54.03-24.224 54.03-54.064V730.03c-.015-31.84-54.047-54.096-54.047-54.096z"/>
+        <svg class="row-icon" fill="currentColor" viewBox="0 0 40 40">
+          <path
+            d="M17.5,16.383a8.067,8.067,0,1,1,8.067-8.067A8.076,8.076,0,0,1,17.5,16.383Zm0-13.633a5.567,5.567,0,1,0,5.567,5.566A5.573,5.573,0,0,0,17.5,2.75Z" />
+          <path
+            d="M31.477,34.75a1.25,1.25,0,0,1-1.23-1.037A12.663,12.663,0,0,0,17.5,22.852,12.663,12.663,0,0,0,4.753,33.713a1.25,1.25,0,0,1-2.464-.426A15.1,15.1,0,0,1,17.5,20.352,15.1,15.1,0,0,1,32.711,33.287a1.25,1.25,0,0,1-1.02,1.444A1.2,1.2,0,0,1,31.477,34.75Z" />
         </svg>
         <!-- Label -->
-        <span class="text-[#FFF1F1] font-medium">My Children</span>
+        <span class="row-label">Personal Details</span>
       </div>
       <!-- Next Icon -->
-      <svg class="w-5 h-5 text-[#FFF1F1]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <svg class="next-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+      </svg>
+    </div>
+  </div>
+
+  <!-- Payment Title -->
+  <h1 class="section-title">Payment</h1>
+
+  <div class="settings-card">
+    <!-- Transactions History Row -->
+    <div (click)="openTransactionsHistory()" class="settings-row">
+      <div class="row-content">
+        <!-- Icon -->
+        <svg class="row-icon" fill="currentColor" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M221.419 490.47c103.339 0 180.565-39.936 180.565-75.605v-58.752c-39.467 29.141-104.235 47.488-180.565 47.488S80.32 385.254 40.854 356.113v58.752c0 35.669 77.227 75.605 180.565 75.605zm0 117.376c106.411 0 180.565-39.851 180.565-75.605v-48.427c-39.467 29.141-104.235 47.531-180.565 47.531S80.32 512.956 40.854 483.814v48.427c0 35.755 74.155 75.605 180.565 75.605zm0 127.019c103.339 0 180.565-39.936 180.565-75.605v-58.069c-39.467 29.141-104.235 47.531-180.565 47.531S80.32 630.333 40.854 601.191v58.069c0 35.669 77.227 75.605 180.565 75.605zm0 128.043c103.339 0 180.565-39.893 180.565-75.605V728.21c-39.467 29.141-104.235 47.531-180.565 47.531S80.32 757.352 40.854 728.21v59.093c0 35.712 77.227 75.605 180.565 75.605zm0-651.392c-106.411 0-180.565 39.851-180.565 75.605 0 35.797 74.155 75.648 180.565 75.648s180.565-39.851 180.565-75.648c0-35.755-74.155-75.605-180.565-75.605zm0-40.875c126.208 0 221.397 50.091 221.397 116.48v510.507c0 4.395-1.408 8.448-3.755 11.819-18.603 55.083-105.899 94.379-217.643 94.379S22.378 864.53 3.775 809.447C1.428 806.076.02 802.023.02 797.628V287.121c0-66.389 95.189-116.48 221.397-116.48zm685.376 288.431c67.797 23.424 113.365 87.381 113.365 159.147 0 92.843-75.52 168.363-168.363 168.363-61.44 0-118.059-33.536-147.669-87.509-5.419-9.856-1.792-22.272 8.107-27.691 9.856-5.461 22.315-1.835 27.733 8.064 22.443 40.875 65.28 66.261 111.829 66.261 70.315 0 127.488-57.216 127.488-127.488 0-54.357-34.475-102.784-85.803-120.533-10.667-3.669-16.341-15.317-12.672-25.984s15.317-16.299 25.984-12.629zm-82.804-2.863c0 92.843-75.52 168.363-168.32 168.363-92.843 0-168.32-75.52-168.32-168.363 0-92.8 75.477-168.32 168.32-168.32 92.8 0 168.32 75.52 168.32 168.32zm-168.32 127.488c70.272 0 127.488-57.173 127.488-127.488 0-70.272-57.216-127.488-127.488-127.488s-127.488 57.216-127.488 127.488c0 70.315 57.216 127.488 127.488 127.488z" />
+        </svg>
+        <!-- Label -->
+        <span class="row-label">Transactions History</span>
+      </div>
+      <!-- Next Icon -->
+      <svg class="next-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+      </svg>
+    </div>
+
+    <!-- My Children Row -->
+    <div (click)="openMyChildren()" class="settings-row">
+      <div class="row-content">
+        <!-- Icon -->
+        <svg class="row-icon" fill="currentColor" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M746 835.28L544.529 723.678c74.88-58.912 95.216-174.688 95.216-239.601v-135.12c0-89.472-118.88-189.12-238.288-189.12-119.376 0-241.408 99.664-241.408 189.12v135.12c0 59.024 24.975 178.433 100.624 239.089L54 835.278S0 859.342 0 889.342v81.088c0 29.84 24.223 54.064 54 54.064h692c29.807 0 54.031-24.224 54.031-54.064v-81.087c0-31.808-54.032-54.064-54.032-54.064zm-9.967 125.215H64.002V903.28c4.592-3.343 11.008-7.216 16.064-9.536 1.503-.688 3.007-1.408 4.431-2.224l206.688-112.096c18.848-10.224 31.344-29.184 33.248-50.528s-7.008-42.256-23.712-55.664c-53.664-43.024-76.656-138.32-76.656-189.152V348.96c0-45.968 86.656-125.12 177.408-125.12 92.432 0 174.288 78.065 174.288 125.12v135.12c0 50.128-15.568 145.84-70.784 189.28a64.098 64.098 0,0,0-24.224 55.664 64.104 64.104 0,0,0 33.12 50.849l201.472 111.6c1.777.975 4.033 2.031 5.905 2.848 4.72 2 10.527 5.343 14.783 8.288v57.887zM969.97 675.936L765.505 564.335c74.88-58.912 98.224-174.688 98.224-239.601v-135.12c0-89.472-121.872-190.128-241.28-190.128-77.6 0-156.943 42.192-203.12 96.225 26.337 1.631 55.377 1.664 80.465 9.664 33.711-26.256 76.368-41.872 122.656-41.872 92.431 0 177.278 79.055 177.278 126.128v135.12c0 50.127-18.56 145.84-73.775 189.28a64.098 64.098 0,0,0-24.224 55.664 64.104 64.104 0,0,0 33.12 50.848l204.465 111.6c1.776.976 4.032 2.032 5.904 2.848 4.72 2 10.527 5.344 14.783 8.288v56.912H830.817c19.504 14.72 25.408 35.776 32.977 64h106.192c29.807 0 54.03-24.224 54.03-54.064V730.03c-.015-31.84-54.047-54.096-54.047-54.096z" />
+        </svg>
+        <!-- Label -->
+        <span class="row-label">My Children</span>
+      </div>
+      <!-- Next Icon -->
+      <svg class="next-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
       </svg>
     </div>
   </div>
 
   <!-- Support Title -->
- <h1 class="text-[20px] font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-200 to-purple-900 mt-4">
-    Support
-  </h1>
+  <h1 class="section-title">Support</h1>
 
-  <div class="bg-gradient-to-l from-[#3E4C70] via-[#547A8C] to-[#6D9CAB] shadow-md rounded-2xl divide-y mt-4 divide-slate-100">
-    <!-- Row 1 - Change Password -->
-    <div class="flex items-center justify-between p-4 cursor-pointer" (click)="openChangePassword()">
-      <div class="flex items-center gap-3">
+  <div class="settings-card">
+    <!-- Change Password Row -->
+    <div (click)="openChangePassword()" class="settings-row">
+      <div class="row-content">
         <!-- Icon -->
-        <svg fill="#FFF1F1" width="18px" height="18px" viewBox="-2 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="m3.5 6.5v3.5h-1.5c-1.105 0-2 .895-2 2v10c0 1.105.895 2 2 2h16c1.105 0 2-.895 2-2v-10c0-1.105-.895-2-2-2h-1.5v-3.5c0-3.59-2.91-6.5-6.5-6.5s-6.5 2.91-6.5 6.5zm2.5 3.5v-3.5c0-2.209 1.791-4 4-4s4 1.791 4 4v3.5zm2 5.5c0-1.105.895-2 2-2s2 .895 2 2c0 .701-.361 1.319-.908 1.676l-.008.005s.195 1.18.415 2.57v.001c0 .414-.335.749-.749.749-.001 0-.001 0-.002 0h-1.499-.001c-.414 0-.749-.335-.749-.749v-.001l.415-2.57c-.554-.361-.916-.979-.916-1.68z"/>
+        <svg class="row-icon" fill="currentColor" viewBox="-2 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="m3.5 6.5v3.5h-1.5c-1.105 0-2 .895-2 2v10c0 1.105.895 2 2 2h16c1.105 0 2-.895 2-2v-10c0-1.105-.895-2-2-2h-1.5v-3.5c0-3.59-2.91-6.5-6.5-6.5s-6.5 2.91-6.5 6.5zm2.5 3.5v-3.5c0-2.209 1.791-4 4-4s4 1.791 4 4v3.5zm2 5.5c0-1.105.895-2 2-2s2 .895 2 2c0 .701-.361 1.319-.908 1.676l-.008.005s.195 1.18.415 2.57v.001c0 .414-.335.749-.749.749-.001 0-.001 0-.002 0h-1.499-.001c-.414 0-.749-.335-.749-.749v-.001l.415-2.57c-.554-.361-.916-.979-.916-1.68z" />
         </svg>
         <!-- Label -->
-        <span class="text-[#FFF1F1] font-medium">Change Password</span>
+        <span class="row-label">Change Password</span>
       </div>
       <!-- Next Icon -->
-      <svg class="w-5 h-5 text-[#FFF1F1]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <svg class="next-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
       </svg>
     </div>
 
-    <!-- Row 2 - T&Cs and Privacy -->
-    <div class="flex items-center justify-between p-4 cursor-pointer" (click)="openTermsAndPrivacy()">
-      <div class="flex items-center gap-3">
+    <!-- T&Cs and Privacy Row -->
+    <div (click)="openTermsAndPrivacy()" class="settings-row">
+      <div class="row-content">
         <!-- Icon -->
-        <svg class="w-6 h-6 text-[#FFF1F1]" fill="currentColor" viewBox="0 0 24 24">
+        <svg class="row-icon" fill="currentColor" viewBox="0 0 24 24">
           <path d="M12 1a11 11 0 100 22 11 11 0 000-22zM11 6h2v7h-2V6zm0 9h2v2h-2v-2z" />
         </svg>
         <!-- Label -->
-        <span class="text-[#FFF1F1] font-medium">T&Cs and privacy</span>
+        <span class="row-label">T&Cs and privacy</span>
       </div>
       <!-- Next Icon -->
-      <svg class="w-5 h-5 text-[#FFF1F1]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <svg class="next-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
       </svg>
     </div>
 
-    <!-- Row 3 - App Version (No navigation) -->
-    <div class="flex items-center justify-between p-4">
-      <div class="flex items-center gap-3">
+    <!-- App Version Row -->
+    <div class="version-info">
+      <div class="row-content">
         <!-- Icon -->
-        <svg width="25px" height="25px" viewBox="0 0 48 48" version="1" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 48 48">
-          <polygon fill="#FFF1F1" points="24,3 28.7,6.6 34.5,5.8 36.7,11.3 42.2,13.5 41.4,19.3 45,24 41.4,28.7 42.2,34.5 36.7,36.7 34.5,42.2 28.7,41.4 24,45 19.3,41.4 13.5,42.2 11.3,36.7 5.8,34.5 6.6,28.7 3,24 6.6,19.3 5.8,13.5 11.3,11.3 13.5,5.8 19.3,6.6"/>
-          <polygon fill="#80A1BA" points="34.6,14.6 21,28.2 15.4,22.6 12.6,25.4 21,33.8 37.4,17.4"/>
+        <svg class="row-icon" fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+          <polygon fill="#FFF1F1"
+            points="24,3 28.7,6.6 34.5,5.8 36.7,11.3 42.2,13.5 41.4,19.3 45,24 41.4,28.7 42.2,34.5 36.7,36.7 34.5,42.2 28.7,41.4 24,45 19.3,41.4 13.5,42.2 11.3,36.7 5.8,34.5 6.6,28.7 3,24 6.6,19.3 5.8,13.5 11.3,11.3 13.5,5.8 19.3,6.6" />
+          <polygon fill="#80A1BA" points="34.6,14.6 21,28.2 15.4,22.6 12.6,25.4 21,33.8 37.4,17.4" />
         </svg>
-        <!-- Label -->
-        <span class="text-[#FFF1F1] font-medium">APPVERSION</span>
+        <span class="version-text">APPVERSION</span>
       </div>
-      <!-- Version Number -->
-      <p class="text-[#FFCF71]">1.1.0</p>
+      <span class="version-number">1.1.0</span>
     </div>
   </div>
-  
-  <div class="main-content">
-    <!-- This outlet will show either SettingsScreen OR Profile, etc. -->
-    <router-outlet></router-outlet>
-  </div>
 </div>
+<router-outlet></router-outlet>

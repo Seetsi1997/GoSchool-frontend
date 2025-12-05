@@ -1,0 +1,128 @@
+
+<section class="profile-settings">
+    <!-- Header -->
+    <div class="profile-header">
+        <h2 class="profile-title">Profile Settings</h2>
+    </div>
+
+    <div class="profile-content">
+        <div class="profile-section">
+            <div class="profile-avatar">
+                <span class="profile-initial">{{ driver.driverName.charAt(0) || 'U' }}</span>
+            </div>
+            <h3 class="profile-name">{{ capitalizeWords(driver.driverName) }} {{ capitalizeWords(driver.driverSurname) }}</h3>
+            <p class="profile-role">{{ capitalizeWords(driver.role) }}</p>
+        </div>
+
+        <div class="form-section">
+            <!-- Names -->
+            <div class="form-grid-main">
+                <div class="form-field">
+                    <label class="form-label">First Name</label>
+                    <input type="text" [(ngModel)]="driver.driverName" class="form-input" placeholder="First Name" />
+                </div>
+                <div class="form-field">
+                    <label class="form-label">Surname</label>
+                    <input type="text" [(ngModel)]="driver.driverSurname" class="form-input" placeholder="Surname" />
+                </div>
+            </div>
+
+            <!-- Email / Phone -->
+            <div class="form-field">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" [(ngModel)]="driver.email" readonly class="form-input" />
+            </div>
+            <div class="form-field">
+                <label for="phone" class="form-label">Phone</label>
+                <input type="tel" id="phone" [(ngModel)]="driver.contact" class="form-input"
+                    placeholder="Phone Number" />
+            </div>
+
+            <!-- Street / Address -->
+            <div class="form-field">
+                <label class="form-label">Street</label>
+                <input type="text" [(ngModel)]="driver.driverLocation.address" readonly class="form-input"
+                    placeholder="Street Address" />
+            </div>
+
+            <div class="address-grid">
+                <div class="form-field">
+                    <label class="form-label">Suburb</label>
+                    <input type="text" [(ngModel)]="driver.driverLocation.suburb" readonly class="form-input"
+                        placeholder="Suburb" />
+                </div>
+                <div class="form-field">
+                    <label class="form-label">City</label>
+                    <input type="text" [(ngModel)]="driver.driverLocation.city" readonly class="form-input"
+                        placeholder="City" />
+                </div>
+                <div class="form-field">
+                    <label for="province" class="form-label">Province</label>
+                    <input type="text" id="province" [value]=" formatProvinceDisplay(driver.driverLocation.province)"
+                        readonly class="form-input" />
+                </div>
+                <div class="form-field">
+                    <label class="form-label">Postal Code</label>
+                    <input type="text" [(ngModel)]="driver.driverLocation.postalCode" readonly class="form-input"
+                        placeholder="Postal Code" />
+                </div>
+            </div>
+            <div class="flex justify-end mt-0">
+                <button type="button" title="location"(click)="openReLocation()"
+                    class="flex items-center gap-2 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-colors">
+                    <svg class="w-6 h-6 text-slate-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="action-buttons">
+            <button class="cancel-button" (click)="goBack()">Cancel</button>
+            <button class="save-button" (click)="saveChanges()">Save</button>
+        </div>
+    </div>
+</section>
+
+<!-- Popup -->
+ @if(showPopup){
+   <div class="popup-overlay">
+    <div class="popup-container">
+        <div class="popup-header">
+            <div class="popup-title-container">
+                @if (popupType === 'success') {
+                   <div  class="popup-icon success-icon">✓</div>
+                }@else if (popupType === 'error') {
+                    <div class="popup-icon error-icon">!</div>
+                }
+
+                @else if (popupType === 'info') {
+                    <div class="popup-icon info-icon">i</div>
+                }
+               
+                <h3 class="popup-title">{{ popupTitle }}</h3>
+            </div>
+        </div>
+        <div class="popup-content">
+            <p class="popup-message">{{ popupMessage }}</p>
+        </div>
+        <div class="popup-actions">
+            <button (click)="closePopup()" class="popup-button" [ngClass]="{
+        'success-btn': popupType === 'success',
+        'error-btn': popupType === 'error',
+        'info-btn': popupType === 'info'
+      }">OK</button>
+        </div>
+    </div>
+</div>
+ }
+
+ @if (showRelocatePopup) {
+    <div class="popup-overlay">
+  <app-driver-location (close)="showRelocatePopup = false"></app-driver-location>
+</div>
+ }
+
+

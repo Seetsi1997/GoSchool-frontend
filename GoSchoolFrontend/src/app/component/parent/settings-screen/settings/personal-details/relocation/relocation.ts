@@ -106,4 +106,11 @@ capitalizeRole(value: string): string {
       .join(' ');
   }
 
+   formatProvinceDisplay(province: Province): string {
+      return province
+        .split('_')
+        .map((word) => word.charAt(0) + word.slice(1).toLowerCase())
+        .join(' ');
+    }
+
 }
