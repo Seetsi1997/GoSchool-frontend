@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { Role } from '../../../constant/role';
 import {
@@ -18,7 +18,7 @@ import {
   templateUrl: './account-setup.html',
   styleUrls: ['./account-setup.css'],
 })
-export class AccontSetup {
+export class AccontSetup implements OnInit{
   @Input() form!: FormGroup;
   @Output() nextStep = new EventEmitter<void>();
   @Output() previousStep = new EventEmitter<void>();
@@ -60,6 +60,10 @@ export class AccontSetup {
   };
 
   constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    this.role = this.role.filter(r => r !== 'ADMIN');
+  }
 
   
 

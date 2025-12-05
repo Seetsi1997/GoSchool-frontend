@@ -17,9 +17,16 @@ export class Auth {
 
   constructor(private http: HttpClient) { }
 
-  register(user: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/auth/api/users/admin/register`, user);
-  }
+register(user: any): Observable<any> {
+  return this.http.post(
+    `${this.apiUrl}/auth/api/users/admin/register`,
+    user,
+    {
+      headers: { 'Content-Type': 'application/json' }
+    }
+  );
+}
+
 
   getCurrentAdmin(): Observable<Users> {
     const token = localStorage.getItem('token');

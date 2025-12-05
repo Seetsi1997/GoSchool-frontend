@@ -93,9 +93,10 @@
   position: absolute;
   top: 100%;
   right: 0;
-  background: #fff;
+  background: linear-gradient(45deg, rgb(136, 136, 255), rgb(120, 180, 160));
   border-radius: 8px;
-  padding: 8px 0;
+  padding: 4px 0;
+  margin-top: 12px;
   display: flex;
   flex-direction: column;
   width: 150px;
@@ -104,7 +105,7 @@
 }
 
 .dropdown-item {
-  background: rgb(94, 94, 94);
+  background: transparent;
   border: none;
   padding: 10px 15px;
   text-align: left;

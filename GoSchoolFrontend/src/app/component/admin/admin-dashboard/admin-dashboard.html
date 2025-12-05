@@ -25,7 +25,7 @@
             <button class="profile-btn" (click)="toggleProfile()">
               <img class="profile-img" src="svg/profile.svg" alt="profile" />
               <span class="profile-name">{{ admin.firstName }}</span>
-              <img src="png/arrow_drop_down.png" alt="" class="arrow">
+              <img [src]="isProfileOpen ? 'png/arrow_drop_up.png' : 'png/arrow_drop_down.png'"  alt="" class="arrow">
             </button>
 
             <!-- DROPDOWN MENU -->
@@ -50,39 +50,52 @@
           </div>
 
           <div *ngIf="activeTab === 'drivers'" class="card-list">
-            <app-driver-card *ngFor="let driver of paginatedDrivers" [driver]="driver">
+
+            @if(drivers.length > 0){
+              <app-driver-card *ngFor="let driver of paginatedDrivers" [driver]="driver">
             </app-driver-card>
 
             <!-- Pagination -->
             <div class="pagination">
-              <button (click)="currentPage = currentPage - 1" [disabled]="currentPage === 1">
+              <button (click)="currentPage = currentPage - 1" [disabled]="!drivers.length || currentPage === 1">
                 Prev
               </button>
 
               <span>{{ currentPage }} / {{ totalPages(drivers) }}</span>
 
-              <button (click)="currentPage = currentPage + 1" [disabled]="currentPage === totalPages(drivers)">
+              <button (click)="currentPage = currentPage + 1"
+                [disabled]="!drivers.length  || currentPage === totalPages(drivers)">
                 Next
               </button>
             </div>
+            }@else{
+              <p class="text-center">There are no registered drivers at the moment.</p>
+            }
+            
           </div>
 
           <div *ngIf="activeTab === 'parents'" class="card-list">
-            <app-parent-card *ngFor="let parent of paginatedParents" [parent]="parent">
+            @if(parents.length > 0){
+               <app-parent-card *ngFor="let parent of paginatedParents" [parent]="parent">
             </app-parent-card>
 
             <!-- Pagination -->
             <div class="pagination">
-              <button (click)="currentPage = currentPage - 1" [disabled]="currentPage === 1">
+              <button (click)="currentPage = currentPage - 1" [disabled]="!parents.length || currentPage === 1">
                 Prev
               </button>
 
               <span>{{ currentPage }} / {{ totalPages(parents) }}</span>
 
-              <button (click)="currentPage = currentPage + 1" [disabled]="currentPage === totalPages(parents)">
+              <button (click)="currentPage = currentPage + 1"
+                [disabled]="!parents.length || currentPage === totalPages(parents)">
                 Next
               </button>
             </div>
+            }@else{
+              <p class="text-center">There are no registered parents at the moment.</p>
+            }
+            
           </div>
 
         </div>
@@ -91,6 +104,34 @@
 
     <div *ngIf="activeSection === 'view'">
       <!-- VIEW CONTENT -->
+      <div class="dashboard-main">
+        <div class="top-navbar">
+          <div class="profile-section">
+            <div class="profile-info">
+
+              <button class="profile-btn" (click)="toggleProfile()">
+                <img class="profile-img" src="svg/profile.svg" alt="profile" />
+                <span class="profile-name">{{ admin.firstName }}</span>
+                <img [src]="isProfileOpen ? 'png/arrow_drop_up.png' : 'png/arrow_drop_down.png'" alt="arrow"
+                  class="arrow" />
+              </button>
+
+              <!-- Dropdown Menu -->
+              <div class="dropdown-menu" *ngIf="isProfileOpen">
+                <button class="dropdown-item">My Profile</button>
+                <button class="dropdown-item">Settings</button>
+                <button class="dropdown-item">Logout</button>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="activeSection === 'settings'">
+      <!-- SETTINGS CONTENT -->
       <div class="dashboard-main">
         <div class="top-navbar">
           <div class="profile-section">
@@ -113,35 +154,6 @@
           </div>
         </div>
       </div>
+
     </div>
-
-
-
-
-  <div *ngIf="activeSection === 'settings'">
-    <!-- SETTINGS CONTENT -->
-    <div class="dashboard-main">
-        <div class="top-navbar">
-          <div class="profile-section">
-            <div class="profile-info">
-
-              <button class="profile-btn" (click)="toggleProfile()">
-                <img class="profile-img" src="svg/profile.svg" alt="profile" />
-                <span class="profile-name">{{ admin.firstName }}</span>
-                <img src="png/arrow_drop_down.png" alt="" class="arrow">
-              </button>
-
-              <!-- DROPDOWN MENU -->
-              <div class="dropdown-menu" *ngIf="isProfileOpen">
-                <button class="dropdown-item">My Profile</button>
-                <button class="dropdown-item">Settings</button>
-                <button class="dropdown-item">Logout</button>
-              </div>
-
-            </div>
-          </div>
-        </div>
   </div>
-
-</div>
-</div>

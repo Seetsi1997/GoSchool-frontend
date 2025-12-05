@@ -1,14 +1,16 @@
-<!-- HTML with Custom Class Names -->
 <button class="parent-card">
   <div class="parent-card-header">
     <img src="svg/profile.svg" class="parent-avatar" alt="profile">
-    <p>{{ capitalize(parent.firstName) }} {{capitalize( parent.surname) }}</p>
+    <p>{{ capitalize(parent.firstName) }} {{ capitalize(parent.surname) }}</p>
   </div>
 
   <div class="parent-card-content">
     <div class="parent-badge">
       {{ parent.contact }}
     </div>
-    <div class="parent-location">{{ capitalize(parent.province)}}</div>
+
+    <div class="parent-location">
+      {{ capitalize(parent.province) }}
+    </div>
   </div>
 </button>

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { DriverDTO } from '../../../dto/driverDTO';
 import { ParentDTO } from '../../../dto/parentDTO';
@@ -14,10 +14,9 @@ import { ParentCard } from './parent-card/parent-card';
   imports: [CommonModule, RouterModule, ParentCard, DriverCard, AdminSidebar],
   providers: [Auth],
   templateUrl: './admin-dashboard.html',
-  styleUrls: ['./admin-dashboard.css']
+  styleUrls: ['./admin-dashboard.css'],
 })
 export class AdminDashboard implements OnInit {
-
   admin: Users = {} as Users;
   isLoading = true;
   firstName = '';
@@ -30,8 +29,7 @@ export class AdminDashboard implements OnInit {
   currentPage = 1;
   isProfileOpen = false;
 
-  constructor(private authService: Auth) { }
-
+  constructor(private authService: Auth) {}
 
   ngOnInit() {
     this.loadAdminData();
@@ -45,8 +43,7 @@ export class AdminDashboard implements OnInit {
     this.isLoading = true;
     this.authService.getCurrentAdmin().subscribe({
       next: (data) => {
-
-        console.log("Admin data:", data);
+        console.log('Admin data:', data);
 
         this.firstName = this.capitalizeRole(data.firstName ?? '');
         this.contact = data.phoneNumber;
@@ -65,7 +62,6 @@ export class AdminDashboard implements OnInit {
     return role.charAt(0).toUpperCase() + role.slice(1).toLowerCase();
   }
 
-
   setTab(tab: 'drivers' | 'parents') {
     this.activeTab = tab;
     if (tab === 'drivers') {
@@ -76,21 +72,21 @@ export class AdminDashboard implements OnInit {
   }
 
   loadDrivers() {
-    this.authService.getListDriver().subscribe(res => {
+    this.authService.getListDriver().subscribe((res) => {
       this.drivers = res;
     });
   }
 
   loadParents() {
     this.authService.getListParent().subscribe({
-      next: res => {
+      next: (res) => {
         this.parents = res;
       },
-      error: err => {
+      error: (err) => {
         console.error('HTTP Error:', err);
         console.error('Error status:', err.status);
         console.error('Error statusText:', err.statusText);
-      }
+      },
     });
   }
 
@@ -125,6 +121,15 @@ export class AdminDashboard implements OnInit {
   }
 
   toggleProfile() {
-  this.isProfileOpen = !this.isProfileOpen;
-}
+    this.isProfileOpen = !this.isProfileOpen;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event) {
+    const target = event.target as HTMLElement;
+    // If click is outside the profile button or dropdown menu, close it
+    if (!target.closest('.profile-section')) {
+      this.isProfileOpen = false;
+    }
+  }
 }
