@@ -53,7 +53,7 @@ export class Sidebar implements OnInit {
 
   // Menu items
 private loadMenuAndLogoutItems() {
-  const menuIcons = ['profile','home', 'view', 'add', 'settings', 'logout'];
+  const menuIcons = ['profile','home', 'view', 'add','notification', 'settings', 'logout'];
 
   this.svgService.preloadSvgs(menuIcons).subscribe(svgs => {
    
@@ -65,11 +65,12 @@ private loadMenuAndLogoutItems() {
       { id: 'home', text: 'Home', svg: this.sanitizer.bypassSecurityTrustHtml(svgs[1]) },
       { id: 'view', text: 'View', svg: this.sanitizer.bypassSecurityTrustHtml(svgs[2]) },
       { id: 'add', text: 'Add', svg: this.sanitizer.bypassSecurityTrustHtml(svgs[3]) },
-      { id: 'settings', text: 'Settings', svg: this.sanitizer.bypassSecurityTrustHtml(svgs[4]) },
+      { id: 'notification', text: 'Notification', svg: this.sanitizer.bypassSecurityTrustHtml(svgs[4]) },
+      { id: 'settings', text: 'Settings', svg: this.sanitizer.bypassSecurityTrustHtml(svgs[5]) },
     ];
 
     this.logoutItems = [
-      { id: 'logout', text: 'Logout', svg: this.sanitizer.bypassSecurityTrustHtml(svgs[5]) },
+      { id: 'logout', text: 'Logout', svg: this.sanitizer.bypassSecurityTrustHtml(svgs[6]) },
     ];
   });
 }

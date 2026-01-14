@@ -5,14 +5,18 @@ import { Driver } from "./driver";
 import { DriverRouteDetails } from "./DriverRouteDetails";
 import { ParentEntity } from "./parent";
 import { PaymentRecordEntity } from "./paymentRecord";
+import { StudentEntity } from "./student";
 
 export interface TransportApplicationEntity {
-  id: string;
+  applicationId: string;
+  parentId: string;
+  parentName: string;
+  studentNames: string;
+  routeId: string;
   numberOfKids: number;
   message: string;
   applicationStatus: ApplicationStatus;
-  parent: ParentEntity;
-  route: DriverRouteDetails;
-  approved: boolean;
-  appliedAt: Date;
+  appliedAt: string;
+  student: StudentEntity;
+   active: boolean;
 }

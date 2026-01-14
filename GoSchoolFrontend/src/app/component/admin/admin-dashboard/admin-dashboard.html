@@ -1,106 +1,19 @@
 <div class="dashboard-container">
 
-  <!-- 🔥 Reusable sidebar -->
+  <!-- Reusable sidebar -->
   <app-admin-sidebar (sectionChange)="onSidebarChange($event)">
   </app-admin-sidebar>
 
   <div class="dashboard-main">
 
-    <div *ngIf="activeSection === 'home'">
-      <!-- HOME CONTENT here -->
-      <div class="top-navbar">
-        <div class="tabs">
-          <a (click)="setTab('drivers')" class="tab-link" [class.active]="activeTab === 'drivers'">
-            Drivers
-          </a>
-
-          <a (click)="setTab('parents')" class="tab-link" [class.active]="activeTab === 'parents'">
-            Parents
-          </a>
-        </div>
-
-        <div class="profile-section">
-          <div class="profile-info">
-
-            <button class="profile-btn" (click)="toggleProfile()">
-              <img class="profile-img" src="svg/profile.svg" alt="profile" />
-              <span class="profile-name">{{ admin.firstName }}</span>
-              <img [src]="isProfileOpen ? 'png/arrow_drop_up.png' : 'png/arrow_drop_down.png'"  alt="" class="arrow">
-            </button>
-
-            <!-- DROPDOWN MENU -->
-            <div class="dropdown-menu" *ngIf="isProfileOpen">
-              <button class="dropdown-item">My Profile</button>
-              <button class="dropdown-item">Settings</button>
-              <button class="dropdown-item">Logout</button>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-
-      <div class="main-content">
-        <div class="left-panel">
-          <div class="search-label">Search</div>
-
-          <div class="search-container">
-            <input type="text" class="search-input" placeholder="Search" />
-            <img src="png/search.png" alt="filter" class="search-icon" />
-          </div>
-
-          <div *ngIf="activeTab === 'drivers'" class="card-list">
-
-            @if(drivers.length > 0){
-              <app-driver-card *ngFor="let driver of paginatedDrivers" [driver]="driver">
-            </app-driver-card>
-
-            <!-- Pagination -->
-            <div class="pagination">
-              <button (click)="currentPage = currentPage - 1" [disabled]="!drivers.length || currentPage === 1">
-                Prev
-              </button>
-
-              <span>{{ currentPage }} / {{ totalPages(drivers) }}</span>
-
-              <button (click)="currentPage = currentPage + 1"
-                [disabled]="!drivers.length  || currentPage === totalPages(drivers)">
-                Next
-              </button>
-            </div>
-            }@else{
-              <p class="text-center">There are no registered drivers at the moment.</p>
-            }
-            
-          </div>
-
-          <div *ngIf="activeTab === 'parents'" class="card-list">
-            @if(parents.length > 0){
-               <app-parent-card *ngFor="let parent of paginatedParents" [parent]="parent">
-            </app-parent-card>
-
-            <!-- Pagination -->
-            <div class="pagination">
-              <button (click)="currentPage = currentPage - 1" [disabled]="!parents.length || currentPage === 1">
-                Prev
-              </button>
-
-              <span>{{ currentPage }} / {{ totalPages(parents) }}</span>
-
-              <button (click)="currentPage = currentPage + 1"
-                [disabled]="!parents.length || currentPage === totalPages(parents)">
-                Next
-              </button>
-            </div>
-            }@else{
-              <p class="text-center">There are no registered parents at the moment.</p>
-            }
-            
-          </div>
-
-        </div>
-      </div>
-    </div>
+    @if(activeSection === 'home'){
+    <app-admin-home-view [admin]="admin" [drivers]="drivers" [parents]="parents" [activeTab]="activeTab"
+      [currentPage]="currentPage" [pageSize]="pageSize" [isProfileOpen]="isProfileOpen"
+      [selectedDriver]="selectedDriver" [selectedParent]="selectedParent" (setTab)="setTab($event)"
+      (toggleProfile)="toggleProfile()" (driverSelect)="selectDriver($event)" (parentSelect)="selectParent($event)"
+      (pageChange)="currentPage = $event">
+    </app-admin-home-view>
+    }
 
     <div *ngIf="activeSection === 'view'">
       <!-- VIEW CONTENT -->
@@ -122,8 +35,6 @@
                 <button class="dropdown-item">Settings</button>
                 <button class="dropdown-item">Logout</button>
               </div>
-
-
             </div>
           </div>
         </div>

@@ -1,0 +1,356 @@
+/* Carousel container */
+.students-carousel {
+  width: 100%;
+  padding: 8px;
+}
+
+/* Grid */
+.students-track {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+/* Card */
+.student-card {
+  background: linear-gradient(135deg, rgba(106, 141, 255, 0.9) 0%, rgba(95, 191, 162, 0.9) 100%);
+  border-radius: 20px;
+  padding: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.student-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Student name */
+.student-card h4 {
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 18px;
+  font-size: 18px;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.5px;
+}
+
+/* Rows */
+.card-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.95);
+  padding: 6px 0;
+}
+
+.card-row span:first-child {
+  font-weight: 600;
+  opacity: 0.9;
+  letter-spacing: 0.3px;
+}
+
+.card-row span:last-child {
+  font-weight: 700;
+  color: #003f2f;
+  background: rgba(255, 255, 255, 0.3);
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+/* Message styling */
+.card-row .message {
+  max-width: 150px;
+  text-align: right;
+  font-style: italic;
+  background: none;
+  padding: 0;
+}
+
+/* Status highlight */
+.card-row.status span:last-child {
+  color: #6d7973;
+  font-weight: 700;
+  background: rgba(0, 255, 136, 0.15);
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
+/* Date */
+.card-row.date {
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+/* Backdrop */
+.popup-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Popup card */
+.popup-card {
+  background: linear-gradient(135deg, #6a8dff, #5fbfa2);
+  border-radius: 20px;
+  padding: 24px;
+  width: 320px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+  animation: popupIn 0.25s ease;
+}
+
+/* Animation */
+@keyframes popupIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.popup-card h3 {
+  text-align: center;
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+/* Popup rows */
+.popup-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  color: #fff;
+  font-size: 14px;
+}
+
+.popup-row span:last-child {
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.25);
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
+.popup-message {
+  max-width: 160px;
+  text-align: right;
+  font-style: italic;
+}
+
+/* Status */
+.popup-row.status span:last-child {
+  background: rgba(0, 255, 136, 0.2);
+  color: #003f2f;
+}
+
+/* Buttons */
+.details-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.details-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.close-btn {
+  margin-top: 16px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 12px;
+  border: none;
+  background: #003f2f;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ================================
+   MOBILE RESPONSIVE STYLES
+   ================================ */
+
+/* Tablets and smaller (768px and below) */
+@media (max-width: 768px) {
+  .students-carousel {
+    padding: 12px 8px;
+  }
+
+  .students-track {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .student-card {
+    padding: 14px;
+    border-radius: 16px;
+  }
+
+  .student-card h4 {
+    font-size: 17px;
+    margin-bottom: 14px;
+  }
+
+  .card-row {
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+
+  .popup-card {
+    width: 90%;
+    max-width: 340px;
+    padding: 20px;
+  }
+}
+
+/* Mobile devices (480px and below) */
+@media (max-width: 480px) {
+  .students-carousel {
+    padding: 8px 4px;
+  }
+
+  .students-track {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 0 4px;
+  }
+
+  .student-card {
+    padding: 16px 12px;
+    border-radius: 14px;
+    margin: 0 auto;
+    max-width: 100%;
+  }
+
+  .student-card:hover {
+    transform: translateY(-4px) scale(1.01);
+  }
+
+  .student-card h4 {
+    font-size: 16px;
+    margin-bottom: 12px;
+    letter-spacing: 0.3px;
+  }
+
+  .card-row {
+    font-size: 12px;
+    margin-bottom: 7px;
+    padding: 4px 0;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .card-row span:first-child {
+    letter-spacing: 0.2px;
+  }
+
+  .card-row span:last-child {
+    padding: 2px 6px;
+    font-size: 11px;
+  }
+
+  .card-row .message {
+    max-width: 120px;
+    font-size: 11px;
+  }
+
+  .card-row.date {
+    font-size: 11px;
+  }
+
+  /* Popup adjustments */
+  .popup-backdrop {
+    padding: 16px;
+  }
+
+  .popup-card {
+    width: 95%;
+    max-width: 100%;
+    padding: 18px;
+    border-radius: 16px;
+  }
+
+  .popup-card h3 {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .popup-row {
+    font-size: 12px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .popup-row span:last-child {
+    padding: 3px 8px;
+    font-size: 11px;
+  }
+
+  .popup-message {
+    max-width: 140px;
+    font-size: 11px;
+  }
+
+  .details-btn {
+    padding: 10px;
+    font-size: 13px;
+    border-radius: 8px;
+  }
+
+  .close-btn {
+    padding: 12px;
+    font-size: 14px;
+    border-radius: 10px;
+  }
+}
+
+/* Extra small devices (360px and below) */
+@media (max-width: 360px) {
+  .students-carousel {
+    padding: 6px 2px;
+  }
+
+  .students-track {
+    gap: 10px;
+  }
+
+  .student-card {
+    padding: 14px 10px;
+  }
+
+  .student-card h4 {
+    font-size: 15px;
+  }
+
+  .card-row {
+    font-size: 11px;
+  }
+
+  .card-row .message {
+    max-width: 100px;
+  }
+
+  .popup-card {
+    padding: 16px;
+  }
+}

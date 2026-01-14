@@ -303,7 +303,7 @@
 .btn-outline-danger {
   background-color: transparent;
   border-color: #dc3545;
-  color: #dc3545;
+  color: #fff;
 }
 
 .btn-outline-danger:hover {
@@ -374,6 +374,69 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   display: flex;
   gap: 0.5rem;
   margin-top: 1.5rem;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.55);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+.modal-dialog {
+  margin: 0;
+  max-width: 500px;
+  width: 90%;
+}
+
+.modal-content {
+  border-radius: 12px;
+  background-color: #1e2a38; /* dark modal background */
+  color: #fff; /* default text color */
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+.modal-body h6 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.modal-body h6 strong {
+  font-size: 16px;
+  font-weight: 600;
+  color: #6D9CAB;
+  margin-left: 5px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 1rem 1.5rem;
+}
+
+.modal-footer .btn {
+  flex: 1;
+}
+
+.modal-footer .btn-outline-danger {
+  color: #fff;
+  border: 1px solid #ff8585;
+  background-color: transparent;
+}
+
+.modal-footer .btn-outline-danger:hover {
+  color: #fff;
+  border: 1px solid #ff8585;
+  background-color: #ff8585;
 }
 
 /* Responsive */

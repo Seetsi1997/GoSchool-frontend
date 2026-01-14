@@ -1,0 +1,236 @@
+/* Main container */
+.student-container > * + * {
+  margin-top: 1.5rem;
+}
+
+/* Title */
+.student-title {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  color: rgb(241 245 249);
+}
+
+/* Loading state */
+.loading-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.loading-spinner {
+  animation: spin 1s linear infinite;
+  border-radius: 9999px;
+  height: 1.5rem;
+  width: 1.5rem;
+  border-bottom-width: 2px;
+  border-color: rgb(147 51 234);
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.loading-text {
+  color: rgb(203 213 225);
+  margin-top: 0.5rem;
+}
+
+/* Error state */
+.error-alert {
+  background-color: rgb(254 226 226);
+  border-width: 1px;
+  border-color: rgb(248 113 113);
+  color: rgb(185 28 28);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-radius: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.empty-state-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-state-title {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  color: rgb(255 255 255);
+  margin-bottom: 0.5rem;
+}
+
+.empty-state-description {
+  color: rgb(203 213 225);
+}
+
+/* Students section */
+.students-section {
+  display: block;
+}
+
+.students-container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.students-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .students-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .students-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Student card */
+.student-card {
+  background-color: #85c5db;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  border-radius: 1rem;
+  padding: 1rem;
+  width: 100%;
+  min-width: 280px;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.student-card:hover {
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+/* Student card header */
+.student-card-header {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.student-avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 9999px;
+  border-width: 2px;
+  border-color: #deedef;
+  flex-shrink: 0;
+}
+
+.student-info {
+  margin-left: 1rem;
+  flex: 1 1 0%;
+  min-width: 0;
+}
+
+.student-name {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  color: #deedef;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.school-name {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #f2f9f9;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Student card body */
+.student-card-body {
+  display: block;
+}
+
+.separator-container {
+  display: flex;
+  justify-content: center;
+}
+
+.separator-line {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: center;
+  border-top-width: 1px;
+  border-color: #375a67;
+  padding-top: 0.75rem;
+  width: 40%;
+}
+
+.driver-name-container {
+  margin-left: 0.25rem;
+}
+
+.driver-name {
+  color: #375a67;
+  font-weight: 600;
+  text-align: center;
+}
+
+.no-driver-text {
+  color: rgb(255 255 255);
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Student card actions */
+.student-card-actions {
+  display: flex;
+  gap: 0.75rem;
+  padding-top: 0.75rem;
+}
+
+.view-details-btn {
+  width: 100%;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background-color: rgb(147 51 234);
+  color: rgb(255 255 255);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.view-details-btn:hover {
+  background-color: rgb(126 34 206);
+}

@@ -1,0 +1,34 @@
+<!-- POPUP -->
+@if(application){
+<div class="popup-backdrop" (click)="application = null">
+  <div class="popup-card" (click)="$event.stopPropagation()">
+
+    <h3>{{capitalizeWords(application.parentName) }}</h3>
+
+    <div class="popup-row">
+      <span>Kids</span>
+      <span>{{ application.numberOfKids }}</span>
+    </div>
+
+    <div class="popup-row">
+      <span>Message</span>
+      <span class="popup-message">{{ application.message }}</span>
+    </div>
+
+    <div class="popup-row status">
+      <span>Status</span>
+      <span>
+        {{ capitalizeWords(application.status.replaceAll('_', ' ')) }}
+      </span>
+
+    </div>
+
+    <div class="popup-row status">
+      <span>Applied On</span>
+      <span>{{ application.appliedAt | date:'yyyy-MM-dd' }}</span>
+    </div>
+
+    <button class="close-btn" (click)="application = null">Close</button>
+  </div>
+</div>
+}

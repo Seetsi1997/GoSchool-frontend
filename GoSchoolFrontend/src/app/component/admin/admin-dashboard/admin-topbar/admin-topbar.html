@@ -1,0 +1,25 @@
+<div class="top-navbar">
+  <ng-content select=".tabs"></ng-content>
+
+  <div class="profile-section">
+    <div class="profile-info">
+      <button class="profile-btn" (click)="toggleProfile.emit()">
+        <img class="profile-img" src="svg/profile.svg" alt="profile" />
+        <span class="profile-name">{{ admin.firstName }}</span>
+        <img
+          [src]="isProfileOpen ? 'png/arrow_drop_up.png' : 'png/arrow_drop_down.png'"  alt="Arrow Icon"
+          class="arrow"
+        /> 
+      </button>
+
+      @if(isProfileOpen){
+        <div class="dropdown-menu">
+        <button class="dropdown-item">My Profile</button>
+        <button class="dropdown-item">Settings</button>
+        <button class="dropdown-item">Logout</button>
+      </div>
+      }
+      
+    </div>
+  </div>
+</div>

@@ -26,6 +26,7 @@ import {Account} from './component/drivers/driver-settings-screen/components/acc
 import { DriverProfile } from './component/drivers/driver-settings-screen/components/driver-profile/driver-profile';
 import { DriverLocation } from './component/drivers/driver-settings-screen/components/driver-profile/driver-location/driver-location';
 import { AdminDashboard } from './component/admin/admin-dashboard/admin-dashboard';
+import { DriverNotificationScreen } from './component/drivers/driver-notification-screen/driver-notification-screen';
 
 export const routes: Routes = [
   
@@ -80,6 +81,8 @@ export const routes: Routes = [
     children:[
       { path: 'home', component: DriverHomeScreen},
       { path: 'view', component:  ViewListScreen },
+      { path: 'add', component: AddNewStudent },
+      { path: 'notification', component: DriverNotificationScreen },
       { path: 'settings', component: DriverSettingsScreen,
         children: [
             {path: 'account', component: Account },
@@ -90,7 +93,6 @@ export const routes: Routes = [
             }
         ]
        },
-      { path: 'add', component: AddNewStudent },
       { path: '', redirectTo: 'home', pathMatch: 'full' }
   ]
   },

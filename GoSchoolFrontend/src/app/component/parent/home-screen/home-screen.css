@@ -348,25 +348,47 @@ label {
     color: #cbd5e0;
 }
 
-/* Inputs + Textarea */
+
+/* General input, textarea, select styling */
 input[type="number"],
-textarea {
-    width: 100%;
-    background: #2d3748;
-    border: 1px solid #4a5568;
-    border-radius: 8px;
-    color: #fff;
-    padding: 10px 12px;
-    font-size: 0.95rem;
-    transition: border 0.2s ease, background 0.2s ease;
-    font-family: inherit;
+textarea,
+select {
+  width: 100%;
+  background: #2d3748; 
+  border: 1px solid #4a5568;
+  border-radius: 8px;
+  color: #fff;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  transition: border 0.2s ease, background 0.2s ease;
+  font-family: inherit;
+  appearance: none; 
 }
 
+/* Focus state */
 input[type="number"]:focus,
-textarea:focus {
-    border-color: #10b981; /* emerald */
-    outline: none;
-    background: #374151;
+textarea:focus,
+select:focus {
+  border-color: #10b981; /* emerald green */
+  outline: none;
+  background: #374151; /* slightly lighter dark */
+}
+
+/* Dropdown arrow for select */
+select {
+  background-image: url("data:image/svg+xml,%3Csvg fill='white' height='16' viewBox='0 0 20 20' width='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.516 7.548l4.484 4.444 4.484-4.444L15.484 9l-5 5-5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 36px;
+}
+
+select option[disabled] {
+  color: #fff;
+}
+
+select:hover {
+  border-color: #6ee7b7;
 }
 
 /* Submit + cancel buttons container */

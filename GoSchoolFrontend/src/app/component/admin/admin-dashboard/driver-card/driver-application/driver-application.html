@@ -1,0 +1,29 @@
+@if (isLoadingApplications) {
+<div class="empty-right">Loading applications...</div>
+
+} @else if (applications.length === 0) {
+<div class="empty-right">No students have applied</div>
+
+} @else {
+<div class="students-carousel">
+  <div class="students-track">
+    @for (app of applications; track app.applicationId) {
+    <div class="student-card">
+      <h4>{{ capitalizeWords(app.parentName)}}</h4>
+
+      <div class="card-row">
+        <span>Student Name</span>
+        <span>{{ capitalizeWords( app.studentName) }}</span>
+      </div>
+
+      <button class="details-btn" (click)="openDetails(app)">View details</button>
+
+      <button class="approve-btn" (click)="approve(app.applicationId!)">Approve</button>
+    </div>
+    }
+  </div>
+</div>
+} @if (selectedApp) {
+<app-driver-admin-popup [application]="selectedApp" (close)="selectedApp = null">
+</app-driver-admin-popup>
+}

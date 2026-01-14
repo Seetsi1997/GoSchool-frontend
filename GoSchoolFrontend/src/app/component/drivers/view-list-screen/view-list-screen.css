@@ -1,3 +1,18 @@
+.header {
+  text-align: center;
+  margin-top: 6cqw;
+  margin-bottom: 25px;
+  color: white;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.header h1 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
 .status-indicator {
   display: inline-block;
   width: 10px;
@@ -15,14 +30,16 @@
 .nav-pills {
   display: flex;
   gap: 8px;
-  padding: 15px 0; /* Changed from 60px to 15px */
+  padding: 15px 0; 
   margin: 0;
   list-style: none;
   flex-wrap: wrap;
 }
+
 .nav-pills li {
   list-style: none;
 }
+
 .nav-pills li a {
   display: inline-block;
   padding: 8px 16px;
@@ -33,27 +50,28 @@
   color: #3E4C70;
   cursor: pointer;
   transition: all 0.25s ease;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+
   text-decoration: none;
 }
 .nav-pills li a:hover {
   background: #ffffff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 .nav-pills li.active a {
   background: linear-gradient(to right, #3E4C70, #2A7B9B);
   color: #fff !important;
-  box-shadow: 0 3px 8px rgba(42, 123, 155, 0.4);
 }
+
 .tab-content {
   padding: 15px;
   background: transparent;
   animation: fadeIn 0.25s ease-in-out;
 }
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
 .section-header p {
   margin-bottom: 20px;
   font-size: 1.5em;
@@ -61,32 +79,105 @@
   color: #2A7B9B;
   text-align: center;
   padding: 15px;
-  background: linear-gradient(135deg, #f8f9fa,   #3E4C70);
+  background: linear-gradient(135deg, #f8f9fa, #3E4C70);
   border-radius: 10px;
-  border-left: 4px solid #2A7B9B;
+  border-left: 2px solid #2A7B9B;
 }
+
+/* Table Styling - Fixed for straight lines */
 .table {
   width: 100%;
   background: #fff;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-collapse: collapse;
+  table-layout: fixed; 
 }
+
+/* Column width definitions */
+.all-tab table {
+  table-layout: fixed;
+}
+.all-tab th:nth-child(1), .all-tab td:nth-child(1) { width: 50%; }
+.all-tab th:nth-child(2), .all-tab td:nth-child(2) { width: 25%; }
+.all-tab th:nth-child(3), .all-tab td:nth-child(3) { width: 25%; }
+
+.paid-tab table {
+  table-layout: fixed;
+}
+.paid-tab th:nth-child(1), .paid-tab td:nth-child(1) { width: 25%; }
+.paid-tab th:nth-child(2), .paid-tab td:nth-child(2) { width: 25%; }
+.paid-tab th:nth-child(3), .paid-tab td:nth-child(3) { width: 25%; }
+.paid-tab th:nth-child(4), .paid-tab td:nth-child(4) { width: 25%; }
+
+.unpaid-tab table {
+  table-layout: fixed;
+}
+.unpaid-tab th:nth-child(1), .unpaid-tab td:nth-child(1) { width: 25%; }
+.unpaid-tab th:nth-child(2), .unpaid-tab td:nth-child(2) { width: 25%; }
+.unpaid-tab th:nth-child(3), .unpaid-tab td:nth-child(3) { width: 25%; }
+.unpaid-tab th:nth-child(4), .unpaid-tab td:nth-child(4) { width: 25%; }
+
+/* Table header styling */
 .table thead th {
-  background: #2A7B9B;
+  background: linear-gradient(135deg,#2d3a5c) border-box;
   color: #fff;
   font-weight: 600;
   padding: 12px 8px;
   font-size: 12px;
+  text-align: left;
+
 }
+
+/* Remove border from last header column */
+.table thead th:last-child {
+  border-right: none;
+}
+
+/* Table body styling */
 .table tbody tr:hover {
   background: #f1f9ff;
 }
+
 .table td {
   padding: 10px 8px;
   vertical-align: middle;
   border-bottom: 1px solid #dee2e6;
+  border-right: 1px solid #dee2e6;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
+
+/* Remove border from last data column */
+.table td:last-child {
+  border-right: none;
+}
+
+/* Specific cell alignments */
+.status-cell {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.amount-cell {
+  text-align: right !important;
+}
+
+/* Center align for all tab status column */
+.all-tab .status-cell {
+  justify-content: center;
+}
+
+/* Right align for paid/unpaid amount columns */
+.paid-tab td:last-child,
+.unpaid-tab td:last-child {
+  text-align: right;
+}
+
+/* Input group styling */
 .input-group {
   display: flex;
   width: 100%;
@@ -116,6 +207,7 @@
 .input-group-addon:hover {
   background: #216680;
 }
+
 .refresh-btn {
   position: fixed;
   right: 20px;
@@ -130,7 +222,6 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   transition: all 0.3s ease;
   z-index: 100;
 }
@@ -138,16 +229,18 @@
   background: #216680;
   transform: scale(1.05);
 }
+
 .navbar {
   background: #fff;
   border-bottom: 2px solid #e9ecef;
   padding: 15px 0;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
+
 @keyframes spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
 .spinning {
   animation: spin 1s linear infinite;
 }
@@ -163,34 +256,29 @@
   padding: 15px;
   background: linear-gradient(135deg, #ffdfdf, #2A7B);
   border-radius: 10px;
-  border-left: 4px solid #2A7B9B;
+  border-left: 2px solid #2A7B9B;
 }
 
-/* Fixed missing dot */
-.status-indicator {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  margin-right: 8px;
-}
-
-.status-indicator.online {
-  background: linear-gradient(135deg, #28a745, #20c997);
-}
-
-.status-indicator.offline {
-  background: linear-gradient(135deg, #dc3545, #e83e8c);
-}
-
-
-
+/* Responsive adjustments */
 @media (max-width: 767px){
+    .header{
+    padding-top: 30px;
+  }
+  
   .nav-pills {
     justify-content: center;
     gap: 6px;
     padding: 15px 0;
     margin-top: 0;
+  }
+  
+  .table {
+    font-size: 12px;
+  }
+  
+  .table td,
+  .table th {
+    padding: 8px 6px;
   }
 }
 
@@ -200,11 +288,15 @@
     padding: 0 10px;
     margin-bottom: 5%;
   }
+
+  .header{
+    padding-top: 30px;
+  }
   
   .nav-pills {
     justify-content: space-around;
     gap: 6px;
-    padding: 15px 0; /* Fixed: Reduced from 85px to 15px */
+    padding: 15px 0;
     margin-top: 0;
   }
   
@@ -219,18 +311,8 @@
     margin-top: 5px;
   }
   
-  .input-group input {
-    height: 40px;
-    font-size: 13px;
-  }
-  
-  .input-group .input-group-addon {
-    padding: 0 12px;
-    min-width: 45px;
-  }
-  
   .table {
-    font-size: 12px;
+    font-size: 11px;
   }
   
   .table thead th {
@@ -246,7 +328,7 @@
 /* Extra small devices */
 @media (max-width: 360px) {
   .nav-pills {
-    padding: 10px 0; /* Fixed: Reduced from 69px to 10px */
+    padding: 10px 0;
     justify-content: space-between;
   }
   
@@ -259,64 +341,85 @@
     font-size: 11px;
     padding: 6px 8px;
   }
-  
-  .input-group {
-    flex-direction: column;
-  }
-  
-  .input-group input {
-    border-radius: 8px;
-    margin-bottom: 8px;
-  }
-  
-  .input-group .input-group-addon {
-    border-radius: 8px;
-    height: 40px;
-  }
 }
 
-/* Hide horizontal scrollbar but keep functionality */
-.nav-pills::-webkit-scrollbar {
-  display: none;
-}
-
-.nav-pills {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* Ensure tables are properly scrollable on mobile */
-.table-responsive {
-  border: none;
-}
-
-/* Improve touch targets for mobile */
-.nav-pills li a,
-.input-group .input-group-addon,
-.table td {
-  cursor: pointer;
-}
-
-/* Loading states for better mobile UX */
-.loading {
-  opacity: 0.7;
-  pointer-events: none;
-}
-
-/* Focus states for accessibility */
-.nav-pills li a:focus,
-.input-group input:focus {
-  outline: 2px solid #2A7B9B;
-  outline-offset: 2px;
-}
-
-/* Add container-fluid styles if missing */
+/* Container-fluid styles */
 .container-fluid {
   margin-bottom: 3%;
   padding: 0 15px;
 }
 
-/* Style for the top-bar wrapper if needed */
+/* Top-bar wrapper styling */
 .top-bar {
   margin-top: 60px;
+}
+
+/* Alert styling for no students message */
+.alert {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.alert-info {
+  color: #2A7B9B;
+   background: 
+    linear-gradient(135deg, #2d3a5c, #2A7B9B) border-box;
+  border: 1px solid transparent;
+}
+
+/* Flex utilities for message center */
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.text-slate-300 {
+  color: #cbd5e1;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
+.space-y-6 > * + * {
+  margin-top: 1.5rem;
 }

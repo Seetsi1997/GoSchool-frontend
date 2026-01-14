@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { DriverDTO } from '../../dto/driverDTO';
 import { environment } from '../../env/env';
 import { DriverRouteDetails } from '../../model/DriverRouteDetails';
+import { StudentDTO } from '../../dto/studentDTO';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,14 @@ export class Driver {
   private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
+
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+  }
+
 
   register(user: DriverDTO): Observable<any> {
     return this.http.post(`${this.apiUrl}/auth/api/drivers/register`, user, {
@@ -37,7 +46,7 @@ export class Driver {
       'Content-Type': 'application/json',
     });
 
-    return this.http.put<DriverDTO>(`${this.apiUrl}/auth/api/drivers/profile`, drivers , {
+    return this.http.put<DriverDTO>(`${this.apiUrl}/auth/api/drivers/profile`, drivers, {
       headers,
     });
   }
@@ -46,10 +55,9 @@ export class Driver {
     return this.http.get(`${this.apiUrl}/auth/api/drivers/me/${userUUID}`);
   }
 
-getAllDrivers(): Observable<any> {
-  return this.http.get(`${this.apiUrl}/auth/api/drivers`, { responseType: 'json' });
-}
-
+  getAllDrivers(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/auth/api/drivers`, { responseType: 'json' });
+  }
 
   listRoutes(driverUUID: string): Observable<DriverRouteDetails[]> {
     return this.http.get<DriverRouteDetails[]>(
@@ -78,6 +86,21 @@ getAllDrivers(): Observable<any> {
   deleteRoute(driverUUID: string, routeId: string): Observable<void> {
     return this.http.delete<void>(
       `${this.apiUrl}/auth/api/drivers/${driverUUID}/routes/${routeId}`
+    );
+  }
+
+  getStudentsByDriverProvince(province: string) {
+    return this.http.get<StudentDTO[]>(
+      `${this.apiUrl}/auth/api/drivers/${province}/students`,
+      { headers: this.getAuthHeaders() }
+    );
+  }
+
+   assignDriverToStudent(driverId: string, studentId: string): Observable<void> {
+    return this.http.post<void>(
+      `${this.apiUrl}/auth/api/drivers/driver/${driverId}/assign/student/${studentId}`,
+      {},
+      { headers: this.getAuthHeaders() }
     );
   }
 }

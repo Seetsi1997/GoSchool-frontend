@@ -3,133 +3,116 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { DriverDTO } from '../../../dto/driverDTO';
 import { ParentDTO } from '../../../dto/parentDTO';
+import { StudentDTO } from '../../../dto/studentDTO';
+import { TransportApplicationDTO } from '../../../dto/transportApplicationDTO';
 import { Users } from '../../../model/Users';
 import { Auth } from '../../../service/serviceAuth/auth';
+import { Parents } from '../../../service/serviceParent/parents';
+import { TransportService } from '../../../service/serviceTransport/transport-service';
+import { AdminLeftPanel } from './admin-left-panel/admin-left-panel';
 import { AdminSidebar } from './admin-sidebar/admin-sidebar';
-import { DriverCard } from './driver-card/driver-card';
-import { ParentCard } from './parent-card/parent-card';
+import { AdminTopbar } from './admin-topbar/admin-topbar';
+import { DriverApplication } from './driver-card/driver-application/driver-application';
+import { ParentChildren } from './parent-card/parent-children/parent-children';
+import { AdminHomeView } from './admin-home-view/admin-home-view';
 
 @Component({
   selector: 'app-admin-dashboard',
-  imports: [CommonModule, RouterModule, ParentCard, DriverCard, AdminSidebar],
-  providers: [Auth],
+  standalone: true,
+  imports: [CommonModule, RouterModule, AdminSidebar, AdminHomeView],
+  providers: [Auth, Parents, TransportService],
   templateUrl: './admin-dashboard.html',
   styleUrls: ['./admin-dashboard.css'],
 })
 export class AdminDashboard implements OnInit {
+
   admin: Users = {} as Users;
   isLoading = true;
-  firstName = '';
-  contact = '';
+
   activeSection: string = 'home';
+
   drivers: DriverDTO[] = [];
   parents: ParentDTO[] = [];
+
   activeTab: 'drivers' | 'parents' = 'drivers';
+
   pageSize = 5;
   currentPage = 1;
+
   isProfileOpen = false;
 
-  constructor(private authService: Auth) {}
+  selectedDriver: DriverDTO | null = null;
+  selectedParent: ParentDTO | null = null;
+
+  constructor(
+    private authService: Auth,
+    private parentService: Parents
+  ) {}
 
   ngOnInit() {
     this.loadAdminData();
-    this.loadParents();
     this.loadDrivers();
+    this.loadParents();
     this.updatePageSize();
     window.addEventListener('resize', () => this.updatePageSize());
   }
 
-  loadAdminData() {
-    this.isLoading = true;
-    this.authService.getCurrentAdmin().subscribe({
-      next: (data) => {
-        console.log('Admin data:', data);
-
-        this.firstName = this.capitalizeRole(data.firstName ?? '');
-        this.contact = data.phoneNumber;
-        this.admin = data;
-        this.isLoading = false;
-      },
-      error: (error) => {
-        console.error('Error loading admin data:', error);
-        this.isLoading = false;
-      },
-    });
-  }
-
-  capitalizeRole(role: string | undefined | null): string {
-    if (!role) return '';
-    return role.charAt(0).toUpperCase() + role.slice(1).toLowerCase();
-  }
-
-  setTab(tab: 'drivers' | 'parents') {
-    this.activeTab = tab;
-    if (tab === 'drivers') {
-      this.loadDrivers();
-    } else {
-      this.loadParents();
-    }
-  }
-
-  loadDrivers() {
-    this.authService.getListDriver().subscribe((res) => {
-      this.drivers = res;
-    });
-  }
-
-  loadParents() {
-    this.authService.getListParent().subscribe({
-      next: (res) => {
-        this.parents = res;
-      },
-      error: (err) => {
-        console.error('HTTP Error:', err);
-        console.error('Error status:', err.status);
-        console.error('Error statusText:', err.statusText);
-      },
-    });
-  }
+  // ------------------ UI STATE ------------------
 
   onSidebarChange(section: string) {
     this.activeSection = section;
   }
 
-  updatePageSize() {
-    const width = window.innerWidth;
-
-    if (width <= 767) {
-      this.pageSize = 2;
-    } else {
-      this.pageSize = 5;
-    }
-
+  setTab(tab: 'drivers' | 'parents') {
+    this.activeTab = tab;
     this.currentPage = 1;
-  }
-
-  get paginatedDrivers() {
-    const start = (this.currentPage - 1) * this.pageSize;
-    return this.drivers.slice(start, start + this.pageSize);
-  }
-
-  get paginatedParents() {
-    const start = (this.currentPage - 1) * this.pageSize;
-    return this.parents.slice(start, start + this.pageSize);
-  }
-
-  totalPages(list: any[]) {
-    return Math.ceil(list.length / this.pageSize);
+    this.selectedDriver = null;
+    this.selectedParent = null;
   }
 
   toggleProfile() {
     this.isProfileOpen = !this.isProfileOpen;
   }
 
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: Event) {
-    const target = event.target as HTMLElement;
-    // If click is outside the profile button or dropdown menu, close it
-    if (!target.closest('.profile-section')) {
-      this.isProfileOpen = false;
-    }
+  selectDriver(driver: DriverDTO) {
+    this.selectedDriver = driver;
+    this.selectedParent = null;
+  }
+
+  selectParent(parent: ParentDTO) {
+    this.selectedParent = parent;
+    this.selectedDriver = null;
+  }
+
+  // ------------------ DATA ------------------
+
+  loadAdminData() {
+    this.isLoading = true;
+    this.authService.getCurrentAdmin().subscribe({
+      next: data => {
+        this.admin = data;
+        this.isLoading = false;
+      },
+      error: () => (this.isLoading = false)
+    });
+  }
+
+  loadDrivers() {
+    this.authService.getListDriver().subscribe(res => {
+      this.drivers = res;
+    });
+  }
+
+  loadParents() {
+    this.authService.getListParent().subscribe(res => {
+      this.parents = res;
+    });
+  }
+
+  // ------------------ PAGINATION ------------------
+
+  updatePageSize() {
+    this.pageSize = window.innerWidth <= 767 ? 2 : 5;
+    this.currentPage = 1;
   }
 }

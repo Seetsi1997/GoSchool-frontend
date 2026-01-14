@@ -1,5 +1,5 @@
 <div class="container">
-  
+
   <!-- Loading State -->
   <div *ngIf="isLoading" class="loading-state">
     <div class="spinner" role="status">
@@ -53,10 +53,10 @@
               <td>{{ route.dropOffTime }}</td>
               <td>R {{ route.monthlyFee | number:'1.2-2' }}</td>
               <td>
-                <button class="btn btn-outline-danger btn-sm" 
-                        *ngIf="route.id">
+                <button class="btn btn-outline-danger btn-sm" *ngIf="route.id" (click)="openDeleteModal(route.id)">
                   Delete
                 </button>
+
               </td>
             </tr>
           </tbody>
@@ -80,13 +80,8 @@
           <!-- School Name -->
           <div class="form-group">
             <label for="schoolName" class="form-label">School Name <span class="text-red-400">*</span></label>
-            <input
-              type="text"
-              id="schoolName"
-              class="form-control"
-              formControlName="schoolName"
-              [class.is-invalid]="isFieldInvalid('schoolName')"
-              placeholder="Enter school name">
+            <input type="text" id="schoolName" class="form-control" formControlName="schoolName"
+              [class.is-invalid]="isFieldInvalid('schoolName')" placeholder="Enter school name">
             <div *ngIf="isFieldInvalid('schoolName')" class="invalid-feedback">
               {{ getFieldError('schoolName') }}
             </div>
@@ -95,11 +90,7 @@
           <!-- Pickup Time -->
           <div class="form-group">
             <label for="pickupTime" class="form-label">Pickup Time <span class="text-red-400">*</span></label>
-            <input
-              type="time"
-              id="pickupTime"
-              class="form-control"
-              formControlName="pickupTime"
+            <input type="time" id="pickupTime" class="form-control" formControlName="pickupTime"
               [class.is-invalid]="isFieldInvalid('pickupTime')">
             <div *ngIf="isFieldInvalid('pickupTime')" class="invalid-feedback">
               {{ getFieldError('pickupTime') }}
@@ -109,11 +100,7 @@
           <!-- Drop-off Time -->
           <div class="form-group">
             <label for="dropOffTime" class="form-label">Drop-off Time <span class="text-red-400">*</span></label>
-            <input
-              type="time"
-              id="dropOffTime"
-              class="form-control"
-              formControlName="dropOffTime"
+            <input type="time" id="dropOffTime" class="form-control" formControlName="dropOffTime"
               [class.is-invalid]="isFieldInvalid('dropOffTime')">
             <div *ngIf="isFieldInvalid('dropOffTime')" class="invalid-feedback">
               {{ getFieldError('dropOffTime') }}
@@ -123,15 +110,8 @@
           <!-- Monthly Fee -->
           <div class="form-group">
             <label for="monthlyFee" class="form-label">Monthly Fee (R) <span class="text-red-400">*</span></label>
-            <input
-              type="number"
-              id="monthlyFee"
-              class="form-control"
-              formControlName="monthlyFee"
-              [class.is-invalid]="isFieldInvalid('monthlyFee')"
-              min="0"
-              step="0.01"
-              placeholder="0.00">
+            <input type="number" id="monthlyFee" class="form-control" formControlName="monthlyFee"
+              [class.is-invalid]="isFieldInvalid('monthlyFee')" min="0" step="0.01" placeholder="0.00">
             <div *ngIf="isFieldInvalid('monthlyFee')" class="invalid-feedback">
               {{ getFieldError('monthlyFee') }}
             </div>
@@ -150,6 +130,47 @@
       </div>
     </div>
   </div>
+
+
+  <!-- Delete Confirmation Modal -->
+<div class="modal-overlay" *ngIf="showDeleteModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title">Confirm Delete</h5>
+      </div>
+
+      <div class="modal-body">
+        <h6>
+          Do you really want to remove the school's name
+          <strong>({{ capitalizeRole(selectedRouteSchoolName)}})</strong>
+          from this transportation route?
+        </h6>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="closeDeleteModal()">
+          Cancel
+        </button>
+        <button class="btn btn-outline-danger" (click)="confirmDeleteRoute()">
+          Yes, Delete
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="showAlertModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" [ngClass]="{'bg-success': alertType === 'success', 'bg-danger': alertType === 'error'}">
+      <div class="modal-body">
+        <h6 class="text-center">{{ alertMessage }}</h6>
+      </div>
+    </div>
+  </div>
+</div>
 
   <!-- No Driver Logged In -->
   <div *ngIf="!currentDriver && !isLoading" class="alert alert-warning no-driver">

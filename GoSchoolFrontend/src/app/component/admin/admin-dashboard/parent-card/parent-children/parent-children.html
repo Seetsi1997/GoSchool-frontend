@@ -1,0 +1,32 @@
+
+@if(!parent) {
+  <div class="empty-right">
+    Select a parent to view their children
+  </div>
+
+}@else if(isLoadingChildren) {
+  <div class="empty-right">
+    Loading children...
+  </div>
+
+}@else if(children.length === 0) {
+  <div class="empty-right">
+    No children found
+  </div>
+
+}@else {
+  <div class="students-carousel">
+    <div class="students-track">
+      @for (child of children; track child.studentUUID) {
+        <div class="student-card">
+          <h4>
+            {{ capitalizeWords(child.studentFirstName) }}
+            {{ capitalizeWords(child.studentSurname) }}
+          </h4>
+          <p><strong>School:</strong> {{ capitalizeWords(child.schoolName) }}</p>
+          <p><strong>Grade:</strong> {{ child.studentGrade }}</p>
+        </div>
+      }
+    </div>
+  </div>
+}

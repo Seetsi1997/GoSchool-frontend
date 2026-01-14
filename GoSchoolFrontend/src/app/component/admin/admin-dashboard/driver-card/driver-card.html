@@ -1,5 +1,4 @@
-<!-- HTML with Custom Class Names -->
-<button class="driver-card">
+<button class="driver-card" (click)="onSelect()">
   <div class="driver-card-header">
     <img src="svg/profile.svg" class="driver-avatar" alt="profile">
     <p>{{ capitalize(driver.driverName) }} {{ capitalize(driver.driverSurname) }}</p>
@@ -9,10 +8,11 @@
     <div class="driver-badge driver-student-count">
       {{ driver.totalNumberOfStudents }}
     </div>
+
     <div class="driver-badge driver-contact">
       {{ driver.contact }}
     </div>
-    
+
     <div class="driver-location">
       {{ capitalize(driver.driverLocation.province) }}
     </div>

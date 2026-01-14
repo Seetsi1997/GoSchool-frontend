@@ -6,6 +6,7 @@ import { ParentDTO } from '../../dto/parentDTO';
 import { UserLoginDTO } from '../../dto/userLoginDTO';
 import { environment } from '../../env/env';
 import { Users } from '../../model/Users';
+import { StudentDTO } from '../../dto/studentDTO';
 
 @Injectable({
   providedIn: 'root',
@@ -15,22 +16,17 @@ export class Auth {
   public currentUser: any = null;
   private logoutTimer: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-register(user: any): Observable<any> {
-  return this.http.post(
-    `${this.apiUrl}/auth/api/users/admin/register`,
-    user,
-    {
-      headers: { 'Content-Type': 'application/json' }
-    }
-  );
-}
-
+  register(user: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/auth/api/users/admin/register`, user, {
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
 
   getCurrentAdmin(): Observable<Users> {
     const token = localStorage.getItem('token');
-    console.log("login admin token", token)
+    console.log('login admin token', token);
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
@@ -48,9 +44,7 @@ register(user: any): Observable<any> {
           headers: new HttpHeaders({
             'Content-Type': 'application/json',
           }),
-
         }
-
       )
       .pipe(
         tap((res: UserLoginDTO) => {
@@ -66,21 +60,16 @@ register(user: any): Observable<any> {
           if (res.role === 'PARENT') {
             localStorage.setItem('parentUUID', res.parentUUID?.toString() || '');
             localStorage.setItem('parentFirstname', res.parentFirstName);
-
           }
           if (res.role === 'DRIVER') {
             localStorage.setItem('driverUUID', res.driverUUID?.toString() || '');
             localStorage.setItem('driverName', res.driverName);
-
           }
 
           if (res.role === 'ADMIN') {
             localStorage.setItem('uuid', res.uuid);
             localStorage.setItem('firstName', res.firstName);
-
           }
-
-
         }),
         catchError((error: HttpErrorResponse) => {
           // Suppress 401 errors from console entirely
@@ -92,7 +81,7 @@ register(user: any): Observable<any> {
           return throwError(() => ({
             ...error,
             // Optional: Prevent browser from logging to console
-            message: 'Login failed'
+            message: 'Login failed',
           }));
         })
       );
@@ -143,7 +132,11 @@ register(user: any): Observable<any> {
     });
   }
 
-  changePassword(currentPassword: string, newPassword: string, confirmPassword: string): Observable<any> {
+  changePassword(
+    currentPassword: string,
+    newPassword: string,
+    confirmPassword: string
+  ): Observable<any> {
     const token = localStorage.getItem('token');
 
     if (!token) {
@@ -153,47 +146,51 @@ register(user: any): Observable<any> {
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     });
 
     const body = {
       currentPassword,
       newPassword,
-      confirmPassword
+      confirmPassword,
     };
 
-    return this.http.post(`${this.apiUrl}/auth/api/users/change-password`, body, { headers })
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          // Don't log 401 errors to console
-          if (error.status !== 401 && error.status !== 400) {
-            console.error('Change password error:', error);
-          }
-          return throwError(() => error);
-        })
-      );
+    return this.http.post(`${this.apiUrl}/auth/api/users/change-password`, body, { headers }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        // Don't log 401 errors to console
+        if (error.status !== 401 && error.status !== 400) {
+          console.error('Change password error:', error);
+        }
+        return throwError(() => error);
+      })
+    );
   }
 
   getListParent(): Observable<ParentDTO[]> {
     const token = localStorage.getItem('token');
-    console.log("admin token", token)
+    console.log('admin token', token);
     return this.http.get<ParentDTO[]>(`${this.apiUrl}/auth/api/users/admin/parents`, {
       headers: {
         Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     });
   }
 
   getListDriver(): Observable<DriverDTO[]> {
     const token = localStorage.getItem('token');
-    console.log("admin token", token)
+    console.log('admin token', token);
     return this.http.get<DriverDTO[]>(`${this.apiUrl}/auth/api/users/admin/drivers`, {
       headers: {
         Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     });
   }
 
+  getStudentsByDriver(driverId: string) {
+    return this.http.get<StudentDTO[]>(
+      `${this.apiUrl}/auth/api/users/admin/drivers/${driverId}/students`
+    );
+  }
 }

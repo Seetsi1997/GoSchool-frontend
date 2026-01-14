@@ -1,0 +1,259 @@
+/* Modal overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(to right, rgba(62, 76, 112, 0.5), rgba(84, 122, 140, 0.5), rgba(109, 156, 171, 0.5));
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* Modal container */
+.modal-container {
+  background-color: rgb(100, 116, 139);
+  border-radius: 1rem;
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  width: 100%;
+  max-width: 28rem;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Modal header */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom-width: 1px;
+  border-color: rgb(229 231 235);
+  flex-shrink: 0;
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  color: rgb(241 245 249);
+}
+
+.modal-close-btn {
+  color: rgb(216 180 254);
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.close-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  background-clip: text;
+  background-image: linear-gradient(to right, rgb(233 213 255), rgb(88 28 135));
+}
+
+/* Modal content */
+.modal-content {
+  padding: 1.5rem;
+  overflow-y: auto;
+  flex: 1 1 0%;
+}
+
+.content-wrapper > * + * {
+  margin-top: 1rem;
+}
+
+/* Student profile */
+.student-profile {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.student-profile-avatar {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 9999px;
+  border-width: 2px;
+  border-color: #F5F5F5;
+  flex-shrink: 0;
+}
+
+.student-profile-info {
+  margin-left: 1rem;
+}
+
+.student-name-large {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+  color: rgb(226 232 240);
+}
+
+.student-school {
+  color: rgb(229 231 235);
+}
+
+/* Student details section */
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.detail-card {
+  background-color: rgb(226 232 240);
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+}
+
+.detail-label {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: rgb(107 114 128);
+  font-weight: 600;
+}
+
+.detail-value {
+  color: #375a67;
+  font-weight: 600;
+}
+
+.edit-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+
+.edit-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: rgb(168 85 247);
+  color: rgb(255 255 255);
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-radius: 0.5rem;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.edit-btn:hover {
+  background-color: rgb(147 51 234);
+}
+
+.edit-icon {
+  width: 1rem;
+  height: 1rem;
+  color: rgb(226 232 240);
+}
+
+/* Parent and driver sections */
+.parent-section, .driver-section {
+  margin-top: 1rem;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  color: rgb(241 245 249);
+}
+
+.info-items {
+  margin-top: 0.5rem;
+}
+
+.info-items > * + * {
+  margin-top: 0.5rem;
+}
+
+.info-item {
+  background-color: rgb(226 232 240);
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.info-text {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: rgb(107 114 128);
+  font-weight: 600;
+}
+
+.info-value {
+  color: #375a67;
+  font-weight: 600;
+}
+
+.info-icon {
+  height: 1.25rem;
+  width: 1.25rem;
+  color: rgb(75 85 99);
+}
+
+.no-driver-message {
+  color: rgb(209 213 219);
+  font-style: italic;
+}
+
+/* Modal actions */
+.modal-actions {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-top-width: 1px;
+  border-color: rgb(229 231 235);
+  flex-shrink: 0;
+}
+
+.close-action-btn {
+  flex: 1 1 0%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background-color: rgb(147 51 234);
+  color: rgb(255 255 255);
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.close-action-btn:hover {
+  background-color: rgb(126 34 206);
+}
+
+/* Text color utilities */
+.text-gray-500 {
+  color: rgb(107 114 128);
+}
+
+.text-gray-300 {
+  color: rgb(209 213 219);
+}
+
+.text-slate-100 {
+  color: rgb(241 245 249);
+}
+
+.text-slate-200 {
+  color: rgb(226 232 240);
+}
+
+.text-gray-200 {
+  color: rgb(229 231 235);
+}

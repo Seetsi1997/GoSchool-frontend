@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DriverDTO } from '../../../../dto/driverDTO';
+import { ParentDTO } from '../../../../dto/parentDTO';
 
 @Component({
   selector: 'app-driver-card',
@@ -9,10 +10,13 @@ import { DriverDTO } from '../../../../dto/driverDTO';
   styleUrl: './driver-card.css'
 })
 export class DriverCard {
- @Input() driver!: DriverDTO;
+  @Input() driver!: DriverDTO;
+  @Output() select = new EventEmitter<DriverDTO>();
 
- 
-    capitalize(value:string | undefined | null): string {
+  onSelect() {
+    this.select.emit(this.driver);
+  }
+  capitalize(value: string | undefined | null): string {
     if (!value) return '';
     return value
       .split(' ')

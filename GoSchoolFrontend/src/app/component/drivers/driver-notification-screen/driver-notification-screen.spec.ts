@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Home } from './home';
+import { DriverNotificationScreen } from './driver-notification-screen';
 
-describe('Home', () => {
-  let component: Home;
-  let fixture: ComponentFixture<Home>;
+describe('DriverNotificationScreen', () => {
+  let component: DriverNotificationScreen;
+  let fixture: ComponentFixture<DriverNotificationScreen>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Home]
+      imports: [DriverNotificationScreen]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Home);
+    fixture = TestBed.createComponent(DriverNotificationScreen);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

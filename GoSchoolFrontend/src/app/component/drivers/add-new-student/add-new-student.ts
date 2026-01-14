@@ -17,12 +17,16 @@ import { RouterService } from '../../../service/serviceRoute/router-service';
 export class AddNewStudent implements OnInit, OnChanges {
 
 
-  currentDriver?: DriverDTO; // Current logged-in driver
+  currentDriver?: DriverDTO;
   driverRoutes: DriverRouteDetailsDTO[] = [];
   isAddingRoute = false;
   isLoading = false;
-
+  selectedRouteId: string | null = null;
+  showDeleteModal = false;
   routeForm: FormGroup;
+  showAlertModal = false;
+  alertMessage = '';
+  alertType: 'success' | 'error' = 'success'
 
   constructor(
     private driverRouteService: RouterService,
@@ -41,10 +45,19 @@ export class AddNewStudent implements OnInit, OnChanges {
     this.loadCurrentDriver();
     this.loadDriverRoute()
   }
-   ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(changes: SimpleChanges): void {
     // Handle changes to input properties here
     console.log('Input properties changed:', changes);
   }
+
+  showAlert(message: string, type: 'success' | 'error' = 'success') {
+  this.alertMessage = message;
+  this.alertType = type;
+  this.showAlertModal = true;
+
+  // optional: auto-close after 3 seconds
+  setTimeout(() => this.showAlertModal = false, 3000);
+}
 
   private loadCurrentDriver() {
     this.isLoading = true;
@@ -81,18 +94,18 @@ export class AddNewStudent implements OnInit, OnChanges {
   }
 
   private loadDriverRoute() {
-  this.driverRouteService.getRoute()
-    .subscribe({
-      next: (routes: DriverRouteDetailsDTO[]) => {
-        this.driverRoutes = routes;
-        this.isLoading = false;
-      },
-      error: err => {
-        console.error('Error fetching routes:', err);
-        this.isLoading = false;
-      }
-    });
-}
+    this.driverRouteService.getRoute()
+      .subscribe({
+        next: (routes: DriverRouteDetailsDTO[]) => {
+          this.driverRoutes = routes;
+          this.isLoading = false;
+        },
+        error: err => {
+          console.error('Error fetching routes:', err);
+          this.isLoading = false;
+        }
+      });
+  }
 
 
   startAddingRoute() {
@@ -114,7 +127,7 @@ export class AddNewStudent implements OnInit, OnChanges {
       return;
     }
 
-    const newRoute: DriverRouteDetailsDTO = { 
+    const newRoute: DriverRouteDetailsDTO = {
       ...this.routeForm.value
     };
 
@@ -134,6 +147,44 @@ export class AddNewStudent implements OnInit, OnChanges {
         }
       });
   }
+
+  openDeleteModal(routeId: string) {
+    this.selectedRouteId = routeId;
+    this.showDeleteModal = true;
+  }
+
+  closeDeleteModal() {
+    this.showDeleteModal = false;
+    this.selectedRouteId = null;
+  }
+
+ confirmDeleteRoute() {
+  if (!this.currentDriver?.driverUUID || !this.selectedRouteId) return;
+
+  this.isLoading = true;
+
+  this.driverRouteService
+    .deleteRoute(this.currentDriver.driverUUID, this.selectedRouteId)
+    .subscribe({
+      next: () => {
+        this.driverRoutes = this.driverRoutes.filter(
+          route => route.id !== this.selectedRouteId
+        );
+        this.isLoading = false;
+        this.closeDeleteModal();
+        this.showAlert('Route deleted successfully', 'success');
+      },
+      error: err => {
+        console.error('Error deleting route:', err);
+        this.isLoading = false;
+        this.showAlert('Failed to delete route', 'error');
+      }
+    });
+}
+
+
+
+
 
   cancelAddRoute() {
     this.isAddingRoute = false;
@@ -167,7 +218,17 @@ export class AddNewStudent implements OnInit, OnChanges {
     return '';
   }
 
-    capitalizeRole(value:string | undefined | null): string {
+  get selectedRouteSchoolName(): string {
+    if (!this.selectedRouteId) return '';
+
+    const route = this.driverRoutes.find(
+      r => r.id === this.selectedRouteId
+    );
+
+    return route?.schoolName ?? '';
+  }
+
+  capitalizeRole(value: string | undefined | null): string {
     if (!value) return '';
     return value
       .split(' ')

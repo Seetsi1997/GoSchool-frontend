@@ -45,6 +45,9 @@ export class DriversDashboard {
       case 'add':
         this.addScreen();
         break;
+      case 'notification':
+        this.notificationScreen();
+        break;
       case 'settings':
         this.settingsScreen();
         break;
@@ -75,6 +78,9 @@ export class DriversDashboard {
     this.router.navigate(['/drivers-dashboard/add']);
   }
 
+  notificationScreen() {
+    this.router.navigate(['/drivers-dashboard/notification']);
+  }
   settingsScreen() {
     this.router.navigate(['/drivers-dashboard/settings']);
   }

@@ -1,1 +1,93 @@
-<p>home-screen works!</p>
+<div class="container">
+    <div class="header">
+        <h1>Students Need Transport</h1>
+        <p *ngIf="driver?.driverLocation?.province !== null">
+            Students from {{ capitalizeWords(driver.driverLocation.province) }}
+        </p>
+
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="loading-container">
+        <div class="spinner"></div>
+        <p>Loading students...</p>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="!isLoading && students.length === 0" class="empty-state">
+        <div class="empty-icon">
+            <div class="icon">
+                <img src="svg/profile.svg" alt="Profile Icon">
+            </div>
+        </div>
+        <h3>No Students Found</h3>
+        <p>There are currently no students assigned to your province.</p>
+    </div>
+
+    <!-- Carousel -->
+    <div *ngIf="!isLoading && students.length > 0" class="carousel-wrapper">
+        <div id="studentCarousel" class="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item" *ngFor="let slide of slides; let i = index"
+                    [class.active]="i === currentSlideIndex">
+                    <div class="row">
+
+                        <div class="col-md-4" *ngFor="let student of slide">
+                            <div class="card">
+                                <div class="card-body">
+                                    <!-- School Info (shown first on mobile) -->
+                                    <div class="mobile-school-info">
+                                        <span class="icon"><img src="svg/profile.svg" alt="School Icon"></span>
+                                        <p class="school-name">{{ capitalizeWords(student.schoolName )}}</p>
+                                    </div>
+
+                                    <!-- Student Name -->
+                                    <h5 class="card-title">{{capitalizeWords(student.studentFirstName)}}
+                                        {{capitalizeWords(student.studentSurname)}}</h5>
+
+                                    <!-- Other Info -->
+                                    <div class="student-details">
+                                        <p class="card-text grade-info">
+                                            <span class="icon"><img src="png/grade.png" alt=""></span>
+                                            <strong>Grade</strong>
+                                            <span class="badge">{{ student.studentGrade }}</span>
+                                        </p>
+
+                                        <div class="card-footer">
+                                            <small>Student ID: {{student.studentUUID.slice(0, 8)}}...</small>
+                                        </div>
+                                    </div>
+
+                                    <!-- View Info Button -->
+                                    <div class="card-button">
+                                        <button type="button" class="btn-view-info">
+                                            <img src="png/info.png" alt="Info Icon"  class="btn-icon">
+                                            <span>View Info</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <button class="carousel-control-prev" type="button" (click)="prevSlide()" [disabled]="slides.length <= 1"
+                title="Previous slide">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+
+            <button class="carousel-control-next" type="button" (click)="nextSlide()" [disabled]="slides.length <= 1"
+                title="Next slide">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+
+        <!-- Indicators -->
+        <div *ngIf="slides.length > 1" class="carousel-indicators">
+            <div *ngFor="let slide of slides; let i = index" class="indicator" [class.active]="i === currentSlideIndex"
+                (click)="goToSlide(i)"></div>
+        </div>
+    </div>
+</div>

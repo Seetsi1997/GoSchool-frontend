@@ -1,0 +1,78 @@
+<div class="left-panel">
+
+  <div class="search-label">Search</div>
+
+  <div class="search-container">
+    <input type="text" class="search-input" placeholder="Search" />
+    <img src="png/search.png" alt="filter" class="search-icon" />
+  </div>
+
+  <!-- DRIVERS -->
+   @if(activeTab === 'drivers'){
+       <div class="card-list">
+    @if (drivers.length > 0) {
+
+      <app-driver-card
+        *ngFor="let driver of paginatedDrivers"
+        [driver]="driver"
+        (select)="driverSelect.emit(driver)">
+      </app-driver-card>
+
+      <div class="pagination">
+        <button
+          (click)="pageChange.emit(currentPage - 1)"
+          [disabled]="currentPage === 1">
+          Prev
+        </button>
+
+        <span>{{ currentPage }} / {{ totalPages(drivers) }}</span>
+
+        <button
+          (click)="pageChange.emit(currentPage + 1)"
+          [disabled]="currentPage === totalPages(drivers)">
+          Next
+        </button>
+      </div>
+
+    } @else {
+      <p class="text-center">There are no registered drivers at the moment.</p>
+    }
+  </div>
+   }
+  
+
+  <!-- PARENTS -->
+   @if(activeTab === 'parents'){
+     <div class="card-list">
+    @if (parents.length > 0) {
+
+      <app-parent-card
+        *ngFor="let parent of paginatedParents"
+        [parent]="parent"
+        (select)="parentSelect.emit(parent)">
+      </app-parent-card>
+
+      <div class="pagination">
+        <button
+          (click)="pageChange.emit(currentPage - 1)"
+          [disabled]="currentPage === 1">
+          Prev
+        </button>
+
+        <span>{{ currentPage }} / {{ totalPages(parents) }}</span>
+
+        <button
+          (click)="pageChange.emit(currentPage + 1)"
+          [disabled]="currentPage === totalPages(parents)">
+          Next
+        </button>
+      </div>
+
+    } @else {
+      <p class="text-center">There are no registered parents at the moment.</p>
+    }
+  </div>
+   }
+ 
+
+</div>

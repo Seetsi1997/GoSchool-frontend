@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ParentDTO } from '../../../../dto/parentDTO';
 
 @Component({
@@ -9,6 +9,11 @@ import { ParentDTO } from '../../../../dto/parentDTO';
 })
 export class ParentCard {
    @Input() parent!: ParentDTO;
+   @Output() select = new EventEmitter<ParentDTO>();
+
+  onSelect() {
+    this.select.emit(this.parent);
+  }
 
     capitalize(value:string | undefined | null): string {
     if (!value) return '';

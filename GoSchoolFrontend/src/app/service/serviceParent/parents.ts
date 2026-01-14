@@ -13,48 +13,41 @@ export class Parents {
 
   constructor(private http: HttpClient) { }
 
+  private getHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+  }
+
   // Register parent
   register(user: ParentDTO): Observable<any> {
     return this.http.post(`${this.apiUrl}/auth/api/parents/register`, user, {
-      headers: { 'Content-Type': 'application/json' },
+      headers: this.getHeaders() ,
     });
   }
 
   // Get current parent
   getCurrentParent(): Observable<ParentDTO> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
-
-    return this.http.get<ParentDTO>(`${this.apiUrl}/auth/api/parents/profile`, { headers });
+    return this.http.get<ParentDTO>(`${this.apiUrl}/auth/api/parents/profile`, { headers: this.getHeaders() });
   }
 
   // Update current parent
   updateCurrentParent(parent: ParentDTO): Observable<ParentDTO> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    });
 
     return this.http.put<ParentDTO>(`${this.apiUrl}/auth/api/parents/profile`, parent, {
-      headers,
+      headers: this.getHeaders(),
     });
   }
 
   // Add new student as parent
   addStudent(parentId: string, student: StudentDTO): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    });
-
+    
     return this.http.post(
       `${this.apiUrl}/auth/api/parents/${parentId}/students`,
       student,
-      { headers }
+      { headers: this.getHeaders() }
     );
   }
 
@@ -62,8 +55,6 @@ export class Parents {
   getAllStudentsForParent(): Observable<StudentDTO[]> {
     const token = localStorage.getItem('token');
     const parentId = localStorage.getItem('parentUUID');
-
-
 
     if (!parentId) {
       return throwError(() => new Error('Please log in as a parent to view students.'));
@@ -89,8 +80,21 @@ export class Parents {
         ? JSON.parse(localStorage.getItem('parent')!).parentUUID
         : null);
 
-    console.log('Retrieved parentId from storage:', parentId);
     return parentId;
   }
+
+  getChildrenByParent(parentId: string) {
+    return this.http.get<StudentDTO[]>(
+      `${this.apiUrl}/auth/api/parents/${parentId}/children`,
+      { headers: this.getHeaders() }
+    );
+  }
+
+  getStudentsByParent(parentUUID: string) {
+  return this.http.get<StudentDTO[]>(
+    `${this.apiUrl}/auth/api/parents/${parentUUID}/students`
+  );
+}
+
 
 }

@@ -58,30 +58,7 @@ export class StudentService {
     );
   }
 
-  // Update student
-// Add proper error handling and headers
-updateStudent(parentUUID: string, studentUUID: string, studentData: any) {
-   const token = localStorage.getItem('token');
-  const headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}}`
-  });
-
-  return this.http.put(
-    `http://localhost:8080/auth/api/parents/${parentUUID}/students/${studentUUID}`,
-    studentData,
-    { headers }
-  ).pipe(
-    catchError(error => {
-      console.error('Update student error:', error);
-      // Handle specific error cases
-      if (error.status === 403) {
-        // Handle permission denied
-      }
-      throw error;
-    })
-  );
-}
+  // Update student information
 
   updateStudents(
     parentUUID: string,
@@ -94,7 +71,6 @@ updateStudent(parentUUID: string, studentUUID: string, studentData: any) {
       'Content-Type': 'application/json',
     });
 
-    // FIX: Add the missing path segments
     return this.http.put<StudentEntity>(
       `${this.apiUrl}/auth/api/parents/${parentUUID}/students/${studentId}`,
       updateData,
@@ -111,4 +87,5 @@ updateStudent(parentUUID: string, studentUUID: string, studentData: any) {
 
     return this.http.delete(`${this.apiUrl}/auth/api/students/${studentId}`, { headers });
   }
+  
 }

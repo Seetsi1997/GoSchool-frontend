@@ -1,0 +1,145 @@
+<div class="notification-container">
+  <!-- Header -->
+  <div class="header">
+    <h1>Notifications</h1>
+  </div>
+  <!-- Filter Tabs -->
+  <div class="notification-tabs">
+    <button [class.active]="currentFilter === 'ALL'" (click)="applyFilter('ALL')" class="tab-btn">
+      All
+    </button>
+    <button [class.active]="currentFilter === 'APPROVED'" (click)="applyFilter('APPROVED')" class="tab-btn">
+      Approved
+    </button>
+    <button [class.active]="currentFilter === 'REJECTED'" (click)="applyFilter('REJECTED')" class="tab-btn">
+      Rejected
+    </button>
+    <button [class.active]="currentFilter === 'PENDING'" (click)="applyFilter('PENDING')" class="tab-btn">
+      Pending
+    </button>
+  </div>
+
+  <!-- No notifications message -->
+  <div *ngIf="filteredNotifications.length === 0 && !isLoading" class="no-notifications">
+    <div class="text-center py-8">
+      <div class="flex flex-col items-center justify-center">
+        <img src="svg/notification.svg" alt="Notification" />
+        <h3 class="text-lg font-semibold text-white mb-2">
+          No Notifications
+        </h3>
+        <p class="text-slate-300">
+          {{ getNoNotificationsMessage() }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Carousel Container -->
+  <div *ngIf="filteredNotifications.length > 0" class="carousel-container">
+    <div class="carousel-wrapper" [style.transform]="getTransform()">
+      <div *ngFor="let n of filteredNotifications; let i = index" class="carousel-slide notification"
+        [class.unseen]="!n.seen" [class.approved]="getNotificationStatus(n) === 'APPROVED'"
+        [class.rejected]="getNotificationStatus(n) === 'REJECTED'"
+        [class.pending]="getNotificationStatus(n) === 'PENDING'">
+
+        <!-- Notification Status Badge -->
+        <div class="notification-status-badge" [class]="getNotificationStatus(n)">
+          {{ getNotificationStatus(n) }}
+        </div>
+
+        <div class="notification-content">
+          <p class="notification-message">{{ n.message }}</p>
+          
+          <!-- Parent and Student Info Side by Side -->
+          <div class="notification-person-info">
+            <div class="notification-parent-info">
+              <h1>Parent Info</h1>
+              <div class="info">
+                <p>{{capitalizeLetters(n.parentName) }}</p>
+              </div>
+            </div>
+            
+            <div class="notification-student-info">
+              <h1>Student Info</h1>
+              <div class="info">
+                <p>{{capitalizeLetters(n.studentName) }}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Location Info Below -->
+          <div class="notification-location-info">
+            <h1>Location Info</h1>
+            <div class="address-grid">
+              <div class="address-item">
+                <span class="address-label">Address:</span>
+                <span class="address-value">{{ capitalizeLetters(n.address) }}</span>
+              </div>
+              <div class="address-item">
+                <span class="address-label">Suburb:</span>
+                <span class="address-value">{{ capitalizeLetters(n.suburb) }}</span>
+              </div>
+              <div class="address-item">
+                <span class="address-label">City:</span>
+                <span class="address-value">{{ capitalizeLetters(n.city) }}</span>
+              </div>
+              <div class="address-item">
+                <span class="address-label">Province:</span>
+                <span class="address-value">{{ capitalizeLetters(n.province.replace('_', ' '))}}</span>
+              </div>
+              <div class="address-item">
+                <span class="address-label">Postal Code:</span>
+                <span class="address-value">{{ n.postalCode }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="notification-school-time">
+            <div class="time">
+                <small class="notification-time">{{ n.createdAt | date:'short' }}</small>
+            </div>
+            <div class="notification-school-info">
+                <small>{{ capitalizeLetters(n.schoolName) }}</small>
+            </div>
+              
+          </div>
+          
+          <div class="notification-actions">
+            <button *ngIf="!n.seen && getNotificationStatus(n) === 'PENDING'" class="btn btn-primary"
+              (click)="approve(n)">Approve</button>
+            <button *ngIf="!n.seen && getNotificationStatus(n) === 'PENDING'" class="btn btn-secondary"
+              (click)="reject(n)">
+              Reject
+            </button>
+            <button *ngIf="n.seen" class="btn btn-view" (click)="viewDetails(n)">
+              View Details
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carousel Controls -->
+    <div class="carousel-controls" *ngIf="filteredNotifications.length > 1">
+      <button class="carousel-btn prev" (click)="prevSlide()">
+        <img src="png/arrow_back.png" alt="Previous">
+      </button>
+
+      <div class="carousel-indicators">
+        <span *ngFor="let n of filteredNotifications; let i = index" class="indicator-dot"
+          [class.active]="i === currentSlideIndex" (click)="goToSlide(i)">
+        </span>
+      </div>
+
+      <button class="carousel-btn next" (click)="nextSlide()">
+        <img src="png/arrow_forward.png" alt="Next">
+      </button>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading notifications...</p>
+  </div>
+</div>

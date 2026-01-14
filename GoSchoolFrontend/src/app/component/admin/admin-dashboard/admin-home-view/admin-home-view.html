@@ -1,0 +1,34 @@
+<div>
+    <app-admin-topbar [admin]="admin" [isProfileOpen]="isProfileOpen" (toggleProfile)="toggleProfile.emit()">
+        <div class="tabs">
+            <a (click)="setTab.emit('drivers')" class="tab-link" [class.active]="activeTab === 'drivers'">
+                Drivers
+            </a>
+
+            <a (click)="setTab.emit('parents')" class="tab-link" [class.active]="activeTab === 'parents'">
+                Parents
+            </a>
+        </div>
+    </app-admin-topbar>
+
+    <div class="main-content">
+        <app-admin-left-panel [drivers]="drivers" [parents]="parents" [activeTab]="activeTab"
+            [currentPage]="currentPage" [pageSize]="pageSize" (driverSelect)="driverSelect.emit($event)"
+            (parentSelect)="parentSelect.emit($event)" (pageChange)="pageChange.emit($event)">
+        </app-admin-left-panel>
+
+        <div class="right-panel">
+            @if(activeTab === 'drivers'){
+            <ng-container>
+                <app-driver-application [driver]="selectedDriver"></app-driver-application>
+            </ng-container>
+            }
+
+            @if(activeTab === 'parents'){
+            <ng-container>
+                <app-parent-children [parent]="selectedParent"></app-parent-children>
+            </ng-container>
+            }
+        </div>
+    </div>
+</div>

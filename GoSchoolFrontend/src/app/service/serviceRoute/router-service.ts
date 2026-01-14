@@ -32,7 +32,6 @@ export class RouterService {
 
   createRoute(driverId: string, body: any) {
     const headers = this.getAuthHeaders();
-    console.log('Creating route with headers:', headers);
     
     return this.http.post<DriverRouteDetailsDTO>(
       `${this.apiUrl}/auth/api/drivers/${driverId}/routes`,
@@ -49,7 +48,6 @@ export class RouterService {
 getRoutes(driverId: string): Observable<any> {
   const token = localStorage.getItem('token');
   if (!token) {
-    console.error('No token found!');
     return throwError(() => new Error('No token'));
   }
 
@@ -57,9 +55,6 @@ getRoutes(driverId: string): Observable<any> {
     'Authorization': `Bearer ${token}`,
     'Content-Type': 'application/json'
   });
-
-   console.log("Token being sent:", token);
-  console.log("Headers being sent:", headers);
 
   return this.http.get(`${this.apiUrl}/auth/api/drivers/${driverId}/routes`, { headers });
 }

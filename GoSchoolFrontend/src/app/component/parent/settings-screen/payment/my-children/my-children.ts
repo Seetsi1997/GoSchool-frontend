@@ -30,7 +30,7 @@ export class MyChildren implements OnInit {
 
   showEditPopup = false;
   studentToEdit: StudentDTO | null = null;
-  originalStudent: StudentDTO | null = null; // Add this to track original values
+  originalStudent: StudentDTO | null = null; 
   isSaving = false;
 
   showPopup = false;
@@ -40,11 +40,11 @@ export class MyChildren implements OnInit {
 
   // Only grades 8-12 as specified in the enum
  availableGrades = [
-    { value: LearnerGrade.GRADE_8, label: 'Grade 8' },
-    { value: LearnerGrade.GRADE_9, label: 'Grade 9' },
-    { value: LearnerGrade.GRADE_10, label: 'Grade 10' },
-    { value: LearnerGrade.GRADE_11, label: 'Grade 11' },
-    { value: LearnerGrade.GRADE_12, label: 'Grade 12' },
+    { value: LearnerGrade.GRADE_8, label: '8' },
+    { value: LearnerGrade.GRADE_9, label: '9' },
+    { value: LearnerGrade.GRADE_10, label: '10' },
+    { value: LearnerGrade.GRADE_11, label: '11' },
+    { value: LearnerGrade.GRADE_12, label: '12' },
   ];
 
   constructor(
@@ -135,7 +135,7 @@ saveStudentChanges() {
     parentProvince: this.studentToEdit.parentProvince,
     parentUUID: this.studentToEdit.parentUUID,
     schoolName: this.studentToEdit.schoolName,
-    driverDto: this.studentToEdit.driverDto
+    driverDto: this.studentToEdit.driverDto?.driverName ? this.studentToEdit.driverDto : undefined
   };
 
   if (actualParentUUID) {
@@ -171,8 +171,8 @@ private convertToDriverDTO(driver: any | null): DriverDTO | null {
 
 return {
   driverUUID: driver.driverUUID ?? '',
-  driverName: driver.driverName ?? '', // Add a default value if the property is missing
-  driverSurname: driver.driverSurname ?? '', // Add a default value if the property is missing
+  driverName: driver.driverName ?? '',
+  driverSurname: driver.driverSurname ?? '', 
   email: driver.email ?? '',
   contact: driver.userAccount ? driver.userAccount.phoneNumber : '',
   driverLocation: {
